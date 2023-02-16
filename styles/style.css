@@ -134,8 +134,8 @@ pre.label{padding: 60px 20px 20px;}
 pre.label span{position:absolute;top:0;left:0;right:0;line-height:20px;background:#000;color:#ffff00;padding:10px;}
 pre.label a.disabled{display:block;cursor:default;}
 pre.label a.disabled:hover{text-decoration: none;}
-pre.label b.function{color:#000;font-weight:600;}
 b{color: #3a75fb;}
+b.function{color:#000;font-weight:600;}
 small{font-size:14px;}
 
 .divider{display:block; width:100%; height:2px; background:#b7b7b7; margin:40px auto;}

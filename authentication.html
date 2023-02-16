@@ -28,12 +28,16 @@
 				<div class="main_con">
 					<main>
 						<h1>Authentication</h1>
+						<ul class="bullet">
+							<li><a href="authentication.html#login">Employee Login</a></li>
+							<li><a href="authentication.html#forgot_password">Forgot Password</a></li>
+						</ul>
 						<div class="divider"></div>
 						<div class="main_content">
 							<h2>Overview</h2>
-							<p>This module will tackle the <i>Login</i> and <i>Forgot Password</i> functionalities.</p>
+							<p>This module will tackle the <i>Employee Login</i> and <i>Forgot Password</i> functionalities.</p>
 
-							<div class="content content_child">
+							<div class="content content_child" id="login">
 								<h3>Employee Login</h3>
 								<p>This is the page where the employee will be authenticating his/her credentials to use the Gateway</p>
 
@@ -80,9 +84,79 @@
 								<div class="comments">
 									<h5>After the employee inputs his/her credentials</h5>
 									<ul>
-										<li><b>EmployeeInfoController::login</b> will received the posted credentials and pass it to <b>AuthRepository::login</b></li>
-										<li><b>AuthRepository::login</b> will determine which app it is being accessed either a <i>Browser</i> or <i>Lightweight Directory Access Protocol (LDAP)</i> then passes it to <b>AuthRepository::authFields</b></li>
-										<li><b>AuthRepository::authFields</b> will then check if the credentials are correct and return to back to the login page or return to a new page</li>
+										<li><b>EmployeeInfoController<b class="function">::login</b></b> will received the posted credentials and pass it to <b>AuthRepository<b class="function">::login</b></b></li>
+										<li><b>AuthRepository<b class="function">::login</b></b> will determine which app it is being accessed either a <i>Browser</i> or <i>Lightweight Directory Access Protocol (LDAP)</i> then passes it to <b>AuthRepository<b class="function">::authFields</b></b></li>
+										<li><b>AuthRepository<b class="function">::authFields</b></b> will then check if the credentials are correct and return to back to the login page or return to a new page</li>
+									</ul>
+								</div>
+
+								<div class="comments">
+									<h5>Comments</h5>
+									<ul>
+										<li>Plan to remove <i>Lightweight Directory Access Protocol (LDAP)</i></li>
+									</ul>
+								</div>
+							</div>
+
+							<div class="divider"></div>
+
+							<div class="content content_child" id="forgot_password">
+								<h3>Forgot Password</h3>
+								<p>This is the page where the employee will be typing his/her Email Address when the employee forgets his/her Credentials</p>
+
+								<pre class="label">
+									<span>Location:</span>
+									<a href="http://dir.elink.corp/password" target="_blank">http://dir.elink.corp/password</a>
+								</pre>
+
+								<pre class="label">
+									<span>Inputs Needed:</span>
+									<p><b>Username</b> (Employees Email)</p>
+								</pre>
+
+								<pre class="label">
+									<span>Models Used:</span>
+									<a href="javascript:;" class="disabled">root/app/User.php</a>
+								</pre>
+
+								<pre class="label">
+									<span>Controllers Used:</span>
+									<a href="javascript:;" class="disabled">root/app/Http/Controllers/PasswordResetController.php</a>
+								</pre>
+
+								<pre class="label">
+									<span>Views Used:</span>
+									<a href="javascript:;" class="disabled">root/resources/views/passwords/reset.blade.php</a>
+									<a href="javascript:;" class="disabled">root/resources/views/passwords/success.blade.php</a>
+									<a href="javascript:;" class="disabled">root/resources/views/auth/styles.php</a>
+								</pre>
+
+								<pre class="label">
+									<span>Other Directory Used:</span>
+									<a href="javascript:;" class="disabled">root/app/Mail/ResetPasswordMail.php</a>
+									<a href="javascript:;" class="disabled">root/resources/views/passwords/email_token.blade.php</a>
+								</pre>
+
+								<pre class="label">
+									<span>Functions Used:</span>
+									<p><b>PasswordResetController</b><b class="function">::reset</b></p>
+									<p><b>PasswordResetController</b><b class="function">::confirmReset</b></p>
+								</pre>
+
+								<div class="comments">
+									<h5>After the employee inputs his/her Email Address</h5>
+									<ul>
+										<li><b>PasswordResetController<b class="function">::reset</b></b> will received the Email Address, if the email existed, <i>the system will send an Email</i> to that Email Address with a link that the Employee has to click to confirm the Password Reset.</li>
+										<li>It will redirect to the <b>PasswordResetController<b class="function">::confirmReset</b></b> function which will change the password to the users birthday.</li>
+									</ul>
+								</div>
+
+								<div class="comments">
+									<h5>Comments</h5>
+									<ul>
+										<li>Sample Password: <b class="function">December251992</b></li>
+										<li>First Letter of the Month always in <i>Capital Letter</i></li>
+										<li>If the birthdate day is less that 10, <i>add Zero</i> for the first number. eg: <b class="function">January011990</b></li>
 									</ul>
 								</div>
 							</div>
