@@ -1,0 +1,1424 @@
+<!DOCTYPE html>
+<html class="no-js" lang="en-US">
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>Human Resources Gateway - Developer Guide</title>
+	<link rel="icon" type="image/png" href="images/favicon.png">
+	<link rel="stylesheet" href="styles/style.css">
+</head>
+<body>
+<div class="protect-me">
+	<div class="clearfix">
+		<!-- Header -->
+		<header>
+			<div class="wrapper">
+				<div class="header_con">
+					<a href="index.html" class="main_logo">
+						<figure><img src="images/main-logo.png" alt=""/></figure>
+					</a>
+				</div>
+			</div>
+		</header>
+		<!-- End Header -->
+
+		<!-- Main -->
+		<div id="main_area">
+			<div class="wrapper">
+				<div class="main_con">
+					<main>
+						<h1>Database Structure</h1>
+						<ul class="bullet">
+							<li><a href="database.html#accblty_conv">Accountability Setting</a></li>
+							<li><a href="database.html#adtl_linkees">Additional Linkees</a></li>
+							<li><a href="database.html#da_infraction">Disciplinary Action (Infraction)</a></li>
+							<li><a href="database.html#elink_account">Elink Account</a></li>
+							<li><a href="database.html#elink_activities">Elink Activities</a></li>
+							<li><a href="database.html#elink_division">Elink Division</a></li>
+							<li><a href="database.html#elink_referral">Elink Referral</a></li>
+							<li><a href="database.html#employeedir_access_group">Employee Access Group</a></li>
+							<li><a href="database.html#employee_department">Employee Department</a></li>
+							<li><a href="database.html#employee_dependents">Employee Dependents</a></li>
+							<li><a href="database.html#employee_info">Employee Information</a></li>
+							<li><a href="database.html#employee_info_details">Employee Information Details</a></li>
+							<li><a href="database.html#employee_role">Employee Role</a></li>
+							<li><a href="database.html#events">Events</a></li>
+							<li><a href="database.html#goal_setting">Goal Setting</a></li>
+							<li><a href="database.html#gtky">Getting to Know You</a></li>
+							<li><a href="database.html#leave_credits">Leave Credits</a></li>
+							<li><a href="database.html#leave_credit_archives">Leave Credit Archive</a></li>
+							<li><a href="database.html#leave_pay_type">Leave Pay Type</a></li>
+							<li><a href="database.html#leave_request">Leave Request</a></li>
+							<li><a href="database.html#leave_request_details">Leave Request Details</a></li>
+							<li><a href="database.html#leave_type">Leave Type</a></li>
+							<li><a href="database.html#linking_master">Linking Master</a></li>
+							<li><a href="database.html#linking_types">Linking Types</a></li>
+							<li><a href="database.html#lnk_focus">Linking Focus</a></li>
+							<li><a href="database.html#log">Logs</a></li>
+							<li><a href="database.html#movements">Employee Movements</a></li>
+							<li><a href="database.html#overtime_request">Overtime Request</a></li>
+							<li><a href="database.html#overtime_request_details">Overtime Request Details</a></li>
+							<li><a href="database.html#posts">Posts</a></li>
+							<li><a href="database.html#quick_link">Quick Link</a></li>
+							<li><a href="database.html#sda">Skills Development Activities</a></li>
+							<li><a href="database.html#sent_email_archives">Sent Email Archives</a></li>
+							<li><a href="database.html#setting_expectations">Cementing Expectation</a></li>
+							<li><a href="database.html#skill_building">Skill Building</a></li>
+							<li><a href="database.html#undertime_request">Undertime Request</a></li>
+						</ul>
+						<div class="divider"></div>
+						<div class="main_content">
+							<h2>Overview</h2>
+							<p>In this module we will tackle the database structure of the HR Gateway, which table is use in which page, etc.</p>
+
+							<div class="content content_child" id="accblty_conv">
+								<h3>Accountability Setting</h3>
+								<p><i>Accountability Setting</i> is the table that stores the Accountability Setting Linkings from the Linking Sessions</p>
+
+								<pre class="label">
+									<span>Table Name:</span>
+									<a href="javascript:;" class="disabled">accblty_conv</a>
+								</pre>
+
+								<pre class="label">
+									<span>Structure:</span>
+									<p><b>ac_id</b>::<b class="function">int(10)</b> (Primary Key, Auto Incremented)</p>
+									<p><b>ac_link_id</b>::<b class="function">int(10)</b> (Index Key, From <a href="database.html#linking_master">Linking Master</a>)</p>
+									<p><b>ac_com_id</b>::<b class="function">varchar(50)</b> (Index Key, An md5 Version of the ac_link_id, URL to access session)</p>
+									<p><b>ac_focus</b>::<b class="function">tinyint(4)</b> (From <a href="database.html#lnk_focus">Linking Focus</a>)</p>
+									<p><b>ac_skill</b>::<b class="function">varchar(250)</b> (Behavior/Skill)</p>
+									<p><b>ac_when_use</b>::<b class="function">varchar(250)</b> (When we use the Skill)</p>
+									<p><b>ac_how_use</b>::<b class="function">varchar(250)</b> (How we use the Skill)</p>
+									<p><b>ac_why_use</b>::<b class="function">varchar(250)</b> (Why we use the Skill)</p>
+									<p><b>ac_expectations</b>::<b class="function">varchar(250)</b> (My Expectations)</p>
+									<p><b>ac_expectation_date</b>::<b class="function">date</b> (Date Expectation was Set)</p>
+									<p><b>ac_comments</b>::<b class="function">mediumtext</b> (Comments)</p>
+									<p><b>ac_feedback</b>::<b class="function">mediumtext</b> (Feedback)</p>
+									<p><b>created_at</b>::<b class="function">datetime</b> (Date the data is inserted)</p>
+									<p><b>updated_at</b>::<b class="function">datetime</b> (Date the data is updated)</p>
+									<p><b>ac_status</b>::<b class="function">tinyint(4)</b> (Status of the Linking Session)</p>
+								</pre>
+							</div>
+
+							<div class="divider"></div>
+
+							<div class="content content_child" id="adtl_linkees">
+								<h3>Additional Linkees</h3>
+								<p><i>Additional Linkees</i> is the table that stores an additional Link between 2 employees that is not an <i>Immediate Superior</i> or a <i>Manager</i> of another employee. The <i>Linker</i> can make a new Linking Session with the <i>Linkee</i>.</p>
+
+								<pre class="label">
+									<span>Table Name:</span>
+									<a href="javascript:;" class="disabled">adtl_linkees</a>
+								</pre>
+
+								<pre class="label">
+									<span>Structure:</span>
+									<p><b>adtl_id</b>::<b class="function">int(10)</b> (Primary Key, Auto Incremented)</p>
+									<p><b>adtl_linker</b>::<b class="function">smallint(5)</b> (The Linker Employee, from <a href="database.html#employee_info">Employee Information</a>)</p>
+									<p><b>adtl_linkee</b>::<b class="function">smallint(5)</b> (The Linkee Employee, from <a href="database.html#employee_info">Employee Information</a>)</p>
+									<p><b>adtl_row</b>::<b class="function">tinyint(3)</b> (Row number)</p>
+									<p><b>adtl_added_by</b>::<b class="function">smallint(5)</b> (The user who added the linking)</p>
+									<p><b>adtl_date_added</b>::<b class="function">datetime</b> (Date the data is inserted)</p>
+									<p><b>adtl_status</b>::<b class="function">tinyint(4)</b> (Status of the linking)</p>
+								</pre>
+
+								<div class="comments">
+									<h5>Comments</h5>
+									<ul>
+										<li>Plan to change some of the <i>data types</i> that is being used.</li>
+									</ul>
+								</div>
+							</div>
+
+							<div class="divider"></div>
+
+							<div class="content content_child" id="da_infraction">
+								<h3>Disciplinary Action (Infraction)</h3>
+								<p><i>Disciplinary Action (Infraction)</i> is the table that stores employee's sanctions.</p>
+
+								<pre class="label">
+									<span>Table Name:</span>
+									<a href="javascript:;" class="disabled">da_infraction</a>
+								</pre>
+
+								<pre class="label">
+									<span>Structure:</span>
+									<p><b>id</b>::<b class="function">int(10)</b> (Primary Key, Auto Incremented)</p>
+									<p><b>employee_id</b>::<b class="function">int(11)</b> (Index Key, From <a href="database.html#employee_info">Employee Information</a>)</p>
+									<p><b>title</b>::<b class="function">varchar(200)</b> (Title of the sanction, eCode Type)</p>
+									<p><b>date</b>::<b class="function">date</b> (Date of the Incident)</p>
+									<p><b>file</b>::<b class="function">text</b> (URL of the File Uploaded)</p>
+									<p><b>infraction_type</b>::<b class="function">enum('NTE', 'NOD')</b> (Type of Infraction: NTE or NOD)</p>
+									<p><b>filed_by</b>::<b class="function">int(11)</b> (The user who created the data, from <a href="database.html#employee_info">Employee Information</a>)</p>
+									<p><b>reason</b>::<b class="function">text</b> (The explanation of the employee that is being sanctioned)</p>
+									<p><b>status</b>::<b class="function">int(11)</b> (Status of the Infraction)</p>
+									<p><b>affixed_name</b>::<b class="function">varchar(200)</b> (Signature of the employee that is being sanctioned)</p>
+									<p><b>acknowledged_date</b>::<b class="function">datetime</b> (Date of acknowledgement)</p>
+									<p><b>hr_notes</b>::<b class="function">text</b> (Notes from HR Department)</p>
+									<p><b>supervisor_id</b>::<b class="function">int(11)</b> (the supervisor of the employee, From <a href="database.html#employee_info">Employee Information</a>)</p>
+									<p><b>manager_id</b>::<b class="function">int(11)</b> (the manager of the employee, From <a href="database.html#employee_info">Employee Information</a>)</p>
+									<p><b>recommend_date</b>::<b class="function">datetime</b> (Date the supervisor/manager recommended the infraction)</p>
+									<p><b>recommend_note</b>::<b class="function">text</b> (Note from the supervisor after recommendation)</p>
+									<p><b>recommend_note_manager</b>::<b class="function">text</b> (Note from the manager after recommendation)</p>
+									<p><b>approved_date</b>::<b class="function">datetime</b> (Date the manager approved the infraction)</p>
+									<p><b>approved_note</b>::<b class="function">text</b> (Note from the manager after approving)</p>
+									<p><b>approved_status</b>::<b class="function">enum('NONE', 'RECOMMENDED', 'APPROVED')</b> (infraction approval status)</p>
+									<p><b>remarks</b>::<b class="function">enum('PENDING', 'COMPLETED')</b> (infraction remarks, if NOD is already filed)</p>
+									<p><b>created_at</b>::<b class="function">datetime</b> (Date the data is inserted)</p>
+									<p><b>updated_at</b>::<b class="function">datetime</b> (Date the data is updated)</p>
+									<p><b>deleted_at</b>::<b class="function">datetime</b> (Date the data is deleted)</p>
+								</pre>
+
+								<div class="comments">
+									<h5>Comments</h5>
+									<ul>
+										<li>
+											<b>Status</b> numeric value
+											<ul>
+												<li><b>0</b> - Not Acknowledged</li>
+												<li><b>1</b> - Acknowledged</li>
+												<li><b>2</b> - Acknowledged but Pending Explanation</li>
+											</ul>
+										</li>
+										<li>
+											Plan to remove
+											<ul>
+												<li><b>recommend_note_manager</b></li>
+												<li><b>deleted_at</b></li>
+											</ul>
+										</li>
+									</ul>
+								</div>
+							</div>
+
+							<div class="divider"></div>
+
+							<div class="content content_child" id="elink_account">
+								<h3>Elink Account</h3>
+								<p><i>Elink Account</i> is the table that stores the elink accounts used.</p>
+
+								<pre class="label">
+									<span>Table Name:</span>
+									<a href="javascript:;" class="disabled">elink_account</a>
+								</pre>
+
+								<pre class="label">
+									<span>Structure:</span>
+									<p><b>id</b>::<b class="function">int(10)</b> (Primary Key, Auto Incremented)</p>
+									<p><b>account_name</b>::<b class="function">varchar(100)</b> (Account Name)</p>
+								</pre>
+							</div>
+
+							<div class="divider"></div>
+
+							<div class="content content_child" id="elink_activities">
+								<h3>Elink Activities</h3>
+								<p><i>Elink Activities</i> is the table that stores all the <i>concluded</i>, <i>ongoing</i> and <i>upcoming</i> Activities from Elink</p>
+
+								<pre class="label">
+									<span>Table Name:</span>
+									<a href="javascript:;" class="disabled">elink_activities</a>
+								</pre>
+
+								<pre class="label">
+									<span>Structure:</span>
+									<p><b>id</b>::<b class="function">int(10)</b> (Primary Key, Auto Incremented)</p>
+									<p><b>title</b>::<b class="function">varchar(100)</b> (Activity Title)</p>
+									<p><b>subtitle</b>::<b class="function">varchar(100)</b> (Activity Subtitle)</p>
+									<p><b>message</b>::<b class="function">text</b> (Activity Message)</p>
+									<p><b>image_url</b>::<b class="function">varchar(200)</b> (Activity Image URL)</p>
+									<p><b>activity_date</b>::<b class="function">datetime</b> (Date of Activity)</p>
+									<p><b>created_at</b>::<b class="function">datetime</b> (Date the data is inserted)</p>
+									<p><b>updated_at</b>::<b class="function">datetime</b> (Date the data is updated)</p>
+									<p><b>deleted_at</b>::<b class="function">datetime</b> (Date the data is deleted)</p>
+								</pre>
+							</div>
+
+							<div class="divider"></div>
+
+							<div class="content content_child" id="elink_division">
+								<h3>Elink Division</h3>
+								<p><i>Elink Division</i> is the table that stores the elink department divisions.</p>
+
+								<pre class="label">
+									<span>Table Name:</span>
+									<a href="javascript:;" class="disabled">elink_division</a>
+								</pre>
+
+								<pre class="label">
+									<span>Structure:</span>
+									<p><b>id</b>::<b class="function">int(10)</b> (Primary Key, Auto Incremented)</p>
+									<p><b>division_name</b>::<b class="function">varchar(100)</b> (Division Name)</p>
+								</pre>
+							</div>
+
+							<div class="divider"></div>
+
+							<div class="content content_child" id="elink_referral">
+								<h3>Elink Referral</h3>
+								<p><i>Elink Referral</i> is the table that stores elink referrals from the current employees.</p>
+
+								<pre class="label">
+									<span>Table Name:</span>
+									<a href="javascript:;" class="disabled">elink_referral</a>
+								</pre>
+
+								<pre class="label">
+									<span>Structure:</span>
+									<p><b>id</b>::<b class="function">int(10)</b> (Primary Key, Auto Incremented)</p>
+									<p><b>referrer_first_name</b>::<b class="function">varchar(200)</b> (Employee First Name)</p>
+									<p><b>referrer_middle_name</b>::<b class="function">varchar(200)</b> (Employee Middle Name)</p>
+									<p><b>referrer_last_name</b>::<b class="function">varchar(200)</b> (Employee Last Name)</p>
+									<p><b>referrer_department</b>::<b class="function">varchar(200)</b> (Employee Department)</p>
+									<p><b>referral_first_name</b>::<b class="function">varchar(200)</b> (Referral First Name)</p>
+									<p><b>referral_middle_name</b>::<b class="function">varchar(200)</b> (Referral Middle Name)</p>
+									<p><b>referral_last_name</b>::<b class="function">varchar(200)</b> (Referral Last Name)</p>
+									<p><b>referral_contact_number</b>::<b class="function">varchar(200)</b> (Referral Contact Number)</p>
+									<p><b>referral_email</b>::<b class="function">varchar(200)</b> (Referral Email)</p>
+									<p><b>position_applied</b>::<b class="function">varchar(200)</b> (Referral Position Applied)</p>
+									<p><b>acknowledged</b>::<b class="function">tinyint(1)</b> (Check if HR or TA department have read the data)</p>
+									<p><b>created_at</b>::<b class="function">datetime</b> (Date the data is inserted)</p>
+									<p><b>updated_at</b>::<b class="function">datetime</b> (Date the data is updated)</p>
+									<p><b>deleted_at</b>::<b class="function">datetime</b> (Date the data is deleted)</p>
+								</pre>
+
+								<div class="comments">
+									<h5>Comments</h5>
+									<ul>
+										<li>
+											<b>Acknolwedged</b> numeric value
+											<ul>
+												<li><b>0</b> - Unread</li>
+												<li><b>1</b> - Read</li>
+											</ul>
+										</li>
+										<li>
+											Plan to remove
+											<ul>
+												<li><b>deleted_at</b></li>
+											</ul>
+										</li>
+										<li><b>TA</b> - Talent Acquisition</li>
+									</ul>
+								</div>
+							</div>
+
+							<div class="divider"></div>
+
+							<div class="content content_child" id="employeedir_access_group">
+								<h3>Employee Access Group</h3>
+								<p><i>Employee Access Group</i> is the table stores Employees Access Group.</p>
+
+								<pre class="label">
+									<span>Table Name:</span>
+									<a href="javascript:;" class="disabled">employeedir_access_group</a>
+								</pre>
+
+								<pre class="label">
+									<span>Structure:</span>
+									<p><b>id</b>::<b class="function">int(10)</b> (Primary Key, Auto Incremented)</p>
+									<p><b>access_type</b>::<b class="function">int(11)</b> (Access Type ID)</p>
+									<p><b>access_name</b>::<b class="function">varchar(191)</b> (Access Name)</p>
+								</pre>
+							</div>
+
+							<div class="divider"></div>
+
+							<div class="content content_child" id="employee_department">
+								<h3>Employee Department</h3>
+								<p><i>Employee Department</i> is the table stores Employees Departments.</p>
+
+								<pre class="label">
+									<span>Table Name:</span>
+									<a href="javascript:;" class="disabled">employee_department</a>
+								</pre>
+
+								<pre class="label">
+									<span>Structure:</span>
+									<p><b>id</b>::<b class="function">int(10)</b> (Primary Key, Auto Incremented)</p>
+									<p><b>department_name</b>::<b class="function">varchar(50)</b> (Department Name)</p>
+									<p><b>department_code</b>::<b class="function">varchar(50)</b> (Index Key, Unique Key, Department Code)</p>
+									<p><b>manager_id</b>::<b class="function">int(11)</b> (Department Manager, from <a href="database.html#employee_info">Employee Information</a>)</p>
+									<p><b>division_id</b>::<b class="function">int(11)</b> (Department Division, from <a href="database.html#elink_division">Elink Division</a>)</p>
+									<p><b>account_id</b>::<b class="function">int(11)</b> (Department Account, from <a href="database.html#elink_account">Elink Account</a>)</p>
+									<p><b>created_at</b>::<b class="function">datetime</b> (Date the data is inserted)</p>
+									<p><b>updated_at</b>::<b class="function">datetime</b> (Date the data is updated)</p>
+									<p><b>deleted_at</b>::<b class="function">datetime</b> (Date the data is deleted)</p>
+								</pre>
+
+								<div class="comments">
+									<h5>Comments</h5>
+									<ul>
+										<li>
+											Plan to remove
+											<ul>
+												<li><b>manager_id</b></li>
+												<li><b>deleted_at</b></li>
+											</ul>
+										</li>
+									</ul>
+								</div>
+							</div>
+
+							<div class="divider"></div>
+
+							<div class="content content_child" id="employee_dependents">
+								<h3>Employee Dependents</h3>
+								<p><i>Employee Dependents</i> is the table stores Employees Dependents (Spouse, Child, etc.).</p>
+
+								<pre class="label">
+									<span>Table Name:</span>
+									<a href="javascript:;" class="disabled">employee_dependents</a>
+								</pre>
+
+								<pre class="label">
+									<span>Structure:</span>
+									<p><b>id</b>::<b class="function">int(10)</b> (Primary Key, Auto Incremented)</p>
+									<p><b>employee_num</b>::<b class="function">int(10)</b> (Employee ID, From <a href="database.html#employee_info">Employee Information</a>)</p>
+									<p><b>dependent</b>::<b class="function">varchar(150)</b> (Dependent Name)</p>
+									<p><b>bday</b>::<b class="function">date</b> (Dependent Birthday)</p>
+									<p><b>generali_num</b>::<b class="function">varchar(100)</b> (Dependent Contact Number)</p>
+									<p><b>created_at</b>::<b class="function">datetime</b> (Date the data is inserted)</p>
+									<p><b>updated_at</b>::<b class="function">datetime</b> (Date the data is updated)</p>
+									<p><b>deleted_at</b>::<b class="function">datetime</b> (Date the data is deleted)</p>
+									<p><b>status</b>::<b class="function">tinyint(4)</b> (Dependent Status)</p>
+								</pre>
+							</div>
+
+							<div class="divider"></div>
+
+							<div class="content content_child" id="employee_info">
+								<h3>Employee Information</h3>
+								<p><i>Employee Information</i> is the table stores Employee Information.</p>
+
+								<pre class="label">
+									<span>Table Name:</span>
+									<a href="javascript:;" class="disabled">employee_info</a>
+								</pre>
+
+								<pre class="label">
+									<span>Structure:</span>
+									<p><b>id</b>::<b class="function">int(10)</b> (Primary Key, Auto Incremented)</p>
+									<p><b>eid</b>::<b class="function">varchar(50)</b> (Employee ID Number)</p>
+									<p><b>first_name</b>::<b class="function">varchar(50)</b> (Employee First Name)</p>
+									<p><b>middle_name</b>::<b class="function">varchar(50)</b> (Employee Middle Name)</p>
+									<p><b>last_name</b>::<b class="function">varchar(50)</b> (Employee Last Name)</p>
+									<p><b>email</b>::<b class="function">varchar(80)</b> (Employee Company Email)</p>
+									<p><b>email2</b>::<b class="function">varchar(80)</b> (Employee Personal Email)</p>
+									<p><b>email3</b>::<b class="function">varchar(80)</b> (Employee Secondary Email)</p>
+									<p><b>alias</b>::<b class="function">varchar(80)</b> (Employee Alias)</p>
+									<p><b>team_name</b>::<b class="function">varchar(80)</b> (Employee Department)</p>
+									<p><b>dept_code</b>::<b class="function">varchar(20)</b> (Employee Department Code, from <a href="database.html#employee_dependents">Employee Department</a>)</p>
+									<p><b>position_name</b>::<b class="function">varchar(50)</b> (Employee Position Name)</p>
+									<p><b>supervisor_id</b>::<b class="function">int(11)</b> (Employee Supervisor ID)</p>
+									<p><b>role_id</b>::<b class="function">varchar(50)</b> (Employee Role ID, from <a href="database.html#employee_role">Employee Role</a>)</p>
+									<p><b>supervisor_name</b>::<b class="function">varchar(150)</b> (Employee Supervisor Name)</p>
+									<p><b>manager_name</b>::<b class="function">varchar(150)</b> (Employee Manager Name)</p>
+									<p><b>birth_date</b>::<b class="function">datetime</b> (Employee Birth Date)</p>
+									<p><b>hired_date</b>::<b class="function">datetime</b> (Employee Hired Date)</p>
+									<p><b>prod_date</b>::<b class="function">datetime</b> (Employee Production Date)</p>
+									<p><b>regularization_date</b>::<b class="function">date</b> (Employee Regularization Date)</p>
+									<p><b>password</b>::<b class="function">varchar(200)</b> (Employee Password)</p>
+									<p><b>usertype</b>::<b class="function">int(11)</b> (Employee Usertype)</p>
+									<p><b>gender</b>::<b class="function">int(11)</b> (Employee Gender)</p>
+									<p><b>civil_status</b>::<b class="function">tinyint(4)</b> (Employee Civil Status)</p>
+									<p><b>manager_id</b>::<b class="function">int(11)</b> (Employee Manager ID)</p>
+									<p><b>division_id</b>::<b class="function">int(11)</b> (Employee Division ID, from <a href="database.html#elink_division">Elink Division</a>)</p>
+									<p><b>division_name</b>::<b class="function">varchar(100)</b> (Employee Division Name)</p>
+									<p><b>account_id</b>::<b class="function">int(11)</b> (Employee Account ID, from <a href="database.html#elink_account">Elink Account</a>)</p>
+									<p><b>status</b>::<b class="function">int(11)</b> (Employee Status)</p>
+									<p><b>ext</b>::<b class="function">varchar(20)</b> (Employee Extension Number)</p>
+									<p><b>wave</b>::<b class="function">varchar(20)</b> (Employee Wave Number)</p>
+									<p><b>all_access</b>::<b class="function">int(11)</b> (If Profile can be access by all)</p>
+									<p><b>profile_img</b>::<b class="function">varchar(200)</b> (Employee Profile Image)</p>
+									<p><b>sss</b>::<b class="function">varchar(200)</b> (Employee SSS Number)</p>
+									<p><b>pagibig</b>::<b class="function">varchar(200)</b> (Employee Pagibig Number)</p>
+									<p><b>philhealth</b>::<b class="function">varchar(200)</b> (Employee Philhealth Number)</p>
+									<p><b>tin</b>::<b class="function">varchar(200)</b> (Employee TIN Number)</p>
+									<p><b>address</b>::<b class="function">varchar(200)</b> (Employee Address)</p>
+									<p><b>leave_credit</b>::<b class="function">decimal(5,2)</b> (Employee Leave Credits)</p>
+									<p><b>contact_number</b>::<b class="function">varchar(25)</b> (Employee Contact Number)</p>
+									<p><b>resigned_date</b>::<b class="function">datetime</b> (Employee Resignation Date)</p>
+									<p><b>is_admin</b>::<b class="function">int(11)</b> (If Employee is Admin)</p>
+									<p><b>is_erp</b>::<b class="function">int(11)</b> (If Employee is an ERP)</p>
+									<p><b>is_hr</b>::<b class="function">int(11)</b> (If Employee from Human Resource Department)</p>
+									<p><b>is_ra</b>::<b class="function">int(11)</b> (If Employee is a Report Analyst)</p>
+									<p><b>is_regular</b>::<b class="function">tinyint(4)</b> (If Employee is Regular Employee)</p>
+									<p><b>employee_category</b>::<b class="function">tinyint(4)</b> (Employee Category, From Employee Access Group)</p>
+									<p><b>remember_token</b>::<b class="function">varchar(200)</b> (Login Token)</p>
+									<p><b>created_at</b>::<b class="function">datetime</b> (Date the data is inserted)</p>
+									<p><b>updated_at</b>::<b class="function">datetime</b> (Date the data is updated)</p>
+									<p><b>deleted_at</b>::<b class="function">datetime</b> (Date the data is deleted)</p>
+								</pre>
+
+								<div class="comments">
+									<h5>Comments</h5>
+									<ul>
+										<li>
+											<b>Gender</b> numeric value
+											<ul>
+												<li><b>0</b> - Rather Not Say</li>
+												<li><b>1</b> - Male</li>
+												<li><b>2</b> - Female</li>
+											</ul>
+										</li>
+										<li>
+											<b>Civil Status</b> numeric value
+											<ul>
+												<li><b>1</b> - Single</li>
+												<li><b>2</b> - Married</li>
+												<li><b>3</b> - Separated</li>
+												<li><b>4</b> - Anulled</li>
+												<li><b>5</b> - Divorced</li>
+											</ul>
+										</li>
+										<li>
+											<b>Status</b> numeric value
+											<ul>
+												<li><b>1</b> - Active</li>
+												<li><b>2</b> - Inactive</li>
+											</ul>
+										</li>
+										<li>
+											Plan to remove
+											<ul>
+												<li><b>leave_credit</b></li>
+											</ul>
+										</li>
+									</ul>
+								</div>
+							</div>
+
+							<div class="divider"></div>
+
+							<div class="content content_child" id="employee_info_details">
+								<h3>Employee Information Details</h3>
+								<p><i>Employee Information Details</i> is the table stores more Employees Information.</p>
+
+								<pre class="label">
+									<span>Table Name:</span>
+									<a href="javascript:;" class="disabled">employee_info_details</a>
+								</pre>
+
+								<pre class="label">
+									<span>Structure:</span>
+									<p><b>em_id</b>::<b class="function">int(10)</b> (Index Key, Auto Incremented)</p>
+									<p><b>employee_id</b>::<b class="function">int(11)</b> (Index Key, Employee ID, From <a href="database.html#employee_info">Employee Information</a>)</p>
+									<p><b>town_address</b>::<b class="function">varchar(250)</b> (Employee Town Address)</p>
+									<p><b>em_con_name</b>::<b class="function">varchar(100)</b> (Employee In Case of Emergency Name)</p>
+									<p><b>em_con_address</b>::<b class="function">varchar(250)</b> (Employee In Case of Emergency Address)</p>
+									<p><b>em_con_num</b>::<b class="function">varchar(30)</b> (Employee In Case of Emergency Number)</p>
+									<p><b>em_con_rel</b>::<b class="function">varchar(100)</b> (Employee In Case of Emergency Relationship)</p>
+									<p><b>past_leave_credit</b>::<b class="function">decimal(5,2)</b> (Employee Past Credit)</p>
+									<p><b>fathers_name</b>::<b class="function">varchar(150)</b> (Employee Father Name)</p>
+									<p><b>created_at</b>::<b class="function">datetime</b> (Date the data is inserted)</p>
+									<p><b>updated_at</b>::<b class="function">datetime</b> (Date the data is updated)</p>
+									<p><b>resignation_date</b>::<b class="function">date</b> (Employee Resignation Date)</p>
+									<p><b>noti_2mos</b>::<b class="function">tinyint(4)</b> (Employee 2 Month Evaluation Notification)</p>
+									<p><b>noti_5mos</b>::<b class="function">tinyint(4)</b> (Employee 5 Month Evaluation Notification)</p>
+									<p><b>fathers_bday</b>::<b class="function">date</b> (Employee Father's Birthday)</p>
+									<p><b>mothers_name</b>::<b class="function">varchar(150)</b> (Employee Mother Name)</p>
+									<p><b>mothers_bday</b>::<b class="function">date</b> (Employee Mother's Birthday)</p>
+									<p><b>spouse_name</b>::<b class="function">varchar(150)</b> (Employee Spouse Name)</p>
+									<p><b>spouse_bday</b>::<b class="function">date</b> (Employee Spouse's Birthday)</p>
+									<p><b>rehirable</b>::<b class="function">tinyint(4)</b> (If Employee is Rehirable)</p>
+									<p><b>rehire_reason</b>::<b class="function">varchar(200)</b> (Reason if not rehirable)</p>
+									<p><b>avega_num</b>::<b class="function">varchar(100)</b> (Employee Avega Number)</p>
+									<p><b>status_s</b>::<b class="function">tinyint(4)</b> (Employee Details Status)</p>
+								</pre>
+
+								<div class="comments">
+									<h5>Comments</h5>
+									<ul>
+										<li>Plan to change table column ordering</li>
+										<li>
+											Plan to remove
+											<ul>
+												<li><b>past_leave_credit</b></li>
+												<li><b>noti_2mos</b></li>
+												<li><b>noti_5mos</b></li>
+											</ul>
+										</li>
+									</ul>
+								</div>
+							</div>
+
+							<div class="divider"></div>
+
+							<div class="content content_child" id="employee_role">
+								<h3>Employee Role</h3>
+								<p><i>Employee Role</i> is the table stores Employees Roles.</p>
+
+								<pre class="label">
+									<span>Table Name:</span>
+									<a href="javascript:;" class="disabled">employee_role</a>
+								</pre>
+
+								<pre class="label">
+									<span>Structure:</span>
+									<p><b>id</b>::<b class="function">int(10)</b> (Primary Key, Auto Incremented)</p>
+									<p><b>role_name</b>::<b class="function">varchar(191)</b> (Role Name)</p>
+								</pre>
+							</div>
+
+							<div class="divider"></div>
+
+							<div class="content content_child" id="events">
+								<h3>Events</h3>
+								<p><i>Events</i> is the table stores company events.</p>
+
+								<pre class="label">
+									<span>Table Name:</span>
+									<a href="javascript:;" class="disabled">events</a>
+								</pre>
+
+								<pre class="label">
+									<span>Structure:</span>
+									<p><b>id</b>::<b class="function">int(10)</b> (Primary Key, Auto Incremented)</p>
+									<p><b>event_name</b>::<b class="function">varchar(200)</b> (Event Name)</p>
+									<p><b>event_description</b>::<b class="function">text</b> (Event Description)</p>
+									<p><b>start_date</b>::<b class="function">datetime</b> (Event Start Date)</p>
+									<p><b>end_date</b>::<b class="function">datetime</b> (Event End Date)</p>
+									<p><b>event_color</b>::<b class="function">varchar(200)</b> (Event Color, Hex Code)</p>
+									<p><b>created_at</b>::<b class="function">datetime</b> (Date the data is inserted)</p>
+									<p><b>updated_at</b>::<b class="function">datetime</b> (Date the data is updated)</p>
+									<p><b>deleted_at</b>::<b class="function">datetime</b> (Date the data is deleted)</p>
+								</pre>
+
+								<div class="comments">
+									<h5>Comments</h5>
+									<ul>
+										<li><b>Event Color</b> - Hex Code is for <i>Calendar.js</i> line color</li>
+										<li>
+											Plan to remove
+											<ul>
+												<li><b>deleted_at</b></li>
+											</ul>
+										</li>
+									</ul>
+								</div>
+							</div>
+
+							<div class="divider"></div>
+
+							<div class="content content_child" id="goal_setting">
+								<h3>Goal Setting</h3>
+								<p><i>Goal Setting</i> is the table that stores the Goal Setting Linkings from the Linking Sessions</p>
+
+								<pre class="label">
+									<span>Table Name:</span>
+									<a href="javascript:;" class="disabled">goal_setting</a>
+								</pre>
+
+								<pre class="label">
+									<span>Structure:</span>
+									<p><b>gs_id</b>::<b class="function">int(10)</b> (Primary Key, Auto Incremented)</p>
+									<p><b>gs_link_id</b>::<b class="function">int(10)</b> (From <a href="database.html#linking_master">Linking Master</a>)</p>
+									<p><b>gs_com_id</b>::<b class="function">varchar(50)</b> (An md5 Version of the gs_link_id, URL to access session)</p>
+									<p><b>gs_accmpl</b>::<b class="function">longtext</b> (Goal Setting Accomplishments)</p>
+									<p><b>gs_metric_01</b>::<b class="function">longtext</b> (Goal Setting Metric #1)</p>
+									<p><b>gs_target_01</b>::<b class="function">longtext</b> (Goal Setting Target #1)</p>
+									<p><b>gs_prev_01</b>::<b class="function">longtext</b> (Goal Setting Previous Month #1)</p>
+									<p><b>gs_curr_01</b>::<b class="function">longtext</b> (Goal Setting Current Month #1)</p>
+									<p><b>gs_metric_02</b>::<b class="function">longtext</b> (Goal Setting Metric #2)</p>
+									<p><b>gs_target_02</b>::<b class="function">longtext</b> (Goal Setting Target #2)</p>
+									<p><b>gs_prev_02</b>::<b class="function">longtext</b> (Goal Setting Previous Month #2)</p>
+									<p><b>gs_curr_02</b>::<b class="function">longtext</b> (Goal Setting Current Month #2)</p>
+									<p><b>gs_metric_03</b>::<b class="function">longtext</b> (Goal Setting Metric #3)</p>
+									<p><b>gs_target_03</b>::<b class="function">longtext</b> (Goal Setting Target #3)</p>
+									<p><b>gs_prev_03</b>::<b class="function">longtext</b> (Goal Setting Previous Month #3)</p>
+									<p><b>gs_curr_03</b>::<b class="function">longtext</b> (Goal Setting Current Month #3)</p>
+									<p><b>gs_metric_04</b>::<b class="function">longtext</b> (Goal Setting Metric #4)</p>
+									<p><b>gs_target_04</b>::<b class="function">longtext</b> (Goal Setting Target #4)</p>
+									<p><b>gs_prev_04</b>::<b class="function">longtext</b> (Goal Setting Previous Month #4)</p>
+									<p><b>gs_curr_04</b>::<b class="function">longtext</b> (Goal Setting Current Month #4)</p>
+									<p><b>gs_metric_05</b>::<b class="function">longtext</b> (Goal Setting Metric #5)</p>
+									<p><b>gs_target_05</b>::<b class="function">longtext</b> (Goal Setting Target #5)</p>
+									<p><b>gs_prev_05</b>::<b class="function">longtext</b> (Goal Setting Previous Month #5)</p>
+									<p><b>gs_curr_05</b>::<b class="function">longtext</b> (Goal Setting Current Month #5)</p>
+									<p><b>gs_metric_06</b>::<b class="function">longtext</b> (Goal Setting Metric #6)</p>
+									<p><b>gs_target_06</b>::<b class="function">longtext</b> (Goal Setting Target #6)</p>
+									<p><b>gs_prev_06</b>::<b class="function">longtext</b> (Goal Setting Previous Month #6)</p>
+									<p><b>gs_curr_06</b>::<b class="function">longtext</b> (Goal Setting Current Month #6)</p>
+									<p><b>gs_metric_07</b>::<b class="function">longtext</b> (Goal Setting Metric #7)</p>
+									<p><b>gs_target_07</b>::<b class="function">longtext</b> (Goal Setting Target #7)</p>
+									<p><b>gs_prev_07</b>::<b class="function">longtext</b> (Goal Setting Previous Month #7)</p>
+									<p><b>gs_curr_07</b>::<b class="function">longtext</b> (Goal Setting Current Month #7)</p>
+									<p><b>gs_tip</b>::<b class="function">longtext</b> (Goal Setting Tip for the Month)</p>
+									<p><b>gs_com</b>::<b class="function">longtext</b> (Goal Setting Commitment)</p>
+									<p><b>gs_feedback</b>::<b class="function">longtext</b> (Goal Setting Feedback)</p>
+									<p><b>created_at</b>::<b class="function">datetime</b> (Date the data is inserted)</p>
+									<p><b>updated_at</b>::<b class="function">datetime</b> (Date the data is updated)</p>
+									<p><b>gs_status</b>::<b class="function">tinyint(4)</b> (Goal Setting Status)</p>
+								</pre>
+							</div>
+
+							<div class="divider"></div>
+
+							<div class="content content_child" id="gtky">
+								<h3>Getting to Know You</h3>
+								<p><i>Getting to Know You</i> is the table that stores the Getting to Know You Linkings from the Linking Sessions</p>
+
+								<pre class="label">
+									<span>Table Name:</span>
+									<a href="javascript:;" class="disabled">gtky</a>
+								</pre>
+
+								<pre class="label">
+									<span>Structure:</span>
+									<p><b>gtk_id</b>::<b class="function">int(10)</b> (Primary Key, Auto Incremented)</p>
+									<p><b>gtk_link_id</b>::<b class="function">int(10)</b> (Index Key, From <a href="database.html#linking_master">Linking Master</a>)</p>
+									<p><b>gtk_com_num</b>::<b class="function">varchar(100)</b> (Index Key, An md5 Version of the gtk_link_id, URL to access session)</p>
+									<p><b>gtk_address</b>::<b class="function">varchar(200)</b> (Getting to Know You Address)</p>
+									<p><b>gtk_bday</b>::<b class="function">date</b> (Getting to Know You Birthday)</p>
+									<p><b>gtk_bplace</b>::<b class="function">varchar(200)</b> (Getting to Know You Birthplace)</p>
+									<p><b>gtk_mobile</b>::<b class="function">varchar(50)</b> (Getting to Know You Mobile Number)</p>
+									<p><b>gtk_email</b>::<b class="function">varchar(150)</b> (Getting to Know You Email Address)</p>
+									<p><b>gtk_civil_stat</b>::<b class="function">varchar(50)</b> (Getting to Know You Civil Status)</p>
+									<p><b>gtk_fav_thing</b>::<b class="function">text</b> (Getting to Know You Most Favorite Thing to Do)</p>
+									<p><b>gtk_fav_color</b>::<b class="function">text</b> (Getting to Know You Most Favorite Color)</p>
+									<p><b>gtk_fav_movie</b>::<b class="function">text</b> (Getting to Know You Most Favorite Movie)</p>
+									<p><b>gtk_fav_song</b>::<b class="function">text</b> (Getting to Know You Most Favorite Song)</p>
+									<p><b>gtk_fav_food</b>::<b class="function">text</b> (Getting to Know You Most Favorite Food)</p>
+									<p><b>gtk_allergic_food</b>::<b class="function">text</b> (Getting to Know You Food Allergy)</p>
+									<p><b>gtk_allergic_med</b>::<b class="function">text</b> (Getting to Know You Medicine Allergy)</p>
+									<p><b>gtk_learn_style</b>::<b class="function">text</b> (Getting to Know You Learning Style)</p>
+									<p><b>gtk_social_style</b>::<b class="function">text</b> (Getting to Know You Social Style)</p>
+									<p><b>gtk_motivation</b>::<b class="function">text</b> (Getting to Know You What motivates you)</p>
+									<p><b>gtk_how_coached</b>::<b class="function">text</b> (Getting to Know You How do you want to be coached)</p>
+									<p><b>gtk_strength</b>::<b class="function">text</b> (Getting to Know You What do you consider your strengths)</p>
+									<p><b>gtk_improvement</b>::<b class="function">text</b> (Getting to Know You What can you do to better to improve)</p>
+									<p><b>gtk_goals</b>::<b class="function">text</b> (Getting to Know You Goals in Life)</p>
+									<p><b>gtk_others</b>::<b class="function">text</b> (Getting to Know You Feedback)</p>
+									<p><b>created_at</b>::<b class="function">datetime</b> (Date the data is inserted)</p>
+									<p><b>updated_at</b>::<b class="function">datetime</b> (Date the data is updated)</p>
+									<p><b>gtk_status</b>::<b class="function">tinyint(3)</b> (Getting to Know You Status)</p>
+								</pre>
+							</div>
+
+							<div class="divider"></div>
+
+							<div class="content content_child" id="leave_credits">
+								<h3>Leave Credits</h3>
+								<p><i>Leave Credits</i> is the table that stores all Employee Leave Credits</p>
+
+								<pre class="label">
+									<span>Table Name:</span>
+									<a href="javascript:;" class="disabled">leave_credits</a>
+								</pre>
+
+								<pre class="label">
+									<span>Structure:</span>
+									<p><b>id</b>::<b class="function">int(10)</b> (Primary Key, Auto Incremented)</p>
+									<p><b>employee_id</b>::<b class="function">int(11)</b> (Employee ID, From <a href="database.html#employee_info">Employee Information</a>)</p>
+									<p><b>credit</b>::<b class="function">decimal(8,5)</b> (Employee Credit)</p>
+									<p><b>type</b>::<b class="function">tinyint(4)</b> (Credit Type)</p>
+									<p><b>month</b>::<b class="function">tinyint(4)</b> (Credit Month)</p>
+									<p><b>year</b>::<b class="function">varchar(5)</b> (Credit Year)</p>
+									<p><b>leave_id</b>::<b class="function">int(11)</b> (Leave ID, from <a href="database.html#leave_request">Leave Request</a>)</p>
+									<p><b>status</b>::<b class="function">tinyint(4)</b> (Leave Status)</p>
+									<p><b>created_at</b>::<b class="function">datetime</b> (Date the data is inserted)</p>
+									<p><b>updated_at</b>::<b class="function">datetime</b> (Date the data is updated)</p>
+									<p><b>deleted_at</b>::<b class="function">datetime</b> (Date the data is deleted)</p>
+								</pre>
+
+								<div class="comments">
+									<h5>Comments</h5>
+									<ul>
+										<li>
+											<b>Type</b> numeric value
+											<ul>
+												<li><b>1</b> - Add Credit</li>
+												<li><b>2</b> - Past Credit</li>
+												<li><b>3</b> - Conversion</li>
+												<li><b>4</b> - LOA</li>
+												<li><b>5</b> - Use Credit</li>
+												<li><b>7</b> - Credit Changes</li>
+											</ul>
+										</li>
+										<li>
+											Plan to remove
+											<ul>
+												<li><b>deleted_at</b></li>
+											</ul>
+										</li>
+									</ul>
+								</div>
+							</div>
+
+							<div class="divider"></div>
+
+							<div class="content content_child" id="leave_credit_archives">
+								<h3>Leave Credit Archive</h3>
+								<p><i>Leave Credit Archive</i> is the table that stores past Employee Leave Credits</p>
+
+								<pre class="label">
+									<span>Table Name:</span>
+									<a href="javascript:;" class="disabled">leave_credit_archives</a>
+								</pre>
+
+								<pre class="label">
+									<span>Structure:</span>
+									<p><b>id</b>::<b class="function">int(10)</b> (Primary Key, Auto Incremented)</p>
+									<p><b>employee_id</b>::<b class="function">bigint(20)</b> (Employee ID, From <a href="database.html#employee_info">Employee Information</a>)</p>
+									<p><b>credit</b>::<b class="function">double</b> (Employee Credit)</p>
+									<p><b>type</b>::<b class="function">tinyint(4)</b> (Credit Type)</p>
+									<p><b>month</b>::<b class="function">tinyint(4)</b> (Credit Month)</p>
+									<p><b>year</b>::<b class="function">varchar(5)</b> (Credit Year)</p>
+									<p><b>leave_id</b>::<b class="function">bigint(20)</b> (Leave ID, from <a href="database.html#leave_request">Leave Request</a>)</p>
+									<p><b>status</b>::<b class="function">tinyint(4)</b> (Leave Status)</p>
+									<p><b>created_at</b>::<b class="function">datetime</b> (Date the data is inserted)</p>
+									<p><b>updated_at</b>::<b class="function">datetime</b> (Date the data is updated)</p>
+								</pre>
+
+								<div class="comments">
+									<h5>Comments</h5>
+									<ul>
+										<li>
+											<b>Type</b> numeric value
+											<ul>
+												<li><b>1</b> - Add Credit</li>
+												<li><b>2</b> - Past Credit</li>
+												<li><b>3</b> - Conversion</li>
+												<li><b>4</b> - LOA</li>
+												<li><b>5</b> - Use Credit</li>
+												<li><b>7</b> - Credit Changes</li>
+												<li><b>99</b> - Current Leave Credit Total (final result will be use as Past Leave Credit for next year in Leave Credits Table)</li>
+											</ul>
+										</li>
+									</ul>
+								</div>
+							</div>
+
+							<div class="divider"></div>
+
+							<div class="content content_child" id="leave_pay_type">
+								<h3>Leave Pay Type</h3>
+								<p><i>Leave Pay Type</i> is the table that stores types of Leave Payment Information</p>
+
+								<pre class="label">
+									<span>Table Name:</span>
+									<a href="javascript:;" class="disabled">leave_pay_type</a>
+								</pre>
+
+								<pre class="label">
+									<span>Structure:</span>
+									<p><b>id</b>::<b class="function">int(10)</b> (Primary Key, Auto Incremented)</p>
+									<p><b>pay_type_name</b>::<b class="function">varchar(191)</b> (Pay Type Name)</p>
+									<p><b>description</b>::<b class="function">varchar(191)</b> (Pay Type Description)</p>
+									<p><b>created_at</b>::<b class="function">datetime</b> (Date the data is inserted)</p>
+									<p><b>updated_at</b>::<b class="function">datetime</b> (Date the data is updated)</p>
+								</pre>
+
+								<div class="comments">
+									<h5>Comments</h5>
+									<ul>
+										<li>Only Stores 2 Values <b>With Pay</b> and <b>Without Pay</b></li>
+									</ul>
+								</div>
+							</div>
+
+							<div class="divider"></div>
+
+							<div class="content content_child" id="leave_request">
+								<h3>Leave Request</h3>
+								<p><i>Leave Request</i> is the table that stores all Employees Leave Request.</p>
+
+								<pre class="label">
+									<span>Table Name:</span>
+									<a href="javascript:;" class="disabled">leave_request</a>
+								</pre>
+
+								<pre class="label">
+									<span>Structure:</span>
+									<p><b>id</b>::<b class="function">int(10)</b> (Primary Key, Auto Incremented)</p>
+									<p><b>employee_id</b>::<b class="function">int(11)</b> (Employee ID, from <a href="database.html#employee_info">Employee Information</a>)</p>
+									<p><b>leave_date_from</b>::<b class="function">datetime</b> (Leave Date From)</p>
+									<p><b>leave_date_to</b>::<b class="function">datetime</b> (Leave Date To)</p>
+									<p><b>number_of_days</b>::<b class="function">decimal(8,2)</b> (Leave Number of Days)</p>
+									<p><b>leave_type_id</b>::<b class="function">int(11)</b> (Leave Type ID, from <a href="database.html#leave_type">Leave Type</a>)</p>
+									<p><b>pay_type_id</b>::<b class="function">int(11)</b> (Leave Pay Type ID, from <a href="database.html#leave_pay_type">Leave Pay Type</a>)</p>
+									<p><b>attachment_id</b>::<b class="function">int(11)</b> (Leave Attachment)</p>
+									<p><b>report_date</b>::<b class="function">datetime</b> (Leave Return Date)</p>
+									<p><b>contact_number</b>::<b class="function">varchar(191)</b> (Leave Contact Number)</p>
+									<p><b>reason</b>::<b class="function">mediumtext</b> (Leave Reason)</p>
+									<p><b>filed_by_id</b>::<b class="function">int(11)</b> (The one who filed the Leave)</p>
+									<p><b>recommending_approval_by_id</b>::<b class="function">int(11)</b> (The one who recommended the Leave, from <a href="database.html#employee_info">Employee Information</a>)</p>
+									<p><b>recommending_approval_by_signed_date</b>::<b class="function">datetime</b> (Date the leave was recommended)</p>
+									<p><b>recommending_approval_by_is_notified</b>::<b class="function">datetime</b> (If the recommender is notified)</p>
+									<p><b>approved_by_id</b>::<b class="function">int(11)</b> (The one who approved the Leave, from <a href="database.html#employee_info">Employee Information</a>)</p>
+									<p><b>approved_by_signed_date</b>::<b class="function">datetime</b> (Date the leave was approved)</p>
+									<p><b>approved_by_is_notified</b>::<b class="function">int(11)</b> (If the one who will approve is notified)</p>
+									<p><b>noted_by_id</b>::<b class="function">int(11)</b> (The one who noted the Leave, from <a href="database.html#employee_info">Employee Information</a>)</p>
+									<p><b>noted_by_signed_date</b>::<b class="function">datetime</b> (Date the note was added)</p>
+									<p><b>noted_by_is_notified</b>::<b class="function">int(11)</b> (If the one who noted was notified)</p>
+									<p><b>approve_status_id</b>::<b class="function">int(11)</b> (Leave Approved Status)</p>
+									<p><b>reason_for_disapproval</b>::<b class="function">mediumtext</b> (Reason for Leave Disapproval)</p>
+									<p><b>date_filed</b>::<b class="function">datetime</b> (Date the Leave is Filed)</p>
+									<p><b>created_at</b>::<b class="function">datetime</b> (Date the data is inserted)</p>
+									<p><b>updated_at</b>::<b class="function">datetime</b> (Date the data is updated)</p>
+									<p><b>deleted_at</b>::<b class="function">datetime</b> (Date the data is deleted)</p>
+									<p><b>status</b>::<b class="function">tinyint(4)</b> (Leave Status)</p>
+								</pre>
+
+								<div class="comments">
+									<h5>Comments</h5>
+									<ul>
+										<li>
+											<b>Approved Status</b> numeric value
+											<ul>
+												<li><b>0</b> - Pending</li>
+												<li><b>1</b> - Approved</li>
+												<li><b>2</b> - Declined</li>
+												<li><b>3</b> - Recommended</li>
+											</ul>
+										</li>
+										<li>
+											Plan to remove
+											<ul>
+												<li><b>leave_date_from</b></li>
+												<li><b>leave_date_to</b></li>
+												<li><b>attachment_id</b></li>
+												<li><b>recommending_approval_by_is_notified</b></li>
+												<li><b>approved_by_is_notified</b></li>
+												<li><b>noted_by_is_notified</b></li>
+												<li><b>deleted_at</b></li>
+											</ul>
+										</li>
+									</ul>
+								</div>
+							</div>
+
+							<div class="divider"></div>
+
+							<div class="content content_child" id="leave_request_details">
+								<h3>Leave Request Details</h3>
+								<p><i>Leave Request Details</i> is the table that stores the Leave Request Dates</p>
+
+								<pre class="label">
+									<span>Table Name:</span>
+									<a href="javascript:;" class="disabled">leave_request_details</a>
+								</pre>
+
+								<pre class="label">
+									<span>Structure:</span>
+									<p><b>id</b>::<b class="function">int(10)</b> (Primary Key, Auto Incremented)</p>
+									<p><b>leave_id</b>::<b class="function">int(10)</b> (Index Key, Leave ID, From <a href="database.html#leave_request">Leave Request</a>)</p>
+									<p><b>date</b>::<b class="function">date</b> (Leave Date)</p>
+									<p><b>length</b>::<b class="function">double(4,2)</b> (Leave Length)</p>
+									<p><b>pay_type</b>::<b class="function">tinyint(4)</b> (Leave Pay Type)</p>
+									<p><b>created_at</b>::<b class="function">timestamp</b> (Date the data is inserted)</p>
+									<p><b>updated_at</b>::<b class="function">timestamp</b> (Date the data is updated)</p>
+									<p><b>status</b>::<b class="function">tinyint(4)</b> (Leave Detail Status)</p>
+								</pre>
+
+								<div class="comments">
+									<h5>Comments</h5>
+									<ul>
+										<li>
+											<b>Length</b> value
+											<ul>
+												<li><b>0.5</b> - Half Day</li>
+												<li><b>1</b> - Whole Day</li>
+											</ul>
+										</li>
+									</ul>
+								</div>
+							</div>
+
+							<div class="divider"></div>
+
+							<div class="content content_child" id="leave_type">
+								<h3>Leave Type</h3>
+								<p><i>Leave Type</i> is the table that stores the Types of Leave Request Available.</p>
+
+								<pre class="label">
+									<span>Table Name:</span>
+									<a href="javascript:;" class="disabled">leave_type</a>
+								</pre>
+
+								<pre class="label">
+									<span>Structure:</span>
+									<p><b>id</b>::<b class="function">int(10)</b> (Primary Key, Auto Incremented)</p>
+									<p><b>leave_type_name</b>::<b class="function">varchar(191)</b> (Leave Type Name)</p>
+									<p><b>description</b>::<b class="function">varchar(191)</b> (Leave Type Name)</p>
+									<p><b>created_at</b>::<b class="function">datetime</b> (Date the data is inserted)</p>
+									<p><b>updated_at</b>::<b class="function">datetime</b> (Date the data is updated)</p>
+									<p><b>deleted_at</b>::<b class="function">datetime</b> (Date the data is deleted)</p>
+									<p><b>status</b>::<b class="function">tinyint(4)</b> (Leave Type Status)</p>
+								</pre>
+							</div>
+
+							<div class="divider"></div>
+
+							<div class="content content_child" id="linking_master">
+								<h3>Linking Master</h3>
+								<p><i>Linking Master</i> is the table that stores as the main table for all the Linking Sessions</p>
+
+								<pre class="label">
+									<span>Table Name:</span>
+									<a href="javascript:;" class="disabled">linking_master</a>
+								</pre>
+
+								<pre class="label">
+									<span>Structure:</span>
+									<p><b>lnk_id</b>::<b class="function">lnk_id(10)</b> (Primary Key, Auto Incremented)</p>
+									<p><b>lnk_date</b>::<b class="function">date</b> (Linking Session Date)</p>
+									<p><b>lnk_linker</b>::<b class="function">smallint(5)</b> (Linker ID, from <a href="database.html#employee_info">Employee Information</a>)</p>
+									<p><b>lnk_linkee</b>::<b class="function">smallint(5)</b> (Linkees ID, from <a href="database.html#employee_info">Employee Information</a>)</p>
+									<p><b>lnk_type</b>::<b class="function">tinyint(4)</b> (Linking Session Type, from <a href="database.html#linking_types">Linking Type</a>)</p>
+									<p><b>lnk_acknw</b>::<b class="function">tinyint(4)</b> (If the Session is Acknowledged by the Linkee)</p>
+									<p><b>created_at</b>::<b class="function">datetime</b> (Date the data is inserted)</p>
+									<p><b>updated_at</b>::<b class="function">datetime</b> (Date the data is updated)</p>
+									<p><b>lnk_status</b>::<b class="function">tinyint(4)</b> (Linking Session Status)</p>
+								</pre>
+							</div>
+
+							<div class="divider"></div>
+
+							<div class="content content_child" id="linking_types">
+								<h3>Linking Types</h3>
+								<p><i>Linking Types</i> is the table that stores the types of Linking Session available.</p>
+
+								<pre class="label">
+									<span>Table Name:</span>
+									<a href="javascript:;" class="disabled">linking_types</a>
+								</pre>
+
+								<pre class="label">
+									<span>Structure:</span>
+									<p><b>lt_id</b>::<b class="function">tinyint(3)</b> (Primary Key, Auto Incremented)</p>
+									<p><b>lt_desc</b>::<b class="function">varchar(100)</b> (Linking Type Description)</p>
+									<p><b>lt_link</b>::<b class="function">varchar(100)</b> (Linking Type Permalink)</p>
+									<p><b>lt_order</b>::<b class="function">tinyint(3)</b> (Linking Type View Ordering)</p>
+									<p><b>lt_status</b>::<b class="function">tinyint(4)</b> (Linking Type Status)</p>
+								</pre>
+							</div>
+
+							<div class="divider"></div>
+
+							<div class="content content_child" id="lnk_focus">
+								<h3>Linking Focus</h3>
+								<p><i>Linking Focus</i> is the table that stores Linking Session Focus Topics available.</p>
+
+								<pre class="label">
+									<span>Table Name:</span>
+									<a href="javascript:;" class="disabled">lnk_focus</a>
+								</pre>
+
+								<pre class="label">
+									<span>Structure:</span>
+									<p><b>fc_id</b>::<b class="function">tinyint(3)</b> (Primary Key, Auto Incremented)</p>
+									<p><b>fc_desc</b>::<b class="function">varchar(150)</b> (Linking Focus Description)</p>
+									<p><b>fc_status</b>::<b class="function">tinyint(4)</b> (Linking Focus Status)</p>
+								</pre>
+							</div>
+
+							<div class="divider"></div>
+
+							<div class="content content_child" id="log">
+								<h3>Logs</h3>
+								<p><i>Logs</i> is the table that stores a certain modules changes.</p>
+
+								<pre class="label">
+									<span>Table Name:</span>
+									<a href="javascript:;" class="disabled">log</a>
+								</pre>
+
+								<pre class="label">
+									<span>Structure:</span>
+									<p><b>id</b>::<b class="function">int(11)</b> (Primary Key, Auto Incremented)</p>
+									<p><b>employee_id</b>::<b class="function">int(11)</b> (Employee ID, from <a href="database.html#employee_info">Employee Information</a>)</p>
+									<p><b>module_id</b>::<b class="function">int(11)</b> (Module ID)</p>
+									<p><b>module</b>::<b class="function">varchar(128)</b> (Module Name)</p>
+									<p><b>method</b>::<b class="function">varchar(128)</b> (Log Method)</p>
+									<p><b>message</b>::<b class="function">text</b> (Log Message)</p>
+									<p><b>created_at</b>::<b class="function">datetime</b> (Date the data is inserted)</p>
+								</pre>
+
+								<div class="comments">
+									<h5>Comments</h5>
+									<ul>
+										<li>
+											<b>Module ID</b> values from
+											<ul>
+												<li>Leave Information</li>
+												<li>Employee Information</li>
+												<li>Overtime Request</li>
+												<li>Undertime Request</li>
+											</ul>
+										</li>
+										<li>
+											<b>Module</b> values from
+											<ul>
+												<li>Leave</li>
+												<li>Employee</li>
+												<li>Overtime</li>
+												<li>Undertime</li>
+												<li>Setting</li>
+												<li>Activity</li>
+												<li>Events</li>
+												<li>Post</li>
+												<li>Department</li>
+											</ul>
+										</li>
+									</ul>
+								</div>
+							</div>
+
+							<div class="divider"></div>
+
+							<div class="content content_child" id="movements">
+								<h3>Employee Movements</h3>
+								<p><i>Employee Movements</i> is the table that stores Employee's Position and Department Movements.</p>
+
+								<pre class="label">
+									<span>Table Name:</span>
+									<a href="javascript:;" class="disabled">movements</a>
+								</pre>
+
+								<pre class="label">
+									<span>Structure:</span>
+									<p><b>mv_id</b>::<b class="function">int(10)</b> (Primary Key, Auto Incremented)</p>
+									<p><b>mv_employee_no</b>::<b class="function">smallint(5)</b> (Employee ID, from <a href="database.html#employee_info">Employee Information</a>)</p>
+									<p><b>mv_transfer_date</b>::<b class="function">date</b> (Movement Transfer Date)</p>
+									<p><b>mv_dept</b>::<b class="function">mediumint(8)</b> (Movement New Department, from  <a href="database.html#employee_department">Employee Department</a>)</p>
+									<p><b>mv_position</b>::<b class="function">varchar(150)</b> (Movement New Position)</p>
+									<p><b>created_at</b>::<b class="function">datetime</b> (Date the data is inserted)</p>
+									<p><b>updated_at</b>::<b class="function">datetime</b> (Date the data is updated)</p>
+									<p><b>mv_status</b>::<b class="function">tinyint(4)</b> (Movement Status)</p>
+								</pre>
+							</div>
+
+							<div class="divider"></div>
+
+							<div class="content content_child" id="overtime_request">
+								<h3>Overtime Request</h3>
+								<p><i>Overtime Request</i> is the table that stores employees overtime request.</p>
+
+								<pre class="label">
+									<span>Table Name:</span>
+									<a href="javascript:;" class="disabled">overtime_request</a>
+								</pre>
+
+								<pre class="label">
+									<span>Structure:</span>
+									<p><b>id</b>::<b class="function">int(10)</b> (Primary Key, Auto Incremented)</p>
+									<p><b>employee_id</b>::<b class="function">int(11)</b> (Employee ID, from <a href="database.html#employee_info">Employee Information</a>)</p>
+									<p><b>recommend_id</b>::<b class="function">int(11)</b> (The one who will recommend the Overtime, from <a href="database.html#employee_info">Employee Information</a>)</p>
+									<p><b>recommend_date</b>::<b class="function">datetime</b> (Overtime Recommended Date)</p>
+									<p><b>approved_id</b>::<b class="function">int(11)</b> (The one who will approve the Overtime, from <a href="database.html#employee_info">Employee Information</a>)</p>
+									<p><b>approved_date</b>::<b class="function">datetime</b> (Overtime Approved Date)</p>
+									<p><b>approved_reason</b>::<b class="function">text</b> (Overtime Approved Reason)</p>
+									<p><b>reverted_reason</b>::<b class="function">text</b> (Overtime Reverted Reason)</p>
+									<p><b>declined_id</b>::<b class="function">int(11)</b> (The one who Declined the Overtime, from <a href="database.html#employee_info">Employee Information</a>)</p>
+									<p><b>declined_date</b>::<b class="function">datetime</b> (Overtime Declined Date)</p>
+									<p><b>declined_reason</b>::<b class="function">text</b> (Overtime Declined Reason)</p>
+									<p><b>declined_by_superior</b>::<b class="function">enum('YES','NO')</b> (If Overtime Request is Declined by the Superior)</p>
+									<p><b>completed_id</b>::<b class="function">int(11)</b> (The one who Completed the Overtime, from <a href="database.html#employee_info">Employee Information</a>)</p>
+									<p><b>completed_date</b>::<b class="function">datetime</b> (Overtime Completed Date)</p>
+									<p><b>reason</b>::<b class="function">text</b> (Overtime Reason)</p>
+									<p><b>status</b>::<b class="function">enum('PENDING','APPROVED','VERIFYING','COMPLETED','REVERTED','DECLINED','VERIFIED')</b> (Overtime Status)</p>
+									<p><b>created_at</b>::<b class="function">datetime</b> (Date the data is inserted)</p>
+									<p><b>updated_at</b>::<b class="function">datetime</b> (Date the data is updated)</p>
+									<p><b>deleted_at</b>::<b class="function">datetime</b> (Date the data is deleted)</p>
+								</pre>
+							</div>
+
+							<div class="divider"></div>
+
+							<div class="content content_child" id="overtime_request_details">
+								<h3>Overtime Request Details</h3>
+								<p><i>Overtime Request Details</i> is the table that stores Overtime Dates.</p>
+
+								<pre class="label">
+									<span>Table Name:</span>
+									<a href="javascript:;" class="disabled">overtime_request_details</a>
+								</pre>
+
+								<pre class="label">
+									<span>Structure:</span>
+									<p><b>id</b>::<b class="function">int(10)</b> (Primary Key, Auto Incremented)</p>
+									<p><b>overtime_id</b>::<b class="function">int(11)</b> (Overtime ID, from <a href="database.html#overtime_request">Overtime Request</a>)</p>
+									<p><b>date</b>::<b class="function">date</b> (Overtime Request Date)</p>
+									<p><b>no_of_hours</b>::<b class="function">decimal(5,2)</b> (Overtime Request Estimated Number of Hours)</p>
+									<p><b>time_in</b>::<b class="function">datetime</b> (Overtime Request Time Start)</p>
+									<p><b>time_out</b>::<b class="function">datetime</b> (Overtime Request Time Finished)</p>
+									<p><b>created_at</b>::<b class="function">datetime</b> (Date the data is inserted)</p>
+									<p><b>updated_at</b>::<b class="function">datetime</b> (Date the data is updated)</p>
+									<p><b>deleted_at</b>::<b class="function">datetime</b> (Date the data is deleted)</p>
+								</pre>
+							</div>
+
+							<div class="divider"></div>
+
+							<div class="content content_child" id="posts">
+								<h3>Posts</h3>
+								<p><i>Posts</i> is the table that stores Slide Images in the dashboard page of the Gateway.</p>
+
+								<pre class="label">
+									<span>Table Name:</span>
+									<a href="javascript:;" class="disabled">posts</a>
+								</pre>
+
+								<pre class="label">
+									<span>Structure:</span>
+									<p><b>id</b>::<b class="function">int(10)</b> (Primary Key, Auto Incremented)</p>
+									<p><b>posted_by_id</b>::<b class="function">int(11)</b> (Employee who posted the image, from <a href="database.html#employee_info">Employee Information</a>)</p>
+									<p><b>image</b>::<b class="function">text</b> (Posts Image URL)</p>
+									<p><b>enabled</b>::<b class="function">int(11)</b> (Posts Status)</p>
+									<p><b>created_at</b>::<b class="function">datetime</b> (Date the data is inserted)</p>
+									<p><b>updated_at</b>::<b class="function">datetime</b> (Date the data is updated)</p>
+									<p><b>deleted_at</b>::<b class="function">datetime</b> (Date the data is deleted)</p>
+								</pre>
+
+								<div class="comments">
+									<h5>Comments</h5>
+									<ul>
+										<li>
+											<b>Enabled</b> numeric value
+											<ul>
+												<li><b>0</b> - Disabled</li>
+												<li><b>1</b> - Enabled</li>
+											</ul>
+										</li>
+									</ul>
+								</div>
+							</div>
+
+							<div class="divider"></div>
+
+							<div class="content content_child" id="quick_link">
+								<h3>Quick Link</h3>
+								<p><i>Quick Link</i> is the table that stores the Quick Link Linkings from the Linking Sessions.</p>
+
+								<pre class="label">
+									<span>Table Name:</span>
+									<a href="javascript:;" class="disabled">quick_link</a>
+								</pre>
+
+								<pre class="label">
+									<span>Structure:</span>
+									<p><b>rf_id</b>::<b class="function">int(11)</b> (Primary Key, Auto Incremented)</p>
+									<p><b>rf_lnk_id</b>::<b class="function">int(11)</b> (From <a href="database.html#linking_master">Linking Master</a>)</p>
+									<p><b>rf_focus</b>::<b class="function">tinyint(3)</b> (From <a href="database.html#lnk_focus">Linking Focus</a>)</p>
+									<p><b>rf_comments</b>::<b class="function">text</b> (Quick Link Comments)</p>
+									<p><b>created_at</b>::<b class="function">datetime</b> (Date the data is inserted)</p>
+									<p><b>updated_at</b>::<b class="function">datetime</b> (Date the data is updated)</p>
+									<p><b>rf_feedback</b>::<b class="function">text</b> (Quick Link Feedback)</p>
+									<p><b>rf_status</b>::<b class="function">tinyint(4)</b> (Quick Link Status)</p>
+								</pre>
+							</div>
+
+							<div class="divider"></div>
+
+							<div class="content content_child" id="sda">
+								<h3>Skills Development Activities</h3>
+								<p><i>Skills Development Activities</i> is the table that stores the Skills Development Activities Linkings from the Linking Sessions.</p>
+
+								<pre class="label">
+									<span>Table Name:</span>
+									<a href="javascript:;" class="disabled">sda</a>
+								</pre>
+
+								<pre class="label">
+									<span>Structure:</span>
+									<p><b>sda_id</b>::<b class="function">int(11)</b> (Primary Key, Auto Incremented)</p>
+									<p><b>sda_lnk_id</b>::<b class="function">int(11)</b> (Index Key, From <a href="database.html#linking_master">Linking Master</a>)</p>
+									<p><b>sda_com_id</b>::<b class="function">varchar(50)</b> (Index Key, An md5 Version of the sda_lnk_id, URL to access session)</p>
+									<p><b>sda_type</b>::<b class="function">tinyint(4)</b> (Skills Development Activities Type)</p>
+									<p><b>sda_date_call</b>::<b class="function">date</b> (Skills Development Activities Date of Call)</p>
+									<p><b>sda_call_sel</b>::<b class="function">varchar(150)</b> (Skills Development Activities Call Selection)</p>
+									<p><b>sda_www_u_said</b>::<b class="function">mediumtext</b> (Skills Development Activities What Went Well, You Said)</p>
+									<p><b>sda_www_i_said</b>::<b class="function">mediumtext</b> (Skills Development Activities What Went Well, I Said)</p>
+									<p><b>sda_wcm_u_said</b>::<b class="function">mediumtext</b> (Skills Development Activities What Could Make This Even Better, You Said)</p>
+									<p><b>sda_wcm_i_said</b>::<b class="function">mediumtext</b> (Skills Development Activities What Could Make this Even Better, I Said)</p>
+									<p><b>sda_take_away</b>::<b class="function">varchar(150)</b> (Skills Development Activities Take Away)</p>
+									<p><b>sda_timeframe</b>::<b class="function">varchar(150)</b> (Skills Development Activities Time Frame)</p>
+									<p><b>sda_comments</b>::<b class="function">mediumtext</b> (Skills Development Activities Comments)</p>
+									<p><b>sda_feedback</b>::<b class="function">mediumtext</b> (Skills Development Activities Feedback)</p>
+									<p><b>created_at</b>::<b class="function">datetime</b> (Date the data is inserted)</p>
+									<p><b>updated_at</b>::<b class="function">datetime</b> (Date the data is updated)</p>
+									<p><b>sda_status</b>::<b class="function">tinyint(4)</b> (Skills Development Activities Status)</p>
+								</pre>
+
+								<div class="comments">
+									<h5>Comments</h5>
+									<ul>
+										<li>
+											Plan to remove
+											<ul>
+												<li><b>sda_take_away</b></li>
+												<li><b>sda_timeframe</b></li>
+											</ul>
+										</li>
+									</ul>
+								</div>
+							</div>
+
+							<div class="divider"></div>
+
+							<div class="content content_child" id="sent_email_archives">
+								<h3>Sent Email Archives</h3>
+								<p><i>Sent Email Archives</i> is the table that stores email archives job for sending emails, this is used usually for daily reminders of a specific modules.</p>
+
+								<pre class="label">
+									<span>Table Name:</span>
+									<a href="javascript:;" class="disabled">sent_email_archives</a>
+								</pre>
+
+								<pre class="label">
+									<span>Structure:</span>
+									<p><b>id</b>::<b class="function">int(10)</b> (Primary Key, Auto Incremented)</p>
+									<p><b>employee_id</b>::<b class="function">int(11)</b> (Employee ID, From <a href="database.html#employee_info">Employee Information</a>)</p>
+									<p><b>mail_type</b>::<b class="function">varchar(200)</b> (Send Email Mail Type)</p>
+									<p><b>status</b>::<b class="function">tinyint(4)</b> (Send Email Mail Status)</p>
+									<p><b>created_at</b>::<b class="function">datetime</b> (Date the data is inserted)</p>
+									<p><b>updated_at</b>::<b class="function">datetime</b> (Date the data is updated)</p>
+								</pre>
+
+								<div class="comments">
+									<h5>Comments</h5>
+									<ul>
+										<li>
+											<b>Mail Type</b> values
+											<ul>
+												<li><b>INFRACTION</b></li>
+												<li><b>EVALUATION</b></li>
+												<li><b>APPROVAL</b></li>
+											</ul>
+										</li>
+									</ul>
+								</div>
+							</div>
+
+							<div class="divider"></div>
+
+							<div class="content content_child" id="setting_expectations">
+								<h3>Cementing Expectation</h3>
+								<p><i>Cementing Expectation</i> is the table that stores the Cementing Expectation Linkings from the Linking Sessions.</p>
+
+								<pre class="label">
+									<span>Table Name:</span>
+									<a href="javascript:;" class="disabled">setting_expectations</a>
+								</pre>
+
+								<pre class="label">
+									<span>Structure:</span>
+									<p><b>se_id</b>::<b class="function">int(10)</b> (Primary Key, Auto Incremented)</p>
+									<p><b>se_com_id</b>::<b class="function">varchar(50)</b> (An md5 Version of the se_link_id, URL to access session)</p>
+									<p><b>se_link_id</b>::<b class="function">int(10)</b> (Index Key, From <a href="database.html#linking_master">Linking Master</a>)</p>
+									<p><b>se_focus</b>::<b class="function">int(10)</b> (From <a href="database.html#lnk_focus">Linking Focus</a>)</p>
+									<p><b>se_skill</b>::<b class="function">varchar(250)</b> (Cementing Expectations Behavior/Skill)</p>
+									<p><b>se_when_use</b>::<b class="function">varchar(250)</b> (Cementing Expectations When we use the Skill)</p>
+									<p><b>se_how_use</b>::<b class="function">varchar(250)</b> (Cementing Expectations How we use the Skill)</p>
+									<p><b>se_why_use</b>::<b class="function">varchar(250)</b> (Cementing Expectations Why we use the Skill)</p>
+									<p><b>se_expectations</b>::<b class="function">varchar(250)</b> (Cementing Expectations My Expectations)</p>
+									<p><b>se_timeframe</b>::<b class="function">varchar(100)</b> (Cementing Expectations Timeframe)</p>
+									<p><b>se_comments</b>::<b class="function">text</b> (Cementing Expectations Comments)</p>
+									<p><b>se_feedback</b>::<b class="function">text</b> (Cementing Expectations Feedback)</p>
+									<p><b>created_at</b>::<b class="function">datetime</b> (Date the data is inserted)</p>
+									<p><b>updated_at</b>::<b class="function">datetime</b> (Date the data is updated)</p>
+									<p><b>se_status</b>::<b class="function">tinyint(4)</b> (Cementing Expectation Status)</p>
+								</pre>
+
+								<div class="comments">
+									<h5>Comments</h5>
+									<ul>
+										<li>
+											Plan to remove
+											<ul>
+												<li><b>se_timeframe</b></li>
+											</ul>
+										</li>
+									</ul>
+								</div>
+							</div>
+
+							<div class="divider"></div>
+
+							<div class="content content_child" id="skill_building">
+								<h3>Skill Building</h3>
+								<p><i>Skill Building</i> is the table that stores the Skill Building Linkings from the Linking Sessions.</p>
+
+								<pre class="label">
+									<span>Table Name:</span>
+									<a href="javascript:;" class="disabled">skill_building</a>
+								</pre>
+
+								<pre class="label">
+									<span>Structure:</span>
+									<p><b>sb_id</b>::<b class="function">int(10)</b> (Primary Key, Auto Incremented)</p>
+									<p><b>sb_link_id</b>::<b class="function">int(10)</b> (Index Key, From <a href="database.html#linking_master">Linking Master</a>)</p>
+									<p><b>sb_com_num</b>::<b class="function">varchar(100)</b> (An md5 Version of the sb_link_id, URL to access session)</p>
+									<p><b>sb_focus</b>::<b class="function">tinyint(3)</b> (From <a href="database.html#lnk_focus">Linking Focus</a>)</p>
+									<p><b>sb_skill</b>::<b class="function">mediumtext</b> (Skill Building Behavior/Skill)</p>
+									<p><b>sb_when_skill</b>::<b class="function">mediumtext</b> (Skill Building When we use the Skill)</p>
+									<p><b>sb_how_skill</b>::<b class="function">mediumtext</b> (Skill Building How we use the Skill)</p>
+									<p><b>sb_why_skill</b>::<b class="function">mediumtext</b> (Skill Building Why we use the Skill)</p>
+									<p><b>sb_takeaway</b>::<b class="function">mediumtext</b> (Skill Building Takeaways from activitys)</p>
+									<p><b>sb_timeframe</b>::<b class="function">mediumtext</b> (Skill Building Timeframe for Quick Link)</p>
+									<p><b>created_at</b>::<b class="function">datetime</b> (Date the data is inserted)</p>
+									<p><b>updated_at</b>::<b class="function">datetime</b> (Date the data is updated)</p>
+									<p><b>sb_feedback</b>::<b class="function">mediumtext</b> (Skill Building Feedback)</p>
+									<p><b>sb_status</b>::<b class="function">tinyint(4)</b> (Skill Building Status)</p>
+								</pre>
+							</div>
+
+							<div class="divider"></div>
+
+							<div class="content content_child" id="undertime_request">
+								<h3>Undertime Request</h3>
+								<p><i>Undertime Request</i> is the table that stores employees undertime request.</p>
+
+								<pre class="label">
+									<span>Table Name:</span>
+									<a href="javascript:;" class="disabled">undertime_request</a>
+								</pre>
+
+								<pre class="label">
+									<span>Structure:</span>
+									<p><b>id</b>::<b class="function">int(10)</b> (Primary Key, Auto Incremented)</p>
+									<p><b>employee_id</b>::<b class="function">int(11)</b> (Index Key, From <a href="database.html#employee_info">Employee Information</a>)</p>
+									<p><b>recommend_id</b>::<b class="function">int(11)</b> (The one who will recommend the Undertime, From <a href="database.html#employee_info">Employee Information</a>)</p>
+									<p><b>recommend_date</b>::<b class="function">datetime</b> (Undertime Recommended Date)</p>
+									<p><b>approved_id</b>::<b class="function">int(11)</b> (The one who will approve the Undertime, From <a href="database.html#employee_info">Employee Information</a>)</p>
+									<p><b>approved_date</b>::<b class="function">datetime</b> (Undertime Approved Date)</p>
+									<p><b>declined_id</b>::<b class="function">int(11)</b> (The one who Declined the Undertime, From <a href="database.html#employee_info">Employee Information</a>)</p>
+									<p><b>declined_date</b>::<b class="function">datetime</b> (Undertime Declined Date)</p>
+									<p><b>declined_reason</b>::<b class="function">text</b> (Undertime Declined Reason)</p>
+									<p><b>declined_by_superior</b>::<b class="function">enum('YES','NO')</b> (If Undertime Request is Declined by the Superior)</p>
+									<p><b>date</b>::<b class="function">date</b> (Undertime Date)</p>
+									<p><b>no_of_hours</b>::<b class="function">decimal(5,2)</b> (Undertime Estimated Number of Hours)</p>
+									<p><b>time_in</b>::<b class="function">datetime</b> (Undertime Time the Employee goes out)</p>
+									<p><b>time_out</b>::<b class="function">datetime</b> (Undertime Time the Employee supposed to go out)</p>
+									<p><b>reason</b>::<b class="function">text</b> (Undertime Reason)</p>
+									<p><b>status</b>::<b class="function">enum('PENDING', 'APPROVED', 'DECLINED')</b> (Undertime Status)</p>
+									<p><b>created_at</b>::<b class="function">datetime</b> (Date the data is inserted)</p>
+									<p><b>updated_at</b>::<b class="function">datetime</b> (Date the data is updated)</p>
+									<p><b>deleted_at</b>::<b class="function">datetime</b> (Date the data is deleted)</p>
+								</pre>
+							</div>
+						</div>
+					</main>
+				</div>
+
+				<div class="clearfix"></div>
+			</div>
+		</div>
+		<!-- End Main -->
+	</div> <!-- End Clearfix -->
+</div> <!-- End Protect Me -->
+<a href="#" class="back_top"></a>
+<footer>
+	<div class="wrapper">
+		<div class="footer_con">
+			<div class="pagination">
+				<a href="structure.html">Prev</a>
+				<a href="authentication.html">Next</a>
+			</div>
+		</div>
+	</div>
+</footer>
+</body>
+</html>

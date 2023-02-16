@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html class="no-js" lang="en-US">
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>Human Resources Gateway - Developer Guide</title>
+	<link rel="icon" type="image/png" href="images/favicon.png">
+	<link rel="stylesheet" href="styles/style.css">
+</head>
+<body>
+<div class="protect-me">
+	<div class="clearfix">
+		<!-- Header -->
+		<header>
+			<div class="wrapper">
+				<div class="header_con">
+					<a href="index.html" class="main_logo">
+						<figure><img src="images/main-logo.png" alt=""/></figure>
+					</a>
+				</div>
+			</div>
+		</header>
+		<!-- End Header -->
+
+		<!-- Main -->
+		<div id="main_area">
+			<div class="wrapper">
+				<div class="main_con">
+					<main>
+						<h1>HR Gateway Directory Structure</h1>
+						<ul class="bullet">
+							<li>
+								<a href="structure.html#app">app</a>
+								<ul>
+									<li><a href="structure.html#console">Console</a></li>
+									<li><a href="structure.html#exceptions">Exceptions</a></li>
+									<li><a href="structure.html#helpers">Helpers</a></li>
+									<li>
+										<a href="structure.html#http">Http</a>
+										<ul>
+											<li><a href="structure.html#controllers">Controllers</a></li>
+											<li><a href="structure.html#middleware">Middleware</a></li>
+										</ul>
+									</li>
+									<li><a href="structure.html#jobs">Jobs</a></li>
+									<li><a href="structure.html#mail">Mail</a></li>
+									<li><a href="structure.html#providers">Providers</a></li>
+									<li><a href="structure.html#repositories">Repositories</a></li>
+								</ul>
+							</li>
+							<li><a href="structure.html#bootstrap">bootstrap</a></li>
+							<li><a href="structure.html#config">config</a></li>
+							<li><a href="structure.html#database">database</a></li>
+							<li><a href="structure.html#public">public</a></li>
+							<li><a href="structure.html#resources">resources</a></li>
+							<li><a href="structure.html#routes">routes</a></li>
+							<li><a href="structure.html#database">storage</a></li>
+							<li><a href="structure.html#database">tests</a></li>
+							<li><a href="structure.html#database">vendor</a></li>
+						</ul>
+						<div class="divider"></div>
+						<div class="main_content">
+							<h2>Overview</h2>
+							<p>This is the overview of the files inside the system.</p>
+
+							<div class="content content_main" id="app">
+								<h3>app</h3>
+								<p>The directory contains numerous subfolders, which will be addressed later. The files on inside the app directory consists of all the php <i>models</i> <small>(since the laravel version does not provide a model directory)</small> and the <i>Global.php</i> settings.</p>
+							</div>
+
+							<div class="content content_child" id="console">
+								<h4>Console</h4>
+								<p>The directory contains the <i>Kernel.php</i> file use for task scheduling, it contains the function to add Leave Credits to all employees every month base on their ranks.</p>
+							</div>
+
+							<div class="content content_child" id="exceptions">
+								<h4>Exceptions</h4>
+								<p>The directory contains the application's exception handler <i>Handler.php</i>.</p>
+								<p><small>(This file was not touched)</small></p>
+							</div>
+
+							<div class="content content_child" id="helpers">
+								<h4>Helpers</h4>
+								<p>The directory contains all the helper functions use for developing.</p>
+								<p><small>(Note that if you create a new custom helper file you need to run a certain code before it becomes usable)</small></p>
+								<pre>
+									composer dump-autoload
+								</pre>
+							</div>
+
+							<div class="content content_child" id="http">
+								<h4>HTTP</h4>
+								<p>The directory contains the folders for <i>Controllers</i> and <i>Middleware</i> which will be addressed later. It also has its own <i>Kernel.php</i> file which provides a structured process for converting a Request into a Response.</p>
+								<p><small>(this file was not touched)</small></p>
+							</div>
+
+							<div class="content content_child2" id="controllers">
+								<h4>Controllers</h4>
+								<p>The directory contains all of the controllers used for developing, all of the functions that are use to return a specific result.</p>
+							</div>
+
+							<div class="content content_child2" id="middleware">
+								<h4>Middleware</h4>
+								<p>The directory contains all of the middlewares used for developing. It provides a convenient mechanism for inspecting and filtering HTTP requests entering your application.</p>
+							</div>
+
+							<div class="content content_child" id="jobs">
+								<h4>Jobs</h4>
+								<p>The directory contains the <i>UpdateEmployeeCredits.php</i> of which the function is used in the main <i>Console/Kernel.php</i> for updating Employees Leave Credits monthly.</p>
+							</div>
+
+							<div class="content content_child" id="mail">
+								<h4>Mail</h4>
+								<p>The directory contains the files for Mailing.</p>
+							</div>
+
+							<div class="content content_child" id="providers">
+								<h4>Providers</h4>
+								<p>The directory contains the files for providing service to the application. It also contains the <i>RepositoryServiceProvider.php</i> where all the Repositories are registered.</p>
+							</div>
+
+							<div class="content content_child" id="repositories">
+								<h4>Repositories</h4>
+								<p>The directory contains the files for authenticating the employee when logging in and the employee information.</p>
+								<p><small>(If new repository is added, refer to providers)</small></p>
+							</div>
+
+							<div class="content content_main" id="bootstrap">
+								<h3>bootstrap</h3>
+								<p>The directory contains the <i>app.php</i> file which bootstraps the framework.</p>
+							</div>
+
+							<div class="content content_main" id="config">
+								<h3>config</h3>
+								<p>The directory contains all of the application's configuration files.</p>
+							</div>
+
+							<div class="content content_main" id="database">
+								<h3>database</h3>
+								<p>The directory contains your database migrations, model factories, and seeds.</p>
+							</div>
+
+							<div class="content content_main" id="public">
+								<h3>public</h3>
+								<p>The directory contains the <i>index.php</i> file, which is the entry point for all requests entering your application and configures autoloading. This contains all the assets used, <i>css</i>, <i>javascript</i>, <i>images</i>, <i>fonts</i>, and other <i>attachments</i>.</p>
+							</div>
+
+							<div class="content content_main" id="resources">
+								<h3>resources</h3>
+								<p>The directory contains the views as well as the raw, un-compiled assets such as LESS, SASS, or JavaScript. This directory also houses all of the language files.</p>
+							</div>
+
+							<div class="content content_main" id="routes">
+								<h3>routes</h3>
+								<p>The directory contains all of the route definitions for your application.</p>
+								<p><small>Do not forget, when adding functions in the controller you need to add it on the <i>web.php</i> as well</small></p>
+							</div>
+
+							<div class="content content_main" id="storage">
+								<h3>storage</h3>
+								<p>The directory contains the compiled Blade templates, file based sessions, file caches, and other files generated by the framework. The employees profile images are stored in <i>app/images</i>.</p>
+							</div>
+
+							<div class="content content_main" id="tests">
+								<h3>tests</h3>
+								<p>The directory contains your automated tests.</p>
+								<p><small>(files not touched)</small></p>
+							</div>
+
+							<div class="content content_main" id="vendor">
+								<h3>vendor</h3>
+								<p>The directory contains the Composer dependencies.</p>
+								<p><small>(files not touched)</small></p>
+							</div>
+						</div>
+					</main>
+				</div>
+
+				<div class="clearfix"></div>
+			</div>
+		</div>
+		<!-- End Main -->
+	</div> <!-- End Clearfix -->
+</div> <!-- End Protect Me -->
+<a href="#" class="back_top"></a>
+<footer>
+	<div class="wrapper">
+		<div class="footer_con">
+			<div class="pagination">
+				<a href="introduction.html">Prev</a>
+				<a href="database.html">Next</a>
+			</div>
+		</div>
+	</div>
+</footer>
+</body>
+</html>
