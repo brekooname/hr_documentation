@@ -1,2 +1,2 @@
-# hr_documentation
-# https://juncelcarreon.github.io/hr_documentation/
+Human Resources Gateway Documentation
+- from https://juncelcarreon.github.io/hr_documentation/
