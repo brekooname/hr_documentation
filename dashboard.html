@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html class="no-js" lang="en-US">
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>Human Resources Gateway - Developer Guide</title>
+	<link rel="icon" type="image/png" href="images/favicon.png">
+	<link rel="stylesheet" href="styles/style.css">
+</head>
+<body>
+<div class="protect-me">
+	<div class="clearfix">
+		<!-- Header -->
+		<header>
+			<div class="wrapper">
+				<div class="header_con">
+					<a href="index.html" class="main_logo">
+						<figure><img src="images/main-logo.png" alt=""/></figure>
+					</a>
+				</div>
+			</div>
+		</header>
+		<!-- End Header -->
+
+		<!-- Main -->
+		<div id="main_area">
+			<div class="wrapper">
+				<div class="main_con">
+					<main>
+						<h1>Dashboard</h1>
+						<ul class="bullet">
+							<li><a href="dashboard.html#announcement">Announcement</a></li>
+							<li><a href="dashboard.html#mision_vision">Mision & Vision</a></li>
+							<li><a href="dashboard.html#new_hires">New Hires</a></li>
+							<li><a href="dashboard.html#birthday_celebrants">Birthday Celebrants</a></li>
+							<li><a href="dashboard.html#elinkgagement">eLinkgagement Activities</a></li>
+						</ul>
+						<div class="divider"></div>
+						<div class="main_content">
+							<h2>Overview</h2>
+							<p>Homepage of the Gateway after the Authentication is successful.</p>
+
+							<pre class="label">
+								<span>Location:</span>
+								<a href="http://dir.elink.corp/dashboard" target="_blank">http://dir.elink.corp/dashboard</a>
+							</pre>
+
+							<pre class="label">
+								<span>Controllers Used:</span>
+								<a href="javascript:;" class="disabled">root/app/Http/Controllers/HomeController.php</a>
+							</pre>
+
+							<pre class="label">
+								<span>Views Used:</span>
+								<a href="javascript:;" class="disabled">root/resources/views/home.blade.php</a>
+							</pre>
+
+							<div class="divider"></div>
+
+							<div class="content content_child" id="announcement">
+								<h3>Announcement</h3>
+								<p>The first thing you see on the gateway after logging in is the Announcement Image Slider.</p>
+
+								<pre class="label">
+									<span>Tables Affected:</span>
+									<a href="javascript:;" class="disabled">posts</a>
+								</pre>
+
+								<pre class="label">
+									<span>Models Used:</span>
+									<a href="javascript:;" class="disabled">root/app/Posts.php</a>
+								</pre>
+
+								<pre class="label">
+									<span>Query (Eloquent):</span>
+									<p><b>Posts</b>::<b>where</b>(<b class="function">'enabled'</b>, <b class="function">'='</b>, <b class="function">'1'</b>)-><b>get</b>()</p>
+								</pre>
+
+								<div class="comments">
+									<h5>Comments</h5>
+									<ul>
+										<li>Get all <b>enabled</b> <i>Posts</i></li>
+									</ul>
+								</div>
+							</div>
+
+							<div class="divider"></div>
+
+							<div class="content content_child" id="mision_vision">
+								<h3>Mision & Vision</h3>
+								<p>The row would be <i>Mission</i> & <i>Vision</i> and their respective description</p>
+
+								<div class="comments">
+									<h5>Comments</h5>
+									<ul>
+										<li>The <b>descriptions</b> are all hard coded inside its view page, to change it you have to change it in the <i>home.blade.php</i> file.</li>
+									</ul>
+								</div>
+							</div>
+
+							<div class="divider"></div>
+
+							<div class="content content_child" id="new_hires">
+								<h3>New Hires</h3>
+								<p>The first column in the last row is the <i>New Hires</i> column, it will show the newly added Employees from the Gateway, from the latest to the oldest.</p>
+
+								<pre class="label">
+									<span>Tables Affected:</span>
+									<a href="javascript:;" class="disabled">employee_info</a>
+								</pre>
+
+								<pre class="label">
+									<span>Models Used:</span>
+									<a href="javascript:;" class="disabled">root/app/User.php</a>
+								</pre>
+
+								<pre class="label">
+									<span>Query (Eloquent):</span>
+									<p><b>User</b>::<b>allExceptSuperAdmin</b>()-><b>orderBy</b>(<b class="function">'prod_date'</b>, <b class="function">'DESC'</b>)-><b>paginate</b>(<b class="function">5</b>)</p>
+								</pre>
+
+								<pre class="label">
+									<span>Functions Used:</span>
+									<p><b>HomeController</b><b class="function">::newhires</b></p>
+								</pre>
+
+								<div class="comments">
+									<h5>Comments</h5>
+									<ul>
+										<li>Using the <b class="function">paginate</b> function, we return the <i>5 latest</i> Employees, and show it on the list.</li>
+										<li>After a certain button is click, the function <b>HomeController<b class="function">::newhires</b></b> will get the <i>another 5</i> Employees who are added to the Gateway.</li>
+									</ul>
+								</div>
+							</div>
+
+							<div class="divider"></div>
+
+							<div class="content content_child" id="birthday_celebrants">
+								<h3>Birthday Celebrants</h3>
+								<p>The second column in the last row is the <i>Birthday Celebrants</i> column, it will show the birthday celebrants for that <b class="function">specific month</b>.</p>
+
+								<pre class="label">
+									<span>Tables Affected:</span>
+									<a href="javascript:;" class="disabled">employee_info</a>
+								</pre>
+
+								<pre class="label">
+									<span>Models Used:</span>
+									<a href="javascript:;" class="disabled">root/app/User.php</a>
+								</pre>
+
+								<pre class="label">
+									<span>Query (Eloquent):</span>
+									<p><b>User</b>::<b>whereRaw</b>(<b class="function">'MONTH(birth_date) = '</b>.<b>date</b>(<b class="function">'n'</b>))-><b>whereRaw</b>(<b class="function">'deleted_at is null'</b>)-><b>where</b>(<b class="function">'status'</b>,<b class="function">'='</b>,<b class="function">1</b>)-><b>orderByRaw</b>(<b class="function">'DAYOFMONTH(birth_date) ASC'</b>)-><b>get</b>()</p>
+								</pre>
+
+								<div class="comments">
+									<h5>Comments</h5>
+									<ul>
+										<li>Get all <b>Active Employees</b> from the database, and order it by the dates</li>
+									</ul>
+								</div>
+							</div>
+
+							<div class="divider"></div>
+
+							<div class="content content_child" id="elinkgagement">
+								<h3>eLinkgagement Activities</h3>
+								<p>The last column in the last row is the <i>eLinkgagement Activities</i> column, it will show all the upcoming activities for the next <b class="function">30 Days</b>.</p>
+
+								<pre class="label">
+									<span>Tables Affected:</span>
+									<a href="javascript:;" class="disabled">elink_activities</a>
+								</pre>
+
+								<pre class="label">
+									<span>Models Used:</span>
+									<a href="javascript:;" class="disabled">root/app/ElinkActivities.php</a>
+								</pre>
+
+								<pre class="label">
+									<span>Query (Eloquent):</span>
+									<p><b>ElinkActivities</b>::<b>getActivities</b>()</p>
+								</pre>
+
+								<div class="comments">
+									<h5>Comments</h5>
+									<ul>
+										<li>Get the activities for the next <b>30 days</b>, and order them by the <i>Activity Date</i></li>
+									</ul>
+								</div>
+							</div>
+						</div>
+					</main>
+				</div>
+
+				<div class="clearfix"></div>
+			</div>
+		</div>
+		<!-- End Main -->
+	</div> <!-- End Clearfix -->
+</div> <!-- End Protect Me -->
+<a href="#" class="back_top"></a>
+<footer>
+	<div class="wrapper">
+		<div class="footer_con">
+			<div class="pagination">
+				<a href="authentication.html">Prev</a>
+				<a href="javascript:;" class="disabled">Next</a>
+			</div>
+		</div>
+	</div>
+</footer>
+</body>
+</html>
