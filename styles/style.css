@@ -130,8 +130,10 @@ pre strong{color:#0086CD;}
 pre small{font-style:italic; color:#4cae4c;}
 pre a{font-style:italic; font-weight:500; color: #30a5ff;}
 pre a:hover{text-decoration:underline;}
-pre.label{padding: 60px 20px 20px;}
+pre.label{padding: 60px 20px 20px;counter-reset: step-counter;}
 pre.label span{position:absolute;top:0;left:0;right:0;line-height:20px;background:#000;color:#ffff00;padding:10px;}
+pre.label p{counter-increment: step-counter;position: relative;}
+pre.label p:before{content: counter(step-counter) '.'; font-weight: 600; margin-right:10px;}
 pre.label a.disabled{display:block;cursor:default;}
 pre.label a.disabled:hover{text-decoration: none;}
 b{color: #3a75fb;}

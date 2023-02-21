@@ -1,0 +1,675 @@
+<!DOCTYPE html>
+<html class="no-js" lang="en-US">
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>Human Resources Gateway - Developer Guide</title>
+	<link rel="icon" type="image/png" href="images/favicon.png">
+	<link rel="stylesheet" href="styles/style.css">
+
+	<script src="https://use.fontawesome.com/a63cbdeb8f.js"></script>
+</head>
+<body>
+<div class="protect-me">
+	<div class="clearfix">
+		<!-- Header -->
+		<header>
+			<div class="wrapper">
+				<div class="header_con">
+					<a href="index.html" class="main_logo">
+						<figure><img src="images/main-logo.png" alt=""/></figure>
+					</a>
+				</div>
+			</div>
+		</header>
+		<!-- End Header -->
+
+		<!-- Main -->
+		<div id="main_area">
+			<div class="wrapper">
+				<div class="main_con">
+					<main>
+						<h1>Active Employees</h1>
+						<ul class="bullet">
+							<li><a href="active_employees.html#list_page">Employee List Page</a></li>
+							<li><a href="active_employees.html#card_page">Employee Card Page</a></li>
+							<li><a href="active_employees.html#add_page">Add Employee Page</a></li>
+							<li><a href="active_employees.html#view_page">View Employee Detail Page</a></li>
+							<li><a href="active_employees.html#edit_page">Edit Employee Detail Page</a></li>
+							<li><a href="active_employees.html#change_page">Change Employee Password Page</a></li>
+						</ul>
+
+						<div class="divider"></div>
+
+						<div class="main_content">
+							<h2>Overview</h2>
+							<p>Check all Company's <i>Active</i> Employees. Adding new employees, viewing of employees information, updating employee information and more.</p>
+
+							<pre class="label">
+								<span>Tables Affected:</span>
+								<a href="javascript:;" class="disabled">employee_info</a>
+								<a href="javascript:;" class="disabled">log</a>
+							</pre>
+
+							<pre class="label">
+								<span>Controllers Used:</span>
+								<a href="javascript:;" class="disabled">root/app/Http/Controllers/EmployeeInfoController.php</a>
+							</pre>
+
+							<pre class="label">
+								<span>Models Used:</span>
+								<a href="javascript:;" class="disabled">root/app/User.php</a>
+								<a href="javascript:;" class="disabled">root/app/Log.php</a>
+							</pre>
+
+							<pre class="label">
+								<span>Views Used:</span>
+								<a href="javascript:;" class="disabled">root/resources/views/employee/style.css</a>
+							</pre>
+
+							<div class="divider"></div>
+
+							<div class="content content_child" id="list_page">
+								<h3>Employee List Page</h3>
+								<p>Get all <i>Active Employees</i> and return it in a <b>List</b> format.</p>
+
+								<pre class="label">
+									<span>Location:</span>
+									<a href="http://dir.elink.corp/employees" target="_blank">http://dir.elink.corp/employees</a>
+								</pre>
+
+								<pre class="label">
+									<span>Models Used:</span>
+									<a href="javascript:;" class="disabled">root/app/EmployeeDepartment.php</a>
+								</pre>
+
+								<pre class="label">
+									<span>Views Used:</span>
+									<a href="javascript:;" class="disabled">root/resources/views/employee/employees.blade.php</a>
+								</pre>
+
+								<pre class="label">
+									<span>Other Directory Used:</span>
+									<a href="javascript:;" class="disabled">root/app/Repositories/EmployeeRepository.php</a>
+								</pre>
+
+								<pre class="label">
+									<span>Functions Used:</span>
+									<p><b>EmployeeRepository</b><b class="function">::employees</b></p>
+								</pre>
+
+								<pre class="label">
+									<span>Query (Eloquent):</span>
+									<p><b>EmployeeDepartment</b>::<b>orderBy</b>()-><b>orderBy</b>(<b class="function">'department_name'</b>)-><b>get</b>()</p>
+									<p><b>User</b>::<b>allExceptSuperAdmin</b>()-><b>select</b>(<b class="function">'position_name'</b>)-><b>distinct</b>()-><b>orderBy</b>(<b class="function">'position_name'</b>)-><b>get</b>()</p>
+									<p><b>User</b>::<b>activeEmployees</b>()-><b>where</b>(<b class="function">'id'</b>, <b class="function">'<>'</b>, <b class="function">1</b>)-><b>orderBy</b>(<b class="function">'last_name'</b>, <b class="function">'ASC'</b>)-><b>paginate</b>(<b class="function">10</b>)</p>
+								</pre>
+
+								<div class="comments">
+									<h5>Comments</h5>
+									<ul>
+										<li>Get all <b>Department</b> in alphabetical order, to be use on <i>Search by Department</i> select</li>
+										<li>Get all <b class="function">Distinct</b> <b>Position</b> from the Employees in alphabetical order, to be use on <i>Search by Position</i> select</li>
+										<li>Get the first <b class="function">10</b> record using <b class="function">Pagination</b> to get <b>Active Employees</b> except the Super Admin, in alphabetical order by <i>Last Name</i></li>
+									</ul>
+								</div>
+
+								<pre class="label">
+									<span>Inputs Needed (Search):</span>
+									<p><b>Search by name</b> (Keyword Search)</p>
+									<p><b>Inactive Employees</b> (Radio Button)</p>
+									<p><b>No Profile Images</b> (Radio Button)</p>
+									<p><b>Invalid Birthday</b> (Radio Button)</p>
+									<p><b>Search by Department</b> (Select Search)</p>
+									<p><b>Search by Position</b> (Select Search)</p>
+									<p><b>Search by Birth Month</b> (Select Search)</p>
+								</pre>
+
+								<pre class="label">
+									<span>Search Keyword Query (Eloquent):</span>
+									<p><b>User</b>::<b>activeEmployees</b>()-><b>where</b>(<b>function</b>(<b class="function">$query</b>) <b>use</b>(<b class="function">$request</b>) {</p>
+									<p>&nbsp;&nbsp;&nbsp;&nbsp;<b>$query</b>-><b>where</b>(<b class="function">'first_name'</b>, <b class="function">'LIKE'</b>, <b class="function">'%'</b>.<b>$request</b>-><b>get</b>(<b class="function">'keyword'</b>).<b class="function">'%'</b>)</p>
+									<p>&nbsp;&nbsp;&nbsp;&nbsp;-><b>orWhere</b>(<b class="function">'last_name'</b>, <b class="function">'LIKE'</b>, <b class="function">'%'</b>.<b>$request</b>-><b>get</b>(<b class="function">'keyword'</b>).<b class="function">'%'</b>)</p>
+									<p>&nbsp;&nbsp;&nbsp;&nbsp;-><b>orWhere</b>(<b class="function">'middle_name'</b>, <b class="function">'LIKE'</b>, <b class="function">'%'</b>.<b>$request</b>-><b>get</b>(<b class="function">'keyword'</b>).<b class="function">'%'</b>)</p>
+									<p>&nbsp;&nbsp;&nbsp;&nbsp;-><b>orWhere</b>(<b>DB</b>::<b>raw</b>(<b class="function">'CONCAT(first_name, " ", last_name)'</b>), <b class="function">'LIKE'</b>, <b class="function">'%'</b>.<b>$request</b>-><b>get</b>(<b class="function">'keyword'</b>).<b class="function">'%'</b>)</p>
+									<p>&nbsp;&nbsp;&nbsp;&nbsp;-><b>orWhere</b>(<b class="function">'email'</b>, <b class="function">'LIKE'</b>, <b class="function">'%'</b>.<b>$request</b>-><b>get</b>(<b class="function">'keyword'</b>).<b class="function">'%'</b>)</p>
+									<p>&nbsp;&nbsp;&nbsp;&nbsp;-><b>orWhere</b>(<b class="function">'email2'</b>, <b class="function">'LIKE'</b>, <b class="function">'%'</b>.<b>$request</b>-><b>get</b>(<b class="function">'keyword'</b>).<b class="function">'%'</b>)</p>
+									<p>&nbsp;&nbsp;&nbsp;&nbsp;-><b>orWhere</b>(<b class="function">'email3'</b>, <b class="function">'LIKE'</b>, <b class="function">'%'</b>.<b>$request</b>-><b>get</b>(<b class="function">'keyword'</b>).<b class="function">'%'</b>)</p>
+									<p>&nbsp;&nbsp;&nbsp;&nbsp;-><b>orWhere</b>(<b class="function">'alias'</b>, <b class="function">'LIKE'</b>, <b class="function">'%'</b>.<b>$request</b>-><b>get</b>(<b class="function">'keyword'</b>).<b class="function">'%'</b>)</p>
+									<p>&nbsp;&nbsp;&nbsp;&nbsp;-><b>orWhere</b>(<b class="function">'team_name'</b>, <b class="function">'LIKE'</b>, <b class="function">'%'</b>.<b>$request</b>-><b>get</b>(<b class="function">'keyword'</b>).<b class="function">'%'</b>)</p>
+									<p>&nbsp;&nbsp;&nbsp;&nbsp;-><b>orWhere</b>(<b class="function">'dept_code'</b>, <b class="function">'LIKE'</b>, <b class="function">'%'</b>.<b>$request</b>-><b>get</b>(<b class="function">'keyword'</b>).<b class="function">'%'</b>)</p>
+									<p>&nbsp;&nbsp;&nbsp;&nbsp;-><b>orWhere</b>(<b class="function">'position_name'</b>, <b class="function">'LIKE'</b>, <b class="function">'%'</b>.<b>$request</b>-><b>get</b>(<b class="function">'keyword'</b>).<b class="function">'%'</b>)</p>
+									<p>&nbsp;&nbsp;&nbsp;&nbsp;-><b>orWhere</b>(<b class="function">'ext'</b>, <b class="function">'LIKE'</b>, <b class="function">'%'</b>.<b>$request</b>-><b>get</b>(<b class="function">'keyword'</b>).<b class="function">'%'</b>)</p>
+									<p>})-><b>where</b>(<b class="function">'id'</b>, <b class="function">'<>'</b>, <b class="function">1</b>)-><b>orderBy</b>(<b class="function">'last_name'</b>, <b class="function">'ASC'</b>)-><b>paginate</b>(<b class="function">10</b>)</p>
+								</pre>
+
+								<div class="comments">
+									<h5>Comments</h5>
+									<ul>
+										<li>When Searching for an <i>Active Employee</i> using the <b>Search by name</b>, compare it to some of the columns from <b>employee_info</b>, the following columns are used: <b class="function">first_name</b>, <b class="function">last_name</b>, <b class="function">middle_name</b>, <b class="function">email</b>, <b class="function">email2</b>, <b class="function">email3</b>, <b class="function">alias</b>, <b class="function">team_name</b>, <b class="function">dept_code</b>, <b class="function">position_name</b>, <b class="function">ext</b></li>
+										<li>After that, select the first <b class="function">10</b> records except for super admin using <b>Pagination</b>, and order it alphabetically by <i>Last Name</i></li>
+									</ul>
+								</div>
+
+								<pre class="label">
+									<span>Get Inactive Employees (Redirect):</span>
+									<a href="http://dir.elink.corp/employees/separated" target="_blank">http://dir.elink.corp/employees/separated</a>
+								</pre>
+
+								<div class="comments">
+									<h5>Comments</h5>
+									<ul>
+										<li>Clicking the <b>Inactive Employees</b> Radio Button, will just redirect you to the <i>Separated Employees</i> Page</li>
+									</ul>
+								</div>
+
+								<pre class="label">
+									<span>No Profile Images Query (Eloquent):</span>
+									<p><b>User</b>::<b>activeEmployees</b>()-><b>where</b>(<b>function</b>(<b class="function">$query</b>) <b>use</b>(<b class="function">$request</b>) {</p>
+									<p>&nbsp;&nbsp;&nbsp;&nbsp;<b>$query</b>-><b>where</b>(<b class="function">'profile_img'</b>, <b class="function">'LIKE'</b>, <b class="function">'http://dir.elink.corp/public/img/nobody_m.original.jpg'</b>)</p>
+									<p>&nbsp;&nbsp;&nbsp;&nbsp;-><b>orWhere</b>(<b class="function">'profile_img'</b>, <b class="function">'LIKE'</b>, <b class="function">'http://dir.elink.corp/public/img/nobody_f.original.jpg'</b>)</p>
+									<p>&nbsp;&nbsp;&nbsp;&nbsp;-><b>orWhere</b>(<b class="function">'profile_img'</b>, <b class="function">'='</b>, <b class="function">'NULL'</b>)</p>
+									<p>})-><b>where</b>(<b class="function">'id'</b>, <b class="function">'<>'</b>, <b class="function">1</b>)-><b>orderBy</b>(<b class="function">'last_name'</b>, <b class="function">'ASC'</b>)-><b>paginate</b>(<b class="function">10</b>)</p>
+								</pre>
+
+								<div class="comments">
+									<h5>Comments</h5>
+									<ul>
+										<li>When Searching for an <i>Active Employee</i> using the <b>No Profile Images</b>, check if the <b class="function">profile_img</b> column is using the default <b>Male</b> or <b>Female</b> Profile Photo, or if the <b class="function">profile_img</b> is <b>NULL</b></li>
+										<li>After that, select the first <b class="function">10</b> records except for super admin using <b>Pagination</b>, and order it alphabetically by <i>Last Name</i></li>
+									</ul>
+								</div>
+
+								<pre class="label">
+									<span>Invalid Birthday Query (Eloquent):</span>
+									<p><b>User</b>::<b>activeEmployees</b>()-><b>where</b>(<b>function</b>(<b class="function">$query</b>) <b>use</b>(<b class="function">$request</b>) {</p>
+									<p>&nbsp;&nbsp;&nbsp;&nbsp;<b>$query</b>-><b>whereRaw</b>(<b class="function">'YEAR(birth_date) > '</b> . (<b>date</b>(<b class="function">'Y'</b>) - <b class="function">16</b>) . <b class="function">' OR YEAR(birth_date) <'</b> . (<b>date</b>(<b class="function">'Y'</b>) - <b class="function">70</b>))</p>
+									<p>&nbsp;&nbsp;&nbsp;&nbsp;-><b>orWhereNull</b>(<b class="function">'birth_date'</b>)</p>
+									<p>})-><b>where</b>(<b class="function">'id'</b>, <b class="function">'<>'</b>, <b class="function">1</b>)-><b>orderBy</b>(<b class="function">'last_name'</b>, <b class="function">'ASC'</b>)-><b>paginate</b>(<b class="function">10</b>)</p>
+								</pre>
+
+								<div class="comments">
+									<h5>Comments</h5>
+									<ul>
+										<li>When Searching for an <i>Active Employee</i> using the <b>Invalid Birthday</b>, check if the Employees Age is <b>Under 16 Years Old</b> or <b>Over 70 Years Old</b> using the <b class="function">birth_date</b> column, or if <b class="function">birth_date</b> is <b>NULL</b></li>
+										<li>After that, select the first <b class="function">10</b> records except for super admin using <b>Pagination</b>, and order it alphabetically by <i>Last Name</i></li>
+									</ul>
+								</div>
+
+								<pre class="label">
+									<span>Search by Department Query (Eloquent):</span>
+									<p><b>User</b>::<b>activeEmployees</b>()</p>
+									<p>-><b>where</b>(<b class="function">'team_name'</b>, <b class="function">'LIKE'</b>, <b>$request</b>-><b>get</b>(<b class="function">'department'</b>))</p>
+									<p>-><b>where</b>(<b class="function">'id'</b>, <b class="function">'<>'</b>, <b class="function">1</b>)-><b>orderBy</b>(<b class="function">'last_name'</b>, <b class="function">'ASC'</b>)-><b>paginate</b>(<b class="function">10</b>)</p>
+								</pre>
+
+								<div class="comments">
+									<h5>Comments</h5>
+									<ul>
+										<li>When Searching for an <i>Active Employee</i> using the <b>Search by Department</b>, checking the <b class="function">team_name</b> column, get employees from that department. After that, select the first <b class="function">10</b> records except for super admin using <b>Pagination</b>, and order it alphabetically by <i>Last Name</i></li>
+									</ul>
+								</div>
+
+								<pre class="label">
+									<span>Search by Position Query (Eloquent):</span>
+									<p><b>User</b>::<b>activeEmployees</b>()</p>
+									<p>-><b>where</b>(<b class="function">'position_name'</b>, <b class="function">'LIKE'</b>, <b class="function">'%'</b> . <b>$request</b>-><b>get</b>(<b class="function">'position'</b>) . <b class="function">'%'</b>)</p>
+									<p>-><b>where</b>(<b class="function">'id'</b>, <b class="function">'<>'</b>, <b class="function">1</b>)-><b>orderBy</b>(<b class="function">'last_name'</b>, <b class="function">'ASC'</b>)-><b>paginate</b>(<b class="function">10</b>)</p>
+								</pre>
+
+								<div class="comments">
+									<h5>Comments</h5>
+									<ul>
+										<li>When Searching for an <i>Active Employee</i> using the <b>Search by Position</b>, checking the <b class="function">position_name</b> column, get employees with that position. After that, select the first <b class="function">10</b> records except for super admin using <b>Pagination</b>, and order it alphabetically by <i>Last Name</i></li>
+									</ul>
+								</div>
+
+								<pre class="label">
+									<span>Search by Birthmonth Query (Eloquent):</span>
+									<p><b>User</b>::<b>activeEmployees</b>()</p>
+									<p>-><b>whereRaw</b>(<b class="function">'MONTH(birth_date) = '</b> . <b>$request</b>-><b>get</b>(<b class="function">'birthmonth'</b>))</p>
+									<p>-><b>where</b>(<b class="function">'id'</b>, <b class="function">'<>'</b>, <b class="function">1</b>)-><b>orderBy</b>(<b class="function">'last_name'</b>, <b class="function">'ASC'</b>)-><b>paginate</b>(<b class="function">10</b>)</p>
+								</pre>
+
+								<div class="comments">
+									<h5>Comments</h5>
+									<ul>
+										<li>When Searching for an <i>Active Employee</i> using the <b>Search by Birthmonth</b>, checking the <b class="function">birth_date</b> column, get employees from that birth month. After that, select the first <b class="function">10</b> records except for super admin using <b>Pagination</b>, and order it alphabetically by <i>Last Name</i></li>
+									</ul>
+								</div>
+
+								<pre class="label">
+									<span>Actions (Button Triggers):</span>
+									<p><b>Add Employee</b></p>
+									<p><b>Download Employee Information</b></p>
+									<p><b>Card Type View</b></p>
+									<p><b>View Employee Information</b></p>
+									<p><b>Edit Employee Information</b></p>
+									<p><b>Deactivate Employee</b></p>
+								</pre>
+
+								<pre class="label">
+									<span>Add Employee Action:</span>
+									<a href="http://dir.elink.corp/employee_info/create" target="_blank">http://dir.elink.corp/employee_info/create</a>
+								</pre>
+
+								<div class="comments">
+									<h5>Comments</h5>
+									<ul>
+										<li>Clicking the <b>Add Employee</b> Button, it will redirect you to the <i>Add Employee</i> Page</li>
+									</ul>
+								</div>
+
+								<pre class="label">
+									<span>Download Employee Information Action:</span>
+									<p><b>EmployeeInfoController</b>::<b class="function">downloadFilter</b></p>
+								</pre>
+
+								<div class="comments">
+									<h5>Comments</h5>
+									<ul>
+										<li>Clicking the <b>Download Employee Information</b> Button, it will generate an <b class="function">Excel File</b> where you can view <i>All Employees</i> specified by its <b>Filters</b> if it is being Filtered.</li>
+									</ul>
+								</div>
+
+								<pre class="label">
+									<span>Card Type View Action:</span>
+									<a href="http://dir.elink.corp/employees-card" target="_blank">http://dir.elink.corp/employees-card</a>
+								</pre>
+
+								<div class="comments">
+									<h5>Comments</h5>
+									<ul>
+										<li>Clicking the <b>Card Type View</b> Button, it will redirect you to the <i>Employee Card Type</i> Page</li>
+									</ul>
+								</div>
+
+								<pre class="label">
+									<span>View Employee Information Action:</span>
+									<a href="http://dir.elink.corp/employee_info/xxx" target="_blank">http://dir.elink.corp/employee_info/xxx</a>
+								</pre>
+
+								<div class="comments">
+									<h5>Comments</h5>
+									<ul>
+										<li>Clicking the Employees <b>Name</b> or the <b>Eye <span class="fa fa-eye"></span></b> Button, it will redirect you to that <i>Employees Detail</i> Page</li>
+									</ul>
+								</div>
+
+								<pre class="label">
+									<span>Edit Employee Information Action:</span>
+									<a href="http://dir.elink.corp/employee_info/xxx/edit" target="_blank">http://dir.elink.corp/employee_info/xxx/edit</a>
+								</pre>
+
+								<div class="comments">
+									<h5>Comments</h5>
+									<ul>
+										<li>Clicking the <b>Pencil <span class="fa fa-pencil"></span></b> Button, it will redirect you to that <i>Employees Detail</i> Page</li>
+									</ul>
+								</div>
+
+								<pre class="label">
+									<span>Deactivate Employee Action:</span>
+									<p><b>EmployeeInfoController</b>::<b class="function">destroy</b></p>
+								</pre>
+
+								<div class="comments">
+									<h5>Comments</h5>
+									<ul>
+										<li>Clicking the <b>Person Icon with an X Mark <span class="fa fa-user-times"></span></b> Button, it will show a <b class="function">Pop-Up</b> that is gonna ask if you want to put this specific Employee to the <i>Separated Employees</i></li>
+										<li>It will also add a <b>Log</b> that indicates that someone transfers this user to the <i>Seperated Employees</i> Lists</li>
+									</ul>
+								</div>
+							</div>
+
+							<div class="divider"></div>
+
+							<div class="content content_child" id="card_page">
+								<h3>Employee Card Page</h3>
+								<p>Get all <i>Active Employees</i> and return it on a <b>Card</b> format.</p>
+
+								<pre class="label">
+									<span>Location:</span>
+									<a href="http://dir.elink.corp/employees-card" target="_blank">http://dir.elink.corp/employees-card</a>
+								</pre>
+
+								<pre class="label">
+									<span>Models Used:</span>
+									<a href="javascript:;" class="disabled">root/app/EmployeeDepartment.php</a>
+								</pre>
+
+								<pre class="label">
+									<span>Views Used:</span>
+									<a href="javascript:;" class="disabled">root/resources/views/employee/card.blade.php</a>
+								</pre>
+
+								<pre class="label">
+									<span>Other Directory Used:</span>
+									<a href="javascript:;" class="disabled">root/app/Repositories/EmployeeRepository.php</a>
+								</pre>
+
+								<pre class="label">
+									<span>Functions Used:</span>
+									<p><b>EmployeeRepository</b><b class="function">::employees</b></p>
+								</pre>
+
+								<pre class="label">
+									<span>Query (Eloquent):</span>
+									<p><b>EmployeeDepartment</b>::<b>orderBy</b>()-><b>orderBy</b>(<b class="function">'department_name'</b>)-><b>get</b>()</p>
+									<p><b>User</b>::<b>allExceptSuperAdmin</b>()-><b>select</b>(<b class="function">'position_name'</b>)-><b>distinct</b>()-><b>orderBy</b>(<b class="function">'position_name'</b>)-><b>get</b>()</p>
+									<p><b>User</b>::<b>activeEmployees</b>()-><b>where</b>(<b class="function">'id'</b>, <b class="function">'<>'</b>, <b class="function">1</b>)-><b>orderBy</b>(<b class="function">'last_name'</b>, <b class="function">'ASC'</b>)-><b>paginate</b>(<b class="function">12</b>)</p>
+								</pre>
+
+								<div class="comments">
+									<h5>Comments</h5>
+									<ul>
+										<li>Get all <b>Department</b> in alphabetical order, to be use on <i>Search by Department</i> select</li>
+										<li>Get all <b class="function">Distinct</b> <b>Position</b> from the Employees in alphabetical order, to be use on <i>Search by Position</i> select</li>
+										<li>Get the first <b class="function">12</b> record using <b class="function">Pagination</b> to get <b>Active Employees</b> except the Super Admin, in alphabetical order by <i>Last Name</i></li>
+									</ul>
+								</div>
+
+								<pre class="label">
+									<span>Inputs Needed (Search):</span>
+									<p><b>Search by name</b> (Keyword Search)</p>
+									<p><b>Inactive Employees</b> (Radio Button)</p>
+									<p><b>No Profile Images</b> (Radio Button)</p>
+									<p><b>Invalid Birthday</b> (Radio Button)</p>
+									<p><b>Search by Department</b> (Select Search)</p>
+									<p><b>Search by Position</b> (Select Search)</p>
+									<p><b>Search by Birth Month</b> (Select Search)</p>
+								</pre>
+
+								<pre class="label">
+									<span>Search Keyword Query (Eloquent):</span>
+									<p><b>User</b>::<b>activeEmployees</b>()-><b>where</b>(<b>function</b>(<b class="function">$query</b>) <b>use</b>(<b class="function">$request</b>) {</p>
+									<p>&nbsp;&nbsp;&nbsp;&nbsp;<b>$query</b>-><b>where</b>(<b class="function">'first_name'</b>, <b class="function">'LIKE'</b>, <b class="function">'%'</b>.<b>$request</b>-><b>get</b>(<b class="function">'keyword'</b>).<b class="function">'%'</b>)</p>
+									<p>&nbsp;&nbsp;&nbsp;&nbsp;-><b>orWhere</b>(<b class="function">'last_name'</b>, <b class="function">'LIKE'</b>, <b class="function">'%'</b>.<b>$request</b>-><b>get</b>(<b class="function">'keyword'</b>).<b class="function">'%'</b>)</p>
+									<p>&nbsp;&nbsp;&nbsp;&nbsp;-><b>orWhere</b>(<b class="function">'middle_name'</b>, <b class="function">'LIKE'</b>, <b class="function">'%'</b>.<b>$request</b>-><b>get</b>(<b class="function">'keyword'</b>).<b class="function">'%'</b>)</p>
+									<p>&nbsp;&nbsp;&nbsp;&nbsp;-><b>orWhere</b>(<b>DB</b>::<b>raw</b>(<b class="function">'CONCAT(first_name, " ", last_name)'</b>), <b class="function">'LIKE'</b>, <b class="function">'%'</b>.<b>$request</b>-><b>get</b>(<b class="function">'keyword'</b>).<b class="function">'%'</b>)</p>
+									<p>&nbsp;&nbsp;&nbsp;&nbsp;-><b>orWhere</b>(<b class="function">'email'</b>, <b class="function">'LIKE'</b>, <b class="function">'%'</b>.<b>$request</b>-><b>get</b>(<b class="function">'keyword'</b>).<b class="function">'%'</b>)</p>
+									<p>&nbsp;&nbsp;&nbsp;&nbsp;-><b>orWhere</b>(<b class="function">'email2'</b>, <b class="function">'LIKE'</b>, <b class="function">'%'</b>.<b>$request</b>-><b>get</b>(<b class="function">'keyword'</b>).<b class="function">'%'</b>)</p>
+									<p>&nbsp;&nbsp;&nbsp;&nbsp;-><b>orWhere</b>(<b class="function">'email3'</b>, <b class="function">'LIKE'</b>, <b class="function">'%'</b>.<b>$request</b>-><b>get</b>(<b class="function">'keyword'</b>).<b class="function">'%'</b>)</p>
+									<p>&nbsp;&nbsp;&nbsp;&nbsp;-><b>orWhere</b>(<b class="function">'alias'</b>, <b class="function">'LIKE'</b>, <b class="function">'%'</b>.<b>$request</b>-><b>get</b>(<b class="function">'keyword'</b>).<b class="function">'%'</b>)</p>
+									<p>&nbsp;&nbsp;&nbsp;&nbsp;-><b>orWhere</b>(<b class="function">'team_name'</b>, <b class="function">'LIKE'</b>, <b class="function">'%'</b>.<b>$request</b>-><b>get</b>(<b class="function">'keyword'</b>).<b class="function">'%'</b>)</p>
+									<p>&nbsp;&nbsp;&nbsp;&nbsp;-><b>orWhere</b>(<b class="function">'dept_code'</b>, <b class="function">'LIKE'</b>, <b class="function">'%'</b>.<b>$request</b>-><b>get</b>(<b class="function">'keyword'</b>).<b class="function">'%'</b>)</p>
+									<p>&nbsp;&nbsp;&nbsp;&nbsp;-><b>orWhere</b>(<b class="function">'position_name'</b>, <b class="function">'LIKE'</b>, <b class="function">'%'</b>.<b>$request</b>-><b>get</b>(<b class="function">'keyword'</b>).<b class="function">'%'</b>)</p>
+									<p>&nbsp;&nbsp;&nbsp;&nbsp;-><b>orWhere</b>(<b class="function">'ext'</b>, <b class="function">'LIKE'</b>, <b class="function">'%'</b>.<b>$request</b>-><b>get</b>(<b class="function">'keyword'</b>).<b class="function">'%'</b>)</p>
+									<p>})-><b>where</b>(<b class="function">'id'</b>, <b class="function">'<>'</b>, <b class="function">1</b>)-><b>orderBy</b>(<b class="function">'last_name'</b>, <b class="function">'ASC'</b>)-><b>paginate</b>(<b class="function">12</b>)</p>
+								</pre>
+
+								<div class="comments">
+									<h5>Comments</h5>
+									<ul>
+										<li>When Searching for an <i>Active Employee</i> using the <b>Search by name</b>, compare it to some of the columns from <b>employee_info</b>, the following columns are used: <b class="function">first_name</b>, <b class="function">last_name</b>, <b class="function">middle_name</b>, <b class="function">email</b>, <b class="function">email2</b>, <b class="function">email3</b>, <b class="function">alias</b>, <b class="function">team_name</b>, <b class="function">dept_code</b>, <b class="function">position_name</b>, <b class="function">ext</b></li>
+										<li>After that, select the first <b class="function">12</b> records except for super admin using <b>Pagination</b>, and order it alphabetically by <i>Last Name</i></li>
+									</ul>
+								</div>
+
+								<pre class="label">
+									<span>Get Inactive Employees (Redirect):</span>
+									<a href="http://dir.elink.corp/employees/separated" target="_blank">http://dir.elink.corp/employees/separated</a>
+								</pre>
+
+								<div class="comments">
+									<h5>Comments</h5>
+									<ul>
+										<li>Clicking the <b>Inactive Employees</b> Radio Button, will just redirect you to the <i>Separated Employees</i> Page</li>
+									</ul>
+								</div>
+
+								<pre class="label">
+									<span>No Profile Images Query (Eloquent):</span>
+									<p><b>User</b>::<b>activeEmployees</b>()-><b>where</b>(<b>function</b>(<b class="function">$query</b>) <b>use</b>(<b class="function">$request</b>) {</p>
+									<p>&nbsp;&nbsp;&nbsp;&nbsp;<b>$query</b>-><b>where</b>(<b class="function">'profile_img'</b>, <b class="function">'LIKE'</b>, <b class="function">'http://dir.elink.corp/public/img/nobody_m.original.jpg'</b>)</p>
+									<p>&nbsp;&nbsp;&nbsp;&nbsp;-><b>orWhere</b>(<b class="function">'profile_img'</b>, <b class="function">'LIKE'</b>, <b class="function">'http://dir.elink.corp/public/img/nobody_f.original.jpg'</b>)</p>
+									<p>&nbsp;&nbsp;&nbsp;&nbsp;-><b>orWhere</b>(<b class="function">'profile_img'</b>, <b class="function">'='</b>, <b class="function">'NULL'</b>)</p>
+									<p>})-><b>where</b>(<b class="function">'id'</b>, <b class="function">'<>'</b>, <b class="function">1</b>)-><b>orderBy</b>(<b class="function">'last_name'</b>, <b class="function">'ASC'</b>)-><b>paginate</b>(<b class="function">12</b>)</p>
+								</pre>
+
+								<div class="comments">
+									<h5>Comments</h5>
+									<ul>
+										<li>When Searching for an <i>Active Employee</i> using the <b>No Profile Images</b>, check if the <b class="function">profile_img</b> column is using the default <b>Male</b> or <b>Female</b> Profile Photo, or if the <b class="function">profile_img</b> is <b>NULL</b></li>
+										<li>After that, select the first <b class="function">12</b> records except for super admin using <b>Pagination</b>, and order it alphabetically by <i>Last Name</i></li>
+									</ul>
+								</div>
+
+								<pre class="label">
+									<span>Invalid Birthday Query (Eloquent):</span>
+									<p><b>User</b>::<b>activeEmployees</b>()-><b>where</b>(<b>function</b>(<b class="function">$query</b>) <b>use</b>(<b class="function">$request</b>) {</p>
+									<p>&nbsp;&nbsp;&nbsp;&nbsp;<b>$query</b>-><b>whereRaw</b>(<b class="function">'YEAR(birth_date) > '</b> . (<b>date</b>(<b class="function">'Y'</b>) - <b class="function">16</b>) . <b class="function">' OR YEAR(birth_date) <'</b> . (<b>date</b>(<b class="function">'Y'</b>) - <b class="function">70</b>))</p>
+									<p>&nbsp;&nbsp;&nbsp;&nbsp;-><b>orWhereNull</b>(<b class="function">'birth_date'</b>)</p>
+									<p>})-><b>where</b>(<b class="function">'id'</b>, <b class="function">'<>'</b>, <b class="function">1</b>)-><b>orderBy</b>(<b class="function">'last_name'</b>, <b class="function">'ASC'</b>)-><b>paginate</b>(<b class="function">12</b>)</p>
+								</pre>
+
+								<div class="comments">
+									<h5>Comments</h5>
+									<ul>
+										<li>When Searching for an <i>Active Employee</i> using the <b>Invalid Birthday</b>, check if the Employees Age is <b>Under 16 Years Old</b> or <b>Over 70 Years Old</b> using the <b class="function">birth_date</b> column, or if <b class="function">birth_date</b> is <b>NULL</b></li>
+										<li>After that, select the first <b class="function">12</b> records except for super admin using <b>Pagination</b>, and order it alphabetically by <i>Last Name</i></li>
+									</ul>
+								</div>
+
+								<pre class="label">
+									<span>Search by Department Query (Eloquent):</span>
+									<p><b>User</b>::<b>activeEmployees</b>()</p>
+									<p>-><b>where</b>(<b class="function">'team_name'</b>, <b class="function">'LIKE'</b>, <b>$request</b>-><b>get</b>(<b class="function">'department'</b>))</p>
+									<p>-><b>where</b>(<b class="function">'id'</b>, <b class="function">'<>'</b>, <b class="function">1</b>)-><b>orderBy</b>(<b class="function">'last_name'</b>, <b class="function">'ASC'</b>)-><b>paginate</b>(<b class="function">12</b>)</p>
+								</pre>
+
+								<div class="comments">
+									<h5>Comments</h5>
+									<ul>
+										<li>When Searching for an <i>Active Employee</i> using the <b>Search by Department</b>, checking the <b class="function">team_name</b> column, get employees from that department. After that, select the first <b class="function">12</b> records except for super admin using <b>Pagination</b>, and order it alphabetically by <i>Last Name</i></li>
+									</ul>
+								</div>
+
+								<pre class="label">
+									<span>Search by Position Query (Eloquent):</span>
+									<p><b>User</b>::<b>activeEmployees</b>()</p>
+									<p>-><b>where</b>(<b class="function">'position_name'</b>, <b class="function">'LIKE'</b>, <b class="function">'%'</b> . <b>$request</b>-><b>get</b>(<b class="function">'position'</b>) . <b class="function">'%'</b>)</p>
+									<p>-><b>where</b>(<b class="function">'id'</b>, <b class="function">'<>'</b>, <b class="function">1</b>)-><b>orderBy</b>(<b class="function">'last_name'</b>, <b class="function">'ASC'</b>)-><b>paginate</b>(<b class="function">12</b>)</p>
+								</pre>
+
+								<div class="comments">
+									<h5>Comments</h5>
+									<ul>
+										<li>When Searching for an <i>Active Employee</i> using the <b>Search by Position</b>, checking the <b class="function">position_name</b> column, get employees with that position. After that, select the first <b class="function">12</b> records except for super admin using <b>Pagination</b>, and order it alphabetically by <i>Last Name</i></li>
+									</ul>
+								</div>
+
+								<pre class="label">
+									<span>Search by Birthmonth Query (Eloquent):</span>
+									<p><b>User</b>::<b>activeEmployees</b>()</p>
+									<p>-><b>whereRaw</b>(<b class="function">'MONTH(birth_date) = '</b> . <b>$request</b>-><b>get</b>(<b class="function">'birthmonth'</b>))</p>
+									<p>-><b>where</b>(<b class="function">'id'</b>, <b class="function">'<>'</b>, <b class="function">1</b>)-><b>orderBy</b>(<b class="function">'last_name'</b>, <b class="function">'ASC'</b>)-><b>paginate</b>(<b class="function">12</b>)</p>
+								</pre>
+
+								<div class="comments">
+									<h5>Comments</h5>
+									<ul>
+										<li>When Searching for an <i>Active Employee</i> using the <b>Search by Birthmonth</b>, checking the <b class="function">birth_date</b> column, get employees from that birth month. After that, select the first <b class="function">12</b> records except for super admin using <b>Pagination</b>, and order it alphabetically by <i>Last Name</i></li>
+									</ul>
+								</div>
+
+								<pre class="label">
+									<span>Actions (Button Triggers):</span>
+									<p><b>Add Employee</b></p>
+									<p><b>Download Employee Information</b></p>
+									<p><b>List Type View</b></p>
+									<p><b>View Employee Information</b></p>
+									<p><b>Edit Employee Information</b></p>
+									<p><b>Deactivate Employee</b></p>
+								</pre>
+
+								<pre class="label">
+									<span>Add Employee Action:</span>
+									<a href="http://dir.elink.corp/employee_info/create" target="_blank">http://dir.elink.corp/employee_info/create</a>
+								</pre>
+
+								<div class="comments">
+									<h5>Comments</h5>
+									<ul>
+										<li>Clicking the <b>Add Employee</b> Button, it will redirect you to the <i>Add Employee</i> Page</li>
+									</ul>
+								</div>
+
+								<pre class="label">
+									<span>Download Employee Information Action:</span>
+									<p><b>EmployeeInfoController</b>::<b class="function">downloadFilter</b></p>
+								</pre>
+
+								<div class="comments">
+									<h5>Comments</h5>
+									<ul>
+										<li>Clicking the <b>Download Employee Information</b> Button, it will generate an <b class="function">Excel File</b> where you can view <i>All Employees</i> specified by its <b>Filters</b> if it is being Filtered.</li>
+									</ul>
+								</div>
+
+								<pre class="label">
+									<span>List Type View Action:</span>
+									<a href="http://dir.elink.corp/employees" target="_blank">http://dir.elink.corp/employees</a>
+								</pre>
+
+								<div class="comments">
+									<h5>Comments</h5>
+									<ul>
+										<li>Clicking the <b>List Type View</b> Button, it will redirect you to the <i>Employee List Type</i> Page</li>
+									</ul>
+								</div>
+
+								<pre class="label">
+									<span>View Employee Information Action:</span>
+									<a href="http://dir.elink.corp/employee_info/xxx" target="_blank">http://dir.elink.corp/employee_info/xxx</a>
+								</pre>
+
+								<div class="comments">
+									<h5>Comments</h5>
+									<ul>
+										<li>Clicking the Employees <b>Name</b> or the <b>Eye <span class="fa fa-eye"></span></b> Button, it will redirect you to that <i>Employees Detail</i> Page</li>
+									</ul>
+								</div>
+
+								<pre class="label">
+									<span>Edit Employee Information Action:</span>
+									<a href="http://dir.elink.corp/employee_info/xxx/edit" target="_blank">http://dir.elink.corp/employee_info/xxx/edit</a>
+								</pre>
+
+								<div class="comments">
+									<h5>Comments</h5>
+									<ul>
+										<li>Clicking the <b>Pencil <span class="fa fa-pencil"></span></b> Button, it will redirect you to that <i>Employees Detail</i> Page</li>
+									</ul>
+								</div>
+
+								<pre class="label">
+									<span>Deactivate Employee Action:</span>
+									<p><b>EmployeeInfoController</b>::<b class="function">destroy</b></p>
+								</pre>
+
+								<div class="comments">
+									<h5>Comments</h5>
+									<ul>
+										<li>Clicking the <b>Person Icon with an X Mark <span class="fa fa-user-times"></span></b> Button, it will show a <b class="function">Pop-Up</b> that is gonna ask if you want to put this specific Employee to the <i>Separated Employees</i></li>
+										<li>It will also add a <b>Log</b> that indicates that someone transfers this user to the <i>Seperated Employees</i> Lists</li>
+									</ul>
+								</div>
+							</div>
+
+							<div class="divider"></div>
+
+							<div class="content content_child" id="add_page">
+								<h3>Add Card Page</h3>
+								<p>Add <i>New Employee</i> on the Gateway.</p>
+
+								<pre class="label">
+									<span>Location:</span>
+									<a href="http://dir.elink.corp/employee_info/create" target="_blank">http://dir.elink.corp/employee_info/create</a>
+								</pre>
+
+								<pre class="label">
+									<span>Models Used:</span>
+									<a href="javascript:;" class="disabled">root/app/EmployeeDepartment.php</a>
+									<a href="javascript:;" class="disabled">root/app/ElinkAccount.php</a>
+								</pre>
+
+								<pre class="label">
+									<span>Views Used:</span>
+									<a href="javascript:;" class="disabled">root/resources/views/employee/create.blade.php</a>
+								</pre>
+
+								<pre class="label">
+									<span>Inputs Needed:</span>
+									<p><b>First Name</b> (Required)</p>
+									<p><b>Middle Name</b></p>
+									<p><b>Last Name</b> (Required)</p>
+									<p><b>Employee ID</b> (Required)</p>
+									<p><b>Phone Name / Alias</b></p>
+									<p><b>Birthdate</b> (Required)</p>
+									<p><b>Contact Number</b></p>
+									<p><b>Gender</b> (Radio Button)</p>
+									<p><b>Civil Status</b> (Select)</p>
+									<p><b>Avega Number</b></p>
+									<p><b>City Address</b></p>
+									<p><b>Home Town Address</b></p>
+									<p><b>Father's Name</b></p>
+									<p><b>Father's Birthday</b></p>
+									<p><b>Complete Mother's Maiden Name</b></p>
+									<p><b>Mother's Birthday</b></p>
+									<p><b>Spouse's Name</b></p>
+									<p><b>Spouse's Birthday</b></p>
+									<p><b>Dependent's Name</b> (Multiple)</p>
+									<p><b>Dependent's Birthday</b> (Multiple)</p>
+									<p><b>Dependent's Generali Number</b> (Multiple)</p>
+									<p><b>In case of emergency please contact</b></p>
+									<p><b>In case of emergency please contact - Relationship</b></p>
+									<p><b>In case of emergency please contact - Contact Number</b></p>
+									<p><b>In case of emergency please contact - Address</b></p>
+									<p><b>User Access</b></p>
+									<p><b>Position</b> (Required, Select)</p>
+									<p><b>Account</b> (Required, Select)</p>
+									<p><b>Team/Department</b> (Required, Select)</p>
+									<p><b>Manager</b> (Select)</p>
+									<p><b>Immediate Superior / Supervisor</b> (Select)</p>
+									<p><b>Employee Type </b> (Select)</p>
+									<p><b>Employee Category</b> (Select)</p>
+									<p><b>Hire Date</b></p>
+									<p><b>Production Date</b></p>
+									<p><b>Regularization Date</b></p>
+									<p><b>EXT</b></p>
+									<p><b>Wave</b></p>
+									<p><b>Rehirable</b></p>
+									<p><b>Rehirable - Reason</b></p>
+									<p><b>SSS Number</b></p>
+									<p><b>Pag-ibig/HDMF</b></p>
+									<p><b>Philhealth Number</b></p>
+									<p><b>TIN ID</b></p>
+									<p><b>Company Email</b> (Required)</p>
+									<p><b>Personal Email</b></p>
+									<p><b>Secondary Email</b></p>
+								</pre>
+							</div>
+						</div>
+					</main>
+				</div>
+
+				<div class="clearfix"></div>
+			</div>
+		</div>
+		<!-- End Main -->
+	</div> <!-- End Clearfix -->
+</div> <!-- End Protect Me -->
+<a href="#" class="back_top"></a>
+<footer>
+	<div class="wrapper">
+		<div class="footer_con">
+			<div class="pagination">
+				<a href="company.html">Prev</a>
+				<a href="javascript:;" class="disabled">Next</a>
+			</div>
+		</div>
+	</div>
+</footer>
+</body>
+</html>
