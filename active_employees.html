@@ -104,7 +104,7 @@
 									<span>Query (Eloquent):</span>
 									<p><b>EmployeeDepartment</b>::<b>orderBy</b>()-><b>orderBy</b>(<b class="function">'department_name'</b>)-><b>get</b>()</p>
 									<p><b>User</b>::<b>allExceptSuperAdmin</b>()-><b>select</b>(<b class="function">'position_name'</b>)-><b>distinct</b>()-><b>orderBy</b>(<b class="function">'position_name'</b>)-><b>get</b>()</p>
-									<p><b>User</b>::<b>activeEmployees</b>()-><b>where</b>(<b class="function">'id'</b>, <b class="function">'<>'</b>, <b class="function">1</b>)-><b>orderBy</b>(<b class="function">'last_name'</b>, <b class="function">'ASC'</b>)-><b>paginate</b>(<b class="function">10</b>)</p>
+									<p><b>User</b>::<b>activeEmployees</b>()-><b>where</b>(<b class="function">'id'</b>, <b class="function">'&lt;&gt;'</b>, <b class="function">1</b>)-><b>orderBy</b>(<b class="function">'last_name'</b>, <b class="function">'ASC'</b>)-><b>paginate</b>(<b class="function">10</b>)</p>
 								</pre>
 
 								<div class="comments">
@@ -142,7 +142,7 @@
 									<p>&nbsp;&nbsp;&nbsp;&nbsp;-><b>orWhere</b>(<b class="function">'dept_code'</b>, <b class="function">'LIKE'</b>, <b class="function">'%'</b>.<b>$request</b>-><b>get</b>(<b class="function">'keyword'</b>).<b class="function">'%'</b>)</p>
 									<p>&nbsp;&nbsp;&nbsp;&nbsp;-><b>orWhere</b>(<b class="function">'position_name'</b>, <b class="function">'LIKE'</b>, <b class="function">'%'</b>.<b>$request</b>-><b>get</b>(<b class="function">'keyword'</b>).<b class="function">'%'</b>)</p>
 									<p>&nbsp;&nbsp;&nbsp;&nbsp;-><b>orWhere</b>(<b class="function">'ext'</b>, <b class="function">'LIKE'</b>, <b class="function">'%'</b>.<b>$request</b>-><b>get</b>(<b class="function">'keyword'</b>).<b class="function">'%'</b>)</p>
-									<p>})-><b>where</b>(<b class="function">'id'</b>, <b class="function">'<>'</b>, <b class="function">1</b>)-><b>orderBy</b>(<b class="function">'last_name'</b>, <b class="function">'ASC'</b>)-><b>paginate</b>(<b class="function">10</b>)</p>
+									<p>})-><b>where</b>(<b class="function">'id'</b>, <b class="function">'&lt;&gt;'</b>, <b class="function">1</b>)-><b>orderBy</b>(<b class="function">'last_name'</b>, <b class="function">'ASC'</b>)-><b>paginate</b>(<b class="function">10</b>)</p>
 								</pre>
 
 								<div class="comments">
@@ -171,7 +171,7 @@
 									<p>&nbsp;&nbsp;&nbsp;&nbsp;<b>$query</b>-><b>where</b>(<b class="function">'profile_img'</b>, <b class="function">'LIKE'</b>, <b class="function">'http://dir.elink.corp/public/img/nobody_m.original.jpg'</b>)</p>
 									<p>&nbsp;&nbsp;&nbsp;&nbsp;-><b>orWhere</b>(<b class="function">'profile_img'</b>, <b class="function">'LIKE'</b>, <b class="function">'http://dir.elink.corp/public/img/nobody_f.original.jpg'</b>)</p>
 									<p>&nbsp;&nbsp;&nbsp;&nbsp;-><b>orWhere</b>(<b class="function">'profile_img'</b>, <b class="function">'='</b>, <b class="function">'NULL'</b>)</p>
-									<p>})-><b>where</b>(<b class="function">'id'</b>, <b class="function">'<>'</b>, <b class="function">1</b>)-><b>orderBy</b>(<b class="function">'last_name'</b>, <b class="function">'ASC'</b>)-><b>paginate</b>(<b class="function">10</b>)</p>
+									<p>})-><b>where</b>(<b class="function">'id'</b>, <b class="function">'&lt;&gt;'</b>, <b class="function">1</b>)-><b>orderBy</b>(<b class="function">'last_name'</b>, <b class="function">'ASC'</b>)-><b>paginate</b>(<b class="function">10</b>)</p>
 								</pre>
 
 								<div class="comments">
@@ -185,9 +185,9 @@
 								<pre class="label">
 									<span>Invalid Birthday Query (Eloquent):</span>
 									<p><b>User</b>::<b>activeEmployees</b>()-><b>where</b>(<b>function</b>(<b class="function">$query</b>) <b>use</b>(<b class="function">$request</b>) {</p>
-									<p>&nbsp;&nbsp;&nbsp;&nbsp;<b>$query</b>-><b>whereRaw</b>(<b class="function">'YEAR(birth_date) > '</b> . (<b>date</b>(<b class="function">'Y'</b>) - <b class="function">16</b>) . <b class="function">' OR YEAR(birth_date) <'</b> . (<b>date</b>(<b class="function">'Y'</b>) - <b class="function">70</b>))</p>
+									<p>&nbsp;&nbsp;&nbsp;&nbsp;<b>$query</b>-><b>whereRaw</b>(<b class="function">'YEAR(birth_date) &gt; '</b> . (<b>date</b>(<b class="function">'Y'</b>) - <b class="function">16</b>) . <b class="function">' OR YEAR(birth_date) &lt;'</b> . (<b>date</b>(<b class="function">'Y'</b>) - <b class="function">70</b>))</p>
 									<p>&nbsp;&nbsp;&nbsp;&nbsp;-><b>orWhereNull</b>(<b class="function">'birth_date'</b>)</p>
-									<p>})-><b>where</b>(<b class="function">'id'</b>, <b class="function">'<>'</b>, <b class="function">1</b>)-><b>orderBy</b>(<b class="function">'last_name'</b>, <b class="function">'ASC'</b>)-><b>paginate</b>(<b class="function">10</b>)</p>
+									<p>})-><b>where</b>(<b class="function">'id'</b>, <b class="function">'&lt;&gt;'</b>, <b class="function">1</b>)-><b>orderBy</b>(<b class="function">'last_name'</b>, <b class="function">'ASC'</b>)-><b>paginate</b>(<b class="function">10</b>)</p>
 								</pre>
 
 								<div class="comments">
@@ -202,7 +202,7 @@
 									<span>Search by Department Query (Eloquent):</span>
 									<p><b>User</b>::<b>activeEmployees</b>()</p>
 									<p>-><b>where</b>(<b class="function">'team_name'</b>, <b class="function">'LIKE'</b>, <b>$request</b>-><b>get</b>(<b class="function">'department'</b>))</p>
-									<p>-><b>where</b>(<b class="function">'id'</b>, <b class="function">'<>'</b>, <b class="function">1</b>)-><b>orderBy</b>(<b class="function">'last_name'</b>, <b class="function">'ASC'</b>)-><b>paginate</b>(<b class="function">10</b>)</p>
+									<p>-><b>where</b>(<b class="function">'id'</b>, <b class="function">'&lt;&gt;'</b>, <b class="function">1</b>)-><b>orderBy</b>(<b class="function">'last_name'</b>, <b class="function">'ASC'</b>)-><b>paginate</b>(<b class="function">10</b>)</p>
 								</pre>
 
 								<div class="comments">
@@ -216,7 +216,7 @@
 									<span>Search by Position Query (Eloquent):</span>
 									<p><b>User</b>::<b>activeEmployees</b>()</p>
 									<p>-><b>where</b>(<b class="function">'position_name'</b>, <b class="function">'LIKE'</b>, <b class="function">'%'</b> . <b>$request</b>-><b>get</b>(<b class="function">'position'</b>) . <b class="function">'%'</b>)</p>
-									<p>-><b>where</b>(<b class="function">'id'</b>, <b class="function">'<>'</b>, <b class="function">1</b>)-><b>orderBy</b>(<b class="function">'last_name'</b>, <b class="function">'ASC'</b>)-><b>paginate</b>(<b class="function">10</b>)</p>
+									<p>-><b>where</b>(<b class="function">'id'</b>, <b class="function">'&lt;&gt;'</b>, <b class="function">1</b>)-><b>orderBy</b>(<b class="function">'last_name'</b>, <b class="function">'ASC'</b>)-><b>paginate</b>(<b class="function">10</b>)</p>
 								</pre>
 
 								<div class="comments">
@@ -230,7 +230,7 @@
 									<span>Search by Birthmonth Query (Eloquent):</span>
 									<p><b>User</b>::<b>activeEmployees</b>()</p>
 									<p>-><b>whereRaw</b>(<b class="function">'MONTH(birth_date) = '</b> . <b>$request</b>-><b>get</b>(<b class="function">'birthmonth'</b>))</p>
-									<p>-><b>where</b>(<b class="function">'id'</b>, <b class="function">'<>'</b>, <b class="function">1</b>)-><b>orderBy</b>(<b class="function">'last_name'</b>, <b class="function">'ASC'</b>)-><b>paginate</b>(<b class="function">10</b>)</p>
+									<p>-><b>where</b>(<b class="function">'id'</b>, <b class="function">'&lt;&gt;'</b>, <b class="function">1</b>)-><b>orderBy</b>(<b class="function">'last_name'</b>, <b class="function">'ASC'</b>)-><b>paginate</b>(<b class="function">10</b>)</p>
 								</pre>
 
 								<div class="comments">
@@ -354,7 +354,7 @@
 									<span>Query (Eloquent):</span>
 									<p><b>EmployeeDepartment</b>::<b>orderBy</b>()-><b>orderBy</b>(<b class="function">'department_name'</b>)-><b>get</b>()</p>
 									<p><b>User</b>::<b>allExceptSuperAdmin</b>()-><b>select</b>(<b class="function">'position_name'</b>)-><b>distinct</b>()-><b>orderBy</b>(<b class="function">'position_name'</b>)-><b>get</b>()</p>
-									<p><b>User</b>::<b>activeEmployees</b>()-><b>where</b>(<b class="function">'id'</b>, <b class="function">'<>'</b>, <b class="function">1</b>)-><b>orderBy</b>(<b class="function">'last_name'</b>, <b class="function">'ASC'</b>)-><b>paginate</b>(<b class="function">12</b>)</p>
+									<p><b>User</b>::<b>activeEmployees</b>()-><b>where</b>(<b class="function">'id'</b>, <b class="function">'&lt;&gt;'</b>, <b class="function">1</b>)-><b>orderBy</b>(<b class="function">'last_name'</b>, <b class="function">'ASC'</b>)-><b>paginate</b>(<b class="function">12</b>)</p>
 								</pre>
 
 								<div class="comments">
@@ -392,7 +392,7 @@
 									<p>&nbsp;&nbsp;&nbsp;&nbsp;-><b>orWhere</b>(<b class="function">'dept_code'</b>, <b class="function">'LIKE'</b>, <b class="function">'%'</b>.<b>$request</b>-><b>get</b>(<b class="function">'keyword'</b>).<b class="function">'%'</b>)</p>
 									<p>&nbsp;&nbsp;&nbsp;&nbsp;-><b>orWhere</b>(<b class="function">'position_name'</b>, <b class="function">'LIKE'</b>, <b class="function">'%'</b>.<b>$request</b>-><b>get</b>(<b class="function">'keyword'</b>).<b class="function">'%'</b>)</p>
 									<p>&nbsp;&nbsp;&nbsp;&nbsp;-><b>orWhere</b>(<b class="function">'ext'</b>, <b class="function">'LIKE'</b>, <b class="function">'%'</b>.<b>$request</b>-><b>get</b>(<b class="function">'keyword'</b>).<b class="function">'%'</b>)</p>
-									<p>})-><b>where</b>(<b class="function">'id'</b>, <b class="function">'<>'</b>, <b class="function">1</b>)-><b>orderBy</b>(<b class="function">'last_name'</b>, <b class="function">'ASC'</b>)-><b>paginate</b>(<b class="function">12</b>)</p>
+									<p>})-><b>where</b>(<b class="function">'id'</b>, <b class="function">'&lt;&gt;'</b>, <b class="function">1</b>)-><b>orderBy</b>(<b class="function">'last_name'</b>, <b class="function">'ASC'</b>)-><b>paginate</b>(<b class="function">12</b>)</p>
 								</pre>
 
 								<div class="comments">
@@ -421,7 +421,7 @@
 									<p>&nbsp;&nbsp;&nbsp;&nbsp;<b>$query</b>-><b>where</b>(<b class="function">'profile_img'</b>, <b class="function">'LIKE'</b>, <b class="function">'http://dir.elink.corp/public/img/nobody_m.original.jpg'</b>)</p>
 									<p>&nbsp;&nbsp;&nbsp;&nbsp;-><b>orWhere</b>(<b class="function">'profile_img'</b>, <b class="function">'LIKE'</b>, <b class="function">'http://dir.elink.corp/public/img/nobody_f.original.jpg'</b>)</p>
 									<p>&nbsp;&nbsp;&nbsp;&nbsp;-><b>orWhere</b>(<b class="function">'profile_img'</b>, <b class="function">'='</b>, <b class="function">'NULL'</b>)</p>
-									<p>})-><b>where</b>(<b class="function">'id'</b>, <b class="function">'<>'</b>, <b class="function">1</b>)-><b>orderBy</b>(<b class="function">'last_name'</b>, <b class="function">'ASC'</b>)-><b>paginate</b>(<b class="function">12</b>)</p>
+									<p>})-><b>where</b>(<b class="function">'id'</b>, <b class="function">'&lt;&gt;'</b>, <b class="function">1</b>)-><b>orderBy</b>(<b class="function">'last_name'</b>, <b class="function">'ASC'</b>)-><b>paginate</b>(<b class="function">12</b>)</p>
 								</pre>
 
 								<div class="comments">
@@ -435,9 +435,9 @@
 								<pre class="label">
 									<span>Invalid Birthday Query (Eloquent):</span>
 									<p><b>User</b>::<b>activeEmployees</b>()-><b>where</b>(<b>function</b>(<b class="function">$query</b>) <b>use</b>(<b class="function">$request</b>) {</p>
-									<p>&nbsp;&nbsp;&nbsp;&nbsp;<b>$query</b>-><b>whereRaw</b>(<b class="function">'YEAR(birth_date) > '</b> . (<b>date</b>(<b class="function">'Y'</b>) - <b class="function">16</b>) . <b class="function">' OR YEAR(birth_date) <'</b> . (<b>date</b>(<b class="function">'Y'</b>) - <b class="function">70</b>))</p>
+									<p>&nbsp;&nbsp;&nbsp;&nbsp;<b>$query</b>-><b>whereRaw</b>(<b class="function">'YEAR(birth_date) &gt; '</b> . (<b>date</b>(<b class="function">'Y'</b>) - <b class="function">16</b>) . <b class="function">' OR YEAR(birth_date) &lt;'</b> . (<b>date</b>(<b class="function">'Y'</b>) - <b class="function">70</b>))</p>
 									<p>&nbsp;&nbsp;&nbsp;&nbsp;-><b>orWhereNull</b>(<b class="function">'birth_date'</b>)</p>
-									<p>})-><b>where</b>(<b class="function">'id'</b>, <b class="function">'<>'</b>, <b class="function">1</b>)-><b>orderBy</b>(<b class="function">'last_name'</b>, <b class="function">'ASC'</b>)-><b>paginate</b>(<b class="function">12</b>)</p>
+									<p>})-><b>where</b>(<b class="function">'id'</b>, <b class="function">'&lt;&gt;'</b>, <b class="function">1</b>)-><b>orderBy</b>(<b class="function">'last_name'</b>, <b class="function">'ASC'</b>)-><b>paginate</b>(<b class="function">12</b>)</p>
 								</pre>
 
 								<div class="comments">
@@ -452,7 +452,7 @@
 									<span>Search by Department Query (Eloquent):</span>
 									<p><b>User</b>::<b>activeEmployees</b>()</p>
 									<p>-><b>where</b>(<b class="function">'team_name'</b>, <b class="function">'LIKE'</b>, <b>$request</b>-><b>get</b>(<b class="function">'department'</b>))</p>
-									<p>-><b>where</b>(<b class="function">'id'</b>, <b class="function">'<>'</b>, <b class="function">1</b>)-><b>orderBy</b>(<b class="function">'last_name'</b>, <b class="function">'ASC'</b>)-><b>paginate</b>(<b class="function">12</b>)</p>
+									<p>-><b>where</b>(<b class="function">'id'</b>, <b class="function">'&lt;&gt;'</b>, <b class="function">1</b>)-><b>orderBy</b>(<b class="function">'last_name'</b>, <b class="function">'ASC'</b>)-><b>paginate</b>(<b class="function">12</b>)</p>
 								</pre>
 
 								<div class="comments">
@@ -466,7 +466,7 @@
 									<span>Search by Position Query (Eloquent):</span>
 									<p><b>User</b>::<b>activeEmployees</b>()</p>
 									<p>-><b>where</b>(<b class="function">'position_name'</b>, <b class="function">'LIKE'</b>, <b class="function">'%'</b> . <b>$request</b>-><b>get</b>(<b class="function">'position'</b>) . <b class="function">'%'</b>)</p>
-									<p>-><b>where</b>(<b class="function">'id'</b>, <b class="function">'<>'</b>, <b class="function">1</b>)-><b>orderBy</b>(<b class="function">'last_name'</b>, <b class="function">'ASC'</b>)-><b>paginate</b>(<b class="function">12</b>)</p>
+									<p>-><b>where</b>(<b class="function">'id'</b>, <b class="function">'&lt;&gt;'</b>, <b class="function">1</b>)-><b>orderBy</b>(<b class="function">'last_name'</b>, <b class="function">'ASC'</b>)-><b>paginate</b>(<b class="function">12</b>)</p>
 								</pre>
 
 								<div class="comments">
@@ -480,7 +480,7 @@
 									<span>Search by Birthmonth Query (Eloquent):</span>
 									<p><b>User</b>::<b>activeEmployees</b>()</p>
 									<p>-><b>whereRaw</b>(<b class="function">'MONTH(birth_date) = '</b> . <b>$request</b>-><b>get</b>(<b class="function">'birthmonth'</b>))</p>
-									<p>-><b>where</b>(<b class="function">'id'</b>, <b class="function">'<>'</b>, <b class="function">1</b>)-><b>orderBy</b>(<b class="function">'last_name'</b>, <b class="function">'ASC'</b>)-><b>paginate</b>(<b class="function">12</b>)</p>
+									<p>-><b>where</b>(<b class="function">'id'</b>, <b class="function">'&lt;&gt;'</b>, <b class="function">1</b>)-><b>orderBy</b>(<b class="function">'last_name'</b>, <b class="function">'ASC'</b>)-><b>paginate</b>(<b class="function">12</b>)</p>
 								</pre>
 
 								<div class="comments">
@@ -823,7 +823,7 @@
 
 								<pre class="label">
 									<span>Insert Employee Dependents Query (Eloquent):</span>
-									<p><b class="function">for</b>(<b>$i</b> = <b class="function">0</b>; <b>$i</b> < <b>count</b>(<b>$request</b>-><b class="function">dependent_name</b>); <b>$i</b>++):</p>
+									<p><b class="function">for</b>(<b>$i</b> = <b class="function">0</b>; <b>$i</b> &lt; <b>count</b>(<b>$request</b>-><b class="function">dependent_name</b>); <b>$i</b>++):</p>
 									<p>&nbsp;&nbsp;&nbsp;&nbsp;<b>$dependents</b> = <b class="function">new</b> <b>EmployeeDependents</b>()</p>
 									<p>&nbsp;&nbsp;&nbsp;&nbsp;<b>$dependents</b>-><b class="function">employee_num</b> = <b>$employee</b>-><b class="function">id</b></p>
 									<p>&nbsp;&nbsp;&nbsp;&nbsp;<b>$dependents</b>-><b class="function">dependent</b> = <b>$request</b>-><b class="function">dependent_name</b>[<b>$i</b>]</p>
@@ -920,6 +920,179 @@
 										<li>If there is no <i>Information Details</i> found, make an <b class="function">object</b> with empty data to avoid error</li>
 									</ul>
 								</div>
+
+								<pre class="label">
+									<span>Get Employees Linkees Query (Eloquent):</span>
+									<p><b>$employee</b>-><b class="function">getLinkees</b>()</p>
+								</pre>
+
+								<div class="comments">
+									<h5>Comments</h5>
+									<ul>
+										<li>Get all Employees Available <i>Linkees</i>, for the <b>Immediate Superior</b> and <b>Manager</b>, the ones under them are automatically added as <i>Linkees</i>, other than that are the <i>Additional Linkees</i> that are not under that specific employee</li>
+									</ul>
+								</div>
+
+								<pre class="label">
+									<span>Get All Active Employees Query (Eloquent):</span>
+									<p><b>User</b>::<b>whereNull</b>(<b class="function">'deleted_at'</b>)-><b>where</b>(<b class="function">'status'</b>, <b class="function">1</b>)-><b>where</b>(<b class="function">'id'</b>, <b class="function">'&lt;&gt;'</b>, <b class="function">1</b>)-><b>orderBy</b>(<b class="function">'last_name'</b>)-><b>get</b>()</p>
+								</pre>
+
+								<div class="comments">
+									<h5>Comments</h5>
+									<ul>
+										<li>Get all <i>Active Employees</i> for selecting, an <b>Immediate Superior</b> or <b>Manager</b></li>
+									</ul>
+								</div>
+
+								<pre class="label">
+									<span>Get Department Query (Eloquent):</span>
+									<p><b>EmployeeDepartment</b>::<b class="function">all</b>()</p>
+								</pre>
+
+								<div class="comments">
+									<h5>Comments</h5>
+									<ul>
+										<li>Get all available <i>Departments</i></li>
+									</ul>
+								</div>
+
+								<pre class="label">
+									<span>Get Elink Accounts Query (Eloquent):</span>
+									<p><b>ElinkAccount</b>::<b class="function">all</b>()</p>
+								</pre>
+
+								<div class="comments">
+									<h5>Comments</h5>
+									<ul>
+										<li>Get all available <i>Elink Accounts</i></li>
+									</ul>
+								</div>
+
+								<pre class="label">
+									<span>Get Specific Employee's EmployeeDependents Query (Eloquent):</span>
+									<p><b>EmployeeDependents</b>::<b>where</b>(<b class="function">'employee_num'</b>, <b>$id</b>)-><b>where</b>(<b class="function">'status'</b>, <b class="function">1</b>)-><b>get</b>()</p>
+								</pre>
+
+								<div class="comments">
+									<h5>Comments</h5>
+									<ul>
+										<li>Using the Employees <b class="function">ID</b>, get that specific employee's <i>Dependents</i></li>
+									</ul>
+								</div>
+
+								<pre class="label">
+									<span>Actions (Button Triggers):</span>
+									<p><b>History</b></p>
+									<p><b>Back</b></p>
+									<p><b>Change Password</b></p>
+									<p><b>Update Profile</b></p>
+									<p><b>Deactivate Employee</b></p>
+								</pre>
+
+								<pre class="label">
+									<span>History Action:</span>
+									<p><b>Log</b>::<b>getLog</b>(<b class="function">'Employee'</b>, <b>$id</b>)</p>
+								</pre>
+
+								<div class="comments">
+									<h5>Comments</h5>
+									<ul>
+										<li>Click the <b>History</b> Button, will show a <b class="function">Pop-Up</b> that is gonna show all the Updates that happened to that specific Employee</li>
+									</ul>
+								</div>
+
+								<pre class="label">
+									<span>Back Action:</span>
+									<a href="http://dir.elink.corp/employees" target="_blank">http://dir.elink.corp/employees</a>
+								</pre>
+
+								<div class="comments">
+									<h5>Comments</h5>
+									<ul>
+										<li>Clicking the <b>Back</b> Button, it will redirect you back to the <i>Active Employees</i> Page</li>
+									</ul>
+								</div>
+
+								<pre class="label">
+									<span>Change Password Action:</span>
+									<a href="http://dir.elink.corp/employee/xxx/changepassword" target="_blank">http://dir.elink.corp/employee/xxx/changepassword</a>
+								</pre>
+
+								<div class="comments">
+									<h5>Comments</h5>
+									<ul>
+										<li>Clicking the <b>Change Password</b> Button, it will redirect you to the <i>Change Employee's Password</i> Page</li>
+									</ul>
+								</div>
+
+								<pre class="label">
+									<span>Update Profile Action:</span>
+									<a href="http://dir.elink.corp/employee_info/xxx/edit" target="_blank">http://dir.elink.corp/employee_info/xxx/edit</a>
+								</pre>
+
+								<div class="comments">
+									<h5>Comments</h5>
+									<ul>
+										<li>Clicking the <b>Update Profile</b> Button, it will redirect you to the <i>Edit Employee Detail</i> Page</li>
+									</ul>
+								</div>
+
+								<pre class="label">
+									<span>Deactivate Employee Action:</span>
+									<p><b>EmployeeInfoController</b>::<b class="function">destroy</b></p>
+								</pre>
+
+								<div class="comments">
+									<h5>Comments</h5>
+									<ul>
+										<li>Clicking the <b>Person Icon with an X Mark <span class="fa fa-user-times"></span></b> Button, it will show a <b class="function">Pop-Up</b> that is gonna ask if you want to put this specific Employee to the <i>Separated Employees</i></li>
+										<li>It will also add a <b>Log</b> that indicates that someone transfers this user to the <i>Seperated Employees</i> Lists</li>
+									</ul>
+								</div>
+							</div>
+
+							<div class="divider"></div>
+
+							<div class="content content_child" id="edit_page">
+								<h3>Edit Employee Detail Page</h3>
+								<p>Update a specific <i>Employees</i> details</p>
+
+								<pre class="label">
+									<span>Location:</span>
+									<a href="http://dir.elink.corp/employee_info/xxx/edit" target="_blank">http://dir.elink.corp/employee_info/xxx/edit</a>
+								</pre>
+
+								<pre class="label">
+									<span>Other Tables Affected:</span>
+									<a href="javascript:;" class="disabled">adtl_linkees</a>
+									<a href="javascript:;" class="disabled">employee_dependents</a>
+									<a href="javascript:;" class="disabled">elink_account</a>
+									<a href="javascript:;" class="disabled">movements</a>
+								</pre>
+
+								<pre class="label">
+									<span>Models Used:</span>
+									<a href="javascript:;" class="disabled">root/app/AdtlLinkee.php</a>
+									<a href="javascript:;" class="disabled">root/app/EmployeeDepartment.php</a>
+									<a href="javascript:;" class="disabled">root/app/ElinkAccount.php</a>
+									<a href="javascript:;" class="disabled">root/app/EmployeeDependents.php</a>
+								</pre>
+
+								<pre class="label">
+									<span>Views Used:</span>
+									<a href="javascript:;" class="disabled">root/resources/views/employee/edit.blade.php</a>
+									<a href="javascript:;" class="disabled">root/resources/views/employee/fields/personal.blade.php</a>
+									<a href="javascript:;" class="disabled">root/resources/views/employee/fields/user_access.blade.php</a>
+									<a href="javascript:;" class="disabled">root/resources/views/employee/fields/job_related.blade.php</a>
+									<a href="javascript:;" class="disabled">root/resources/views/employee/fields/government.blade.php</a>
+									<a href="javascript:;" class="disabled">root/resources/views/employee/fields/login.blade.php</a>
+								</pre>
+
+								<pre class="label">
+									<span>Functions Used:</span>
+									<p><b>EmployeeInfoController</b>::<b class="function">edit</b></p>
+								</pre>
 							</div>
 						</div>
 					</main>
