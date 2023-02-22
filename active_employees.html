@@ -48,6 +48,7 @@
 							<pre class="label">
 								<span>Tables Affected:</span>
 								<a href="javascript:;" class="disabled">employee_info</a>
+								<a href="javascript:;" class="disabled">employee_info_details</a>
 								<a href="javascript:;" class="disabled">log</a>
 							</pre>
 
@@ -59,12 +60,18 @@
 							<pre class="label">
 								<span>Models Used:</span>
 								<a href="javascript:;" class="disabled">root/app/User.php</a>
+								<a href="javascript:;" class="disabled">root/app/EmployeeInfoDetails.php</a>
 								<a href="javascript:;" class="disabled">root/app/Log.php</a>
 							</pre>
 
 							<pre class="label">
 								<span>Views Used:</span>
 								<a href="javascript:;" class="disabled">root/resources/views/employee/style.css</a>
+							</pre>
+
+							<pre class="label">
+								<span>Other Directory Used:</span>
+								<a href="javascript:;" class="disabled">root/app/Repositories/EmployeeRepository.php</a>
 							</pre>
 
 							<div class="divider"></div>
@@ -86,11 +93,6 @@
 								<pre class="label">
 									<span>Views Used:</span>
 									<a href="javascript:;" class="disabled">root/resources/views/employee/employees.blade.php</a>
-								</pre>
-
-								<pre class="label">
-									<span>Other Directory Used:</span>
-									<a href="javascript:;" class="disabled">root/app/Repositories/EmployeeRepository.php</a>
 								</pre>
 
 								<pre class="label">
@@ -344,11 +346,6 @@
 								</pre>
 
 								<pre class="label">
-									<span>Other Directory Used:</span>
-									<a href="javascript:;" class="disabled">root/app/Repositories/EmployeeRepository.php</a>
-								</pre>
-
-								<pre class="label">
 									<span>Functions Used:</span>
 									<p><b>EmployeeRepository</b><b class="function">::employees</b></p>
 								</pre>
@@ -589,6 +586,12 @@
 								</pre>
 
 								<pre class="label">
+									<span>Other Tables Affected:</span>
+									<a href="javascript:;" class="disabled">employee_dependents</a>
+									<a href="javascript:;" class="disabled">movements</a>
+								</pre>
+
+								<pre class="label">
 									<span>Models Used:</span>
 									<a href="javascript:;" class="disabled">root/app/EmployeeDepartment.php</a>
 									<a href="javascript:;" class="disabled">root/app/ElinkAccount.php</a>
@@ -649,6 +652,274 @@
 									<p><b>Personal Email</b></p>
 									<p><b>Secondary Email</b></p>
 								</pre>
+
+								<pre class="label">
+									<span>Functions Used:</span>
+									<p><b>EmployeeInfoController</b><b class="function">::store</b></p>
+									<p><b>EmployeeRepository</b><b class="function">::store</b></p>
+								</pre>
+
+								<pre class="label">
+									<span>Insert Employee Information Query (Eloquent):</span>
+									<p><b>$manager</b> = <b>User</b>::<b>find</b>(<b>$request</b>-><b class="function">manager_id</b>)</p>
+									<p><b>$supervisor</b> = <b>User</b>::<b>find</b>(<b>$request</b>-><b class="function">supervisor_id</b>)</p>
+									<p></p>
+									<p><b>$employee</b> = <b class="function">new</b> <b>User</b>()</p>
+									<p><b>$employee</b>-><b class="function">eid</b> = <b>$request</b>-><b class="function">eid</b></p>
+									<p><b>$employee</b>-><b class="function">first_name</b> = <b>$request</b>-><b class="function">first_name</b></p>
+									<p><b>$employee</b>-><b class="function">middle_name</b> = <b>$request</b>-><b class="function">middle_name</b></p>
+									<p><b>$employee</b>-><b class="function">last_name</b> = <b>$request</b>-><b class="function">last_name</b></p>
+									<p><b>$employee</b>-><b class="function">alias</b> = <b>$request</b>-><b class="function">alias</b></p>
+									<p><b>$employee</b>-><b class="function">position_name</b> = <b>$request</b>-><b class="function">position_name</b></p>
+									<p><b>$employee</b>-><b class="function">contact_number</b> = <b>$request</b>-><b class="function">contact_number</b></p>
+									<p><b>$employee</b>-><b class="function">supervisor_id</b> = <b>$request</b>-><b class="function">supervisor_id</b></p>
+									<p><b>$employee</b>-><b class="function">manager_id</b> = <b>$request</b>-><b class="function">manager_id</b></p>
+									<p></p>
+									<p><b class="function">if</b>(<b>$supervisor</b>){</p>
+									<p>&nbsp;&nbsp;&nbsp;&nbsp;<b>$employee</b>-><b class="function">supervisor_name</b> = <b>$supervisor</b>-><b class="function">fullName</b>()</p>
+									<p>}</p>
+									<p></p>
+									<p><b class="function">if</b>(<b>$manager</b>){</p>
+									<p>&nbsp;&nbsp;&nbsp;&nbsp;<b>$employee</b>-><b class="function">manager_name</b> = <b>$manager</b>-><b class="function">fullName</b>()</p>
+									<p>}</p>
+									<p></p>
+									<p><b>$employee</b>-><b class="function">dept_code</b> = <b>$request</b>-><b class="function">dept_code</b></p>
+									<p><b>$employee</b>-><b class="function">team_name</b> = <b>$request</b>-><b class="function">team_name</b></p>
+									<p><b>$employee</b>-><b class="function">gender</b> = <b>$request</b>-><b class="function">gender_id</b></p>
+									<p><b>$employee</b>-><b class="function">address</b> = <b>$request</b>-><b class="function">address</b></p>
+									<p><b>$employee</b>-><b class="function">account_id</b> = <b>$request</b>-><b class="function">account_id</b></p>
+									<p><b>$employee</b>-><b class="function">status</b> = <b>$request</b>-><b class="function">status_id</b></p>
+									<p></p>
+									<p><b class="function">if</b>(<b>$request</b>-><b class="function">has</b>(<b class="function">'employee_type'</b>)){</p>
+									<p>&nbsp;&nbsp;&nbsp;&nbsp;<b>$employee</b>-><b class="function">usertype</b> = <b>$request</b>-><b class="function">usertype</b></p>
+									<p>}</p>
+									<p></p>
+									<p><b class="function">if</b>(<b>$request</b>-><b class="function">has</b>(<b class="function">'all_access'</b>)){</p>
+									<p>&nbsp;&nbsp;&nbsp;&nbsp;<b>$employee</b>-><b class="function">all_access</b> = <b class="function">1</b></p>
+									<p>} <b class="function">else</b> {</p>
+									<p>&nbsp;&nbsp;&nbsp;&nbsp;<b>$employee</b>-><b class="function">all_access</b> = <b class="function">0</b></p>
+									<p>}</p>
+									<p></p>
+									<p><b class="function">if</b>(<b>$request</b>-><b class="function">has</b>(<b class="function">'is_admin'</b>)){</p>
+									<p>&nbsp;&nbsp;&nbsp;&nbsp;<b>$employee</b>-><b class="function">is_admin</b> = <b class="function">1</b></p>
+									<p>} <b class="function">else</b> {</p>
+									<p>&nbsp;&nbsp;&nbsp;&nbsp;<b>$employee</b>-><b class="function">is_admin</b> = <b class="function">0</b></p>
+									<p>}</p>
+									<p></p>
+									<p><b class="function">if</b>(<b>$request</b>-><b class="function">has</b>(<b class="function">'is_hr'</b>)){</p>
+									<p>&nbsp;&nbsp;&nbsp;&nbsp;<b>$employee</b>-><b class="function">is_hr</b> = <b class="function">1</b></p>
+									<p>} <b class="function">else</b> {</p>
+									<p>&nbsp;&nbsp;&nbsp;&nbsp;<b>$employee</b>-><b class="function">is_hr</b> = <b class="function">0</b></p>
+									<p>}</p>
+									<p></p>
+									<p><b class="function">if</b>(<b>$request</b>-><b class="function">has</b>(<b class="function">'is_erp'</b>)){</p>
+									<p>&nbsp;&nbsp;&nbsp;&nbsp;<b>$employee</b>-><b class="function">is_erp</b> = <b class="function">1</b></p>
+									<p>} <b class="function">else</b> {</p>
+									<p>&nbsp;&nbsp;&nbsp;&nbsp;<b>$employee</b>-><b class="function">is_erp</b> = <b class="function">0</b></p>
+									<p>}</p>
+									<p></p>
+									<p><b>$datetime</b> = <b class="function">new</b> <b>DateTime</b>()</p>
+									<p></p>
+									<p><b class="function">if</b>(<b>$request</b>-><b class="function">has</b>(<b class="function">'birth_date'</b>) && <b>$request</b>-><b class="function">birth_date</b>){</p>
+									<p>&nbsp;&nbsp;&nbsp;&nbsp;<b>$birth_date</b> = <b>$datetime</b>-><b class="function">createFromFormat</b>(<b class="function">'m/d/Y'</b>, <b>$request</b>-><b class="function">birth_date</b>)-><b>format</b>(<b class="function">"Y-m-d H:i:s"</b>)</p>
+									<p>&nbsp;&nbsp;&nbsp;&nbsp;<b>$employee</b>-><b class="function">birth_date</b> = <b>$birth_date</b></p>
+									<p>}</p>
+									<p></p>
+									<p><b class="function">if</b>(<b>$request</b>-><b class="function">has</b>(<b class="function">'hired_date'</b>) && <b>$request</b>-><b class="function">hired_date</b>){</p>
+									<p>&nbsp;&nbsp;&nbsp;&nbsp;<b>$hired_date</b> = <b>$datetime</b>-><b class="function">createFromFormat</b>(<b class="function">'m/d/Y'</b>, <b>$request</b>-><b class="function">hired_date</b>)-><b>format</b>(<b class="function">"Y-m-d H:i:s"</b>)</p>
+									<p>&nbsp;&nbsp;&nbsp;&nbsp;<b>$employee</b>-><b class="function">hired_date</b> = <b>$hired_date</b></p>
+									<p>}</p>
+									<p></p>
+									<p><b class="function">if</b>(<b>$request</b>-><b class="function">has</b>(<b class="function">'prod_date'</b>) && <b>$request</b>-><b class="function">prod_date</b>){</p>
+									<p>&nbsp;&nbsp;&nbsp;&nbsp;<b>$prod_date</b> = <b>$datetime</b>-><b class="function">createFromFormat</b>(<b class="function">'m/d/Y'</b>, <b>$request</b>-><b class="function">prod_date</b>)-><b>format</b>(<b class="function">"Y-m-d H:i:s"</b>)</p>
+									<p>&nbsp;&nbsp;&nbsp;&nbsp;<b>$employee</b>-><b class="function">prod_date</b> = <b>$prod_date</b></p>
+									<p>}</p>
+									<p></p>
+									<p><b>$employee</b>-><b class="function">email</b> = <b>$request</b>-><b class="function">email</b></p>
+									<p><b>$employee</b>-><b class="function">email2</b> = <b>$request</b>-><b class="function">email2</b></p>
+									<p><b>$employee</b>-><b class="function">email3</b> = <b>$request</b>-><b class="function">email3</b></p>
+									<p><b>$employee</b>-><b class="function">ext</b> = <b>$request</b>-><b class="function">ext</b></p>
+									<p><b>$employee</b>-><b class="function">wave</b> = <b>$request</b>-><b class="function">wave</b></p>
+									<p><b>$employee</b>-><b class="function">sss</b> = <b>$request</b>-><b class="function">sss</b></p>
+									<p><b>$employee</b>-><b class="function">pagibig</b> = <b>$request</b>-><b class="function">pagibig</b></p>
+									<p><b>$employee</b>-><b class="function">philhealth</b> = <b>$request</b>-><b class="function">philhealth</b></p>
+									<p><b>$employee</b>-><b class="function">tin</b> = <b>$request</b>-><b class="function">tin</b></p>
+									<p><b>$employee</b>-><b class="function">is_regular</b> = <b>$request</b>-><b class="function">is_regular</b></p>
+									<p><b>$employee</b>-><b class="function">employee_category</b> = <b>$request</b>-><b class="function">employee_category</b></p>
+									<p><b>$employee</b>-><b class="function">regularization_date</b> = <b>date</b>(<b class="function">"Y-m-d"</b>, <b>strtotime</b>(<b>$request</b>-><b class="function">regularization_date</b>))</p>
+									<p><b>$employee</b>-><b class="function">civil_status</b> = <b>$request</b>-><b class="function">civil_status</b></p>
+									<p></p>
+									<p><b class="function">if</b>(<b>$request</b>-><b class="function">gender</b> == <b class="function">2</b>){</p>
+									<p>&nbsp;&nbsp;&nbsp;&nbsp;<b>$employee</b>-><b class="function">profile_img</b> = <b class="function">'http://dir.elink.corp/public/img/nobody_f.original.jpg'</b></p>
+									<p>}</p>
+									<p></p>
+									<p><b>$employee</b>-><b class="function">password</b> = <b>Hash</b>::<b>make</b>(<b>env</b>(<b class="function">'USER_DEFAULT_PASSWORD'</b>, <b class="function">'qwe123!@#$'</b>))</p>
+									<p><b>$employee</b>-><b class="function">save</b>()</p>
+								</pre>
+
+								<div class="comments">
+									<h5>Comments</h5>
+									<ul>
+										<li>After Filling-out the Form, If a <b>Manager</b> or <b>Supervisor</b> is selected, find that User and get its <b class="function">Fullname</b> and insert it into their respective columns, <b class="function">manager_name</b> and <b class="function">supervisor_name</b></li>
+										<li>If a photo is not found, use the default photo for each <b class="function">Gender</b> type</li>
+										<li><b class="function">Password</b> is auto generated, and by default is <b>qwe123!@#</b></li>
+									</ul>
+								</div>
+
+								<pre class="label">
+									<span>Insert Employee Information Details Query (Eloquent):</span>
+									<p><b>$details</b> = <b class="function">new</b> <b>EmployeeInfoDetails</b>()</p>
+									<p><b>$details</b>-><b class="function">employee_id</b> = <b>$employee</b>-><b class="function">id</b></p>
+									<p><b>$details</b>-><b class="function">town_address</b> = <b>$request</b>-><b class="function">town_address</b></p>
+									<p><b>$details</b>-><b class="function">em_con_name</b> = <b>$request</b>-><b class="function">em_con_name</b></p>
+									<p><b>$details</b>-><b class="function">em_con_address</b> = <b>$request</b>-><b class="function">em_con_address</b></p>
+									<p><b>$details</b>-><b class="function">em_con_num</b> = <b>$request</b>-><b class="function">em_con_num</b></p>
+									<p><b>$details</b>-><b class="function">em_con_rel</b> = <b>$request</b>-><b class="function">em_con_rel</b></p>
+									<p><b>$details</b>-><b class="function">fathers_name</b> = <b>$request</b>-><b class="function">fathers_name</b></p>
+									<p><b>$details</b>-><b class="function">fathers_bday</b> = <b>date</b>(<b class="function">"Y-m-d"</b>, <b>strtotime</b>(<b>$request</b>-><b class="function">fathers_bday</b>))</p>
+									<p><b>$details</b>-><b class="function">mothers_name</b> = <b>$request</b>-><b class="function">mothers_name</b></p>
+									<p><b>$details</b>-><b class="function">mothers_bday</b> = <b>date</b>(<b class="function">"Y-m-d"</b>, <b>strtotime</b>(<b>$request</b>-><b class="function">mothers_bday</b>))</p>
+									<p><b>$details</b>-><b class="function">spouse_name</b> = <b>$request</b>-><b class="function">spouse_name</b></p>
+									<p><b>$details</b>-><b class="function">spouse_bday</b> = <b>date</b>(<b class="function">"Y-m-d"</b>, <b>strtotime</b>(<b>$request</b>-><b class="function">spouse_bday</b>))</p>
+									<p><b>$details</b>-><b class="function">rehirable</b> = <b>$request</b>-><b class="function">rehirable</b></p>
+									<p><b>$details</b>-><b class="function">rehire_reason</b> = <b>$request</b>-><b class="function">rehire_reason</b></p>
+									<p><b>$details</b>-><b class="function">avega_num</b> = <b>$request</b>-><b class="function">avega_num</b></p>
+									<p><b>$details</b>-><b class="function">save</b>()</p>
+								</pre>
+
+								<div class="comments">
+									<h5>Comments</h5>
+									<ul>
+										<li>After inserting the data to <i>employee_info</i>, get the newly generated <b class="function">ID</b> and insert it together with the details needed for <i>employee_info_details</i></li>
+									</ul>
+								</div>
+
+								<pre class="label">
+									<span>Insert Employee Movement Query (Eloquent):</span>
+									<p><b>$find_dept</b> = <b>$request</b>-><b class="function">team_name</b></p>
+									<p></p>
+									<p><b>$dept_obj</b> = <b>DB</b>::<b>select</b>(<b class="function">"select * from employee_department where department_name like '%</b><b>$find_dept</b><b class="function">%' limit 1"</b>)</p>
+									<p></p>
+									<p><b>$dept_id</b> = <b class="function">0</b></p>
+									<p><b class="function">if</b>(<b>count</b>(<b class="function">$dept_obj</b>) > <b class="function">0</b>){</p>
+									<p>&nbsp;&nbsp;&nbsp;&nbsp;<b>$dept_id</b> = <b>$dept_obj</b>[<b class="function">0</b>]-><b class="function">id</b></p>
+									<p>}</p>
+									<p></p>
+									<p><b>$movement</b> = <b class="function">new</b> <b>MovementsTransfer</b>()</p>
+									<p><b>$movement</b>-><b class="function">mv_employee_no</b> = <b>$employee</b>-><b class="function">id</b></p>
+									<p><b>$movement</b>-><b class="function">mv_transfer_date</b> = <b>date</b>(<b class="function">"Y-m-d"</b>)</p>
+									<p><b>$movement</b>-><b class="function">mv_dept</b> = <b>$dept_id</b></p>
+									<p><b>$movement</b>-><b class="function">mv_position</b> = <b>$request</b>-><b class="function">position_name</b></p>
+									<p><b>$movement</b>-><b class="function">save</b>()</p>
+								</pre>
+
+								<div class="comments">
+									<h5>Comments</h5>
+									<ul>
+										<li>After inserting the <i>employee_info</i> and <i>employee_info_details</i> data, use the <b class="function">team_name</b> to find the <b class="function">ID</b> of the selected <b>Department</b></li>
+										<li>After that, get the <i>employee_info</i> generated <b class="function">ID</b> and insert it together with the details needed for <i>movements</i></li>
+									</ul>
+								</div>
+
+								<pre class="label">
+									<span>Insert Employee Dependents Query (Eloquent):</span>
+									<p><b class="function">for</b>(<b>$i</b> = <b class="function">0</b>; <b>$i</b> < <b>count</b>(<b>$request</b>-><b class="function">dependent_name</b>); <b>$i</b>++):</p>
+									<p>&nbsp;&nbsp;&nbsp;&nbsp;<b>$dependents</b> = <b class="function">new</b> <b>EmployeeDependents</b>()</p>
+									<p>&nbsp;&nbsp;&nbsp;&nbsp;<b>$dependents</b>-><b class="function">employee_num</b> = <b>$employee</b>-><b class="function">id</b></p>
+									<p>&nbsp;&nbsp;&nbsp;&nbsp;<b>$dependents</b>-><b class="function">dependent</b> = <b>$request</b>-><b class="function">dependent_name</b>[<b>$i</b>]</p>
+									<p>&nbsp;&nbsp;&nbsp;&nbsp;<b>$dependents</b>-><b class="function">generali_num</b> = <b>$request</b>-><b class="function">generali_num</b>[<b>$i</b>]</p>
+									<p>&nbsp;&nbsp;&nbsp;&nbsp;<b>$dependents</b>-><b class="function">bday</b> = <b>date</b>(<b class="function">"Y-m-d"</b>, <b>strtotime</b>(<b>$request</b>-><b class="function">dependent_bday</b>[<b>$i</b>]))</p>
+									<p>&nbsp;&nbsp;&nbsp;&nbsp;<b>$dependents</b>-><b class="function">save</b>()</p>
+									<p><b class="function">endfor</b></p>
+								</pre>
+
+								<div class="comments">
+									<h5>Comments</h5>
+									<ul>
+										<li>After inserting the <i>employee_info</i>, <i>employee_info_details</i> and <i>movements</i> data, <b>Loop</b> the number of <b class="function">dependents</b> depending on how many is added in the system while filling-out the form.</li>
+										<li>After that, get the <i>employee_info</i> generated <b class="function">ID</b> and insert it together with the details needed per dependents to <i>employee_dependents</i></li>
+										<li>It will also add a <b>Log</b> that indicates that someone is being added in the <i>Active Employees</i> Lists</li>
+									</ul>
+								</div>
+							</div>
+
+							<div class="divider"></div>
+
+							<div class="content content_child" id="view_page">
+								<h3>View Employee Detail Page</h3>
+								<p>Show a specific <i>Employees</i> details</p>
+
+								<pre class="label">
+									<span>Location:</span>
+									<a href="http://dir.elink.corp/xx" target="_blank">http://dir.elink.corp/employee_info/xxx</a>
+								</pre>
+
+								<pre class="label">
+									<span>Other Tables Affected:</span>
+									<a href="javascript:;" class="disabled">adtl_linkees</a>
+									<a href="javascript:;" class="disabled">employee_dependents</a>
+									<a href="javascript:;" class="disabled">elink_account</a>
+									<a href="javascript:;" class="disabled">movements</a>
+								</pre>
+
+								<pre class="label">
+									<span>Models Used:</span>
+									<a href="javascript:;" class="disabled">root/app/AdtlLinkee.php</a>
+									<a href="javascript:;" class="disabled">root/app/EmployeeDepartment.php</a>
+									<a href="javascript:;" class="disabled">root/app/ElinkAccount.php</a>
+									<a href="javascript:;" class="disabled">root/app/EmployeeDependents.php</a>
+								</pre>
+
+								<pre class="label">
+									<span>Views Used:</span>
+									<a href="javascript:;" class="disabled">root/resources/views/employee/view-admin.blade.php</a>
+									<a href="javascript:;" class="disabled">root/resources/views/employee/fields/personalv.blade.php</a>
+									<a href="javascript:;" class="disabled">root/resources/views/employee/fields/user_accessv.blade.php</a>
+									<a href="javascript:;" class="disabled">root/resources/views/employee/fields/job_relatedv.blade.php</a>
+									<a href="javascript:;" class="disabled">root/resources/views/employee/fields/governmentv.blade.php</a>
+									<a href="javascript:;" class="disabled">root/resources/views/employee/fields/loginv.blade.php</a>
+								</pre>
+
+								<pre class="label">
+									<span>Functions Used:</span>
+									<p><b>EmployeeInfoController</b><b class="function">::show</b></p>
+								</pre>
+
+								<pre class="label">
+									<span>Get Specific Employee Query (Eloquent):</span>
+									<p><b>$employee</b> = <b>User</b>::<b>withTrashed</b>()-><b class="function">find</b>(<b>$id</b>)</p>
+								</pre>
+
+								<div class="comments">
+									<h5>Comments</h5>
+									<ul>
+										<li>Using the Employees <b class="function">ID</b>, get that specific employee <b>withTrashed</b> is a function use to allow <b class="function">deleted</b> data or <i>Separated Employees</i> to be viewed and not just <i>Active Employees</i></li>
+										<li>If that certain employee is not found on the Gateway, it will redirect to a <b>404 Error</b> Page</li>
+									</ul>
+								</div>
+
+								<pre class="label">
+									<span>Get Specific Employee's Details Query (Eloquent):</span>
+									<p><b>$obj</b> = <b>EmployeeInfoDetails</b>::<b>where</b>(<b class="function">'employee_id'</b>, <b>$id</b>)-><b>get</b>()</p>
+									<p><b class="function">if</b>(<b>count</b>(<b class="function">$obj</b>) > <b class="function">0</b>){</p>
+									<p>&nbsp;&nbsp;&nbsp;&nbsp;<b>$details</b> = <b>$obj</b>[<b class="function">0</b>]</p>
+									<p>} <b class="function">else</b> {</p>
+									<p>&nbsp;&nbsp;&nbsp;&nbsp;<b>$details</b> = (<b class="function">object</b>) [</p>
+									<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<b class="function">'town_address'</b> => <b class="function">""</b>,</p>
+									<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<b class="function">'em_con_name'</b> => <b class="function">""</b>,</p>
+									<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<b class="function">'em_con_rel'</b> => <b class="function">""</b>,</p>
+									<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<b class="function">'em_con_num'</b> => <b class="function">""</b></p>
+									<p>&nbsp;&nbsp;&nbsp;&nbsp;]</p>
+									<p>}</p>
+								</pre>
+
+								<div class="comments">
+									<h5>Comments</h5>
+									<ul>
+										<li>Using the Employees <b class="function">ID</b>, get that specific employee's <i>Information Details</i></li>
+										<li>If there is no <i>Information Details</i> found, make an <b class="function">object</b> with empty data to avoid error</li>
+									</ul>
+								</div>
 							</div>
 						</div>
 					</main>
