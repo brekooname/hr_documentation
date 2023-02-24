@@ -1,0 +1,351 @@
+<!DOCTYPE html>
+<html class="no-js" lang="en-US">
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>Human Resources Gateway - Developer Guide</title>
+	<link rel="icon" type="image/png" href="images/favicon.png">
+	<link rel="stylesheet" href="styles/style.css">
+
+	<script src="https://use.fontawesome.com/a63cbdeb8f.js"></script>
+</head>
+<body>
+<div class="protect-me">
+	<div class="clearfix">
+		<!-- Header -->
+		<header>
+			<div class="wrapper">
+				<div class="header_con">
+					<a href="index.html" class="main_logo">
+						<figure><img src="images/main-logo.png" alt=""/></figure>
+					</a>
+				</div>
+			</div>
+		</header>
+		<!-- End Header -->
+
+		<!-- Main -->
+		<div id="main_area">
+			<div class="wrapper">
+				<div class="main_con">
+					<main>
+						<h1>Blog Posts - Activities</h1>
+						<ul class="bullet">
+							<li><a href="activities.html#list_page">List of Activities Page</a></li>
+							<li><a href="activities.html#add_page">Add New Activity Page</a></li>
+							<li><a href="activities.html#edit_page">Edit Activity Page</a></li>
+						</ul>
+
+						<div class="divider"></div>
+
+						<div class="main_content">
+							<h2>Overview</h2>
+							<p>Company's previous, ongoing and upcoming <i>Activities</i>. Also for adding, updating or deleting an <b class="function">Activity</b></p>
+
+							<pre class="label">
+								<span>Tables Affected:</span>
+								<a href="javascript:;" class="disabled">elink_activities</a>
+								<a href="javascript:;" class="disabled">log</a>
+							</pre>
+
+							<pre class="label">
+								<span>Controllers Used:</span>
+								<a href="javascript:;" class="disabled">root/app/Http/Controllers/ActivityController.php</a>
+							</pre>
+
+							<pre class="label">
+								<span>Models Used:</span>
+								<a href="javascript:;" class="disabled">root/app/ElinkActivities.php</a>
+							</pre>
+
+							<pre class="label">
+								<span>Views Used:</span>
+								<a href="javascript:;" class="disabled">root/resources/views/activity/style.css</a>
+								<a href="javascript:;" class="disabled">root/resources/views/activity/js-script.php</a>
+							</pre>
+
+							<div class="divider"></div>
+
+							<div class="content content_child" id="list_page">
+								<h3>List of Activities Page</h3>
+								<p>List of the Company's previous, ongoing and upcoming <i>Activities</i>.</p>
+
+								<pre class="label">
+									<span>Location:</span>
+									<a href="http://dir.elink.corp/activities" target="_blank">http://dir.elink.corp/activities</a>
+								</pre>
+
+								<pre class="label">
+									<span>Views Used:</span>
+									<a href="javascript:;" class="disabled">root/resources/views/activity/list.blade.php</a>
+								</pre>
+
+								<pre class="label">
+									<span>Query (Eloquent):</span>
+									<p><b>ElinkActivities</b>::<b>all</b>()</p>
+								</pre>
+
+								<div class="comments">
+									<h5>Comments</h5>
+									<ul>
+										<li>Get all <i>Activities</i> from <b class="function">oldest</b> to <b class="function">newest</b></li>
+									</ul>
+								</div>
+
+								<pre class="label">
+									<span>Actions (Button Triggers):</span>
+									<p><b>History</b></p>
+									<p><b>Add Activity</b></p>
+									<p><b>Edit Activity</b></p>
+									<p><b>Delete Activity</b></p>
+								</pre>
+
+								<pre class="label">
+									<span>History Action:</span>
+									<p><b>Log</b>::<b>getLog</b>(<b class="function">'Activity'</b>)</p>
+								</pre>
+
+								<div class="comments">
+									<h5>Comments</h5>
+									<ul>
+										<li>Click the <b>History</b> Button, will show a <b class="function">Pop-Up</b> that is gonna show all the Updates that happened in <i>Activities</i> Module</li>
+									</ul>
+								</div>
+
+								<pre class="label">
+									<span>Add Activity Action:</span>
+									<a href="http://dir.elink.corp/activities/create" target="_blank">http://dir.elink.corp/activities/create</a>
+								</pre>
+
+								<div class="comments">
+									<h5>Comments</h5>
+									<ul>
+										<li>Clicking the <b>Add Activity</b> Button, it will redirect you to the <i>Add Activity</i> Page</li>
+									</ul>
+								</div>
+
+								<pre class="label">
+									<span>Edit Activity Action:</span>
+									<a href="http://dir.elink.corp/activities/xxx/edit" target="_blank">http://dir.elink.corp/activities/xxx/edit</a>
+								</pre>
+
+								<div class="comments">
+									<h5>Comments</h5>
+									<ul>
+										<li>Clicking the <b>Pencil <span class="fa fa-pencil"></span></b> Button, it will redirect you to that <i>Edit Activity</i> Page</li>
+									</ul>
+								</div>
+
+								<pre class="label">
+									<span>Delete Activity Action:</span>
+									<p><b>ActivityController</b>::<b class="function">destroy</b></p>
+								</pre>
+
+								<pre class="label">
+									<span>Delete Activity Query (Eloquent):</span>
+									<p><b>$activity</b> = <b>ElinkActivities</b>::<b>find</b>(<b class="function">$id</b>)</p>
+									<p><b>$activity</b>-><b>delete</b>()</p>
+								</pre>
+
+								<div class="comments">
+									<h5>Comments</h5>
+									<ul>
+										<li>Clicking the <b>Trashcan Icon <span class="fa fa-trash"></span></b> Button, it will show a <b class="function">Pop-Up</b> that is gonna ask if you want to delete a specific <b>Activity</b></li>
+										<li>It will also add a <b>Log</b> that indicates that someone deleted this specific <b>Activity</b></li>
+									</ul>
+								</div>
+							</div>
+
+							<div class="divider"></div>
+
+							<div class="content content_child" id="add_page">
+								<h3>Add New Activity Page</h3>
+								<p>Page that lets you add a new <b>Activity</b></p>
+
+								<pre class="label">
+									<span>Location:</span>
+									<a href="http://dir.elink.corp/activities/create" target="_blank">http://dir.elink.corp/activities/create</a>
+								</pre>
+
+								<pre class="label">
+									<span>Views Used:</span>
+									<a href="javascript:;" class="disabled">root/resources/views/activity/create.blade.php</a>
+								</pre>
+
+								<pre class="label">
+									<span>Inputs Needed:</span>
+									<p><b>Title</b> (Required)</p>
+									<p><b>Subtitle</b> (Required)</p>
+									<p><b>Message</b></p>
+									<p><b>Image Attachment</b> (Required)</p>
+									<p><b>Activity Date</b> (Required)</p>
+								</pre>
+
+								<pre class="label">
+									<span>Functions Used:</span>
+									<p><b>ActivityController</b><b class="function">::store</b></p>
+								</pre>
+
+								<pre class="label">
+									<span>Query (Eloquent):</span>
+									<p><b>$activity</b> = <b class="function">new</b> <b>ElinkActivities</b></p>
+									<p><b>$activity</b>-><b class="function">title</b> = <b>$request</b>-><b class="function">title</b></p>
+									<p><b>$activity</b>-><b class="function">subtitle</b> = <b>$request</b>-><b class="function">subtitle</b></p>
+									<p><b>$activity</b>-><b class="function">message</b> = <b>$request</b>-><b class="function">message</b></p>
+									<p></p>
+									<p><b>$datetime</b> = <b class="function">new</b> <b>DateTime</b>()</p>
+									<p><b class="function">if</b>(<b>$request</b>-><b>has</b>(<b class="function">'activity_date'</b>) && <b>$request</b>-><b class="function">activity_date</b>) {</p>
+									<p>&nbsp;&nbsp;&nbsp;&nbsp;<b>$activity_date</b> = <b>$datetime</b>-><b>createFromFormat</b>(<b class="function">'m/d/Y'</b>, <b>$request</b>-><b class="function">activity_date</b>)-><b>format</b>(<b class="function">"Y-m-d H:i:s"</b>)</p>
+									<p>&nbsp;&nbsp;&nbsp;&nbsp;<b>$activity</b>-><b class="function">activity_date</b> = <b>$activity_date</b></p>
+									<p>}</p>
+									<p></p>
+									<p><b>$activity</b>-><b>save</b>()</p>
+									<p></p>
+									<p><b class="function">if</b>(<b>$request</b>-><b>hasFile</b>(<b class="function">"image_url"</b>)) {</p>
+									<p>&nbsp;&nbsp;&nbsp;&nbsp;<b>$path</b> = <b>$request</b>-><b class="function">image_url</b>-><b>store</b>(<b class="function">'images/'</b>.<b>$activity</b>-><b class="function">id</b>)</p>
+									<p>&nbsp;&nbsp;&nbsp;&nbsp;<b>$activity</b>-><b class="function">image_url</b> = <b>asset</b>(<b class="function">'storage/app/'</b>.<b>$path</b>)</p>
+									<p>&nbsp;&nbsp;&nbsp;&nbsp;<b>$activity</b>-><b>save</b>()</p>
+									<p>}</p>
+								</pre>
+
+								<div class="comments">
+									<h5>Comments</h5>
+									<ul>
+										<li>Insert the data in <i>elink_activities</i> other than the <b class="function">Image URL</b></li>
+										<li>Once the data is inserted, then get the <b class="function">Image URL</b> data then update that specific <b>Activity</b></li>
+										<li>It will also add a <b>Log</b> that indicates that an <b>Activity</b> is added</li>
+									</ul>
+								</div>
+
+								<pre class="label">
+									<span>Actions (Button Triggers):</span>
+									<p><b>Back</b></p>
+								</pre>
+
+								<pre class="label">
+									<span>Back Action:</span>
+									<a href="http://dir.elink.corp/activities" target="_blank">http://dir.elink.corp/activities</a>
+								</pre>
+
+								<div class="comments">
+									<h5>Comments</h5>
+									<ul>
+										<li>Clicking the <b>Back</b> Button, it will redirect you back to the <i>Activities</i> Page</li>
+									</ul>
+								</div>
+							</div>
+
+							<div class="divider"></div>
+
+							<div class="content content_child" id="edit_page">
+								<h3>Edit Activity Page</h3>
+								<p>Page that lets you edit a specific <b>Activity</b></p>
+
+								<pre class="label">
+									<span>Location:</span>
+									<a href="http://dir.elink.corp/activities/xxx/edit" target="_blank">http://dir.elink.corp/activities/xxx/edit</a>
+								</pre>
+
+								<pre class="label">
+									<span>Views Used:</span>
+									<a href="javascript:;" class="disabled">root/resources/views/activity/edit.blade.php</a>
+								</pre>
+
+								<pre class="label">
+									<span>Inputs Needed:</span>
+									<p><b>Title</b> (Required)</p>
+									<p><b>Subtitle</b> (Required)</p>
+									<p><b>Message</b></p>
+									<p><b>Image Attachment</b></p>
+									<p><b>Activity Date</b> (Required)</p>
+								</pre>
+
+								<pre class="label">
+									<span>Functions Used:</span>
+									<p><b>ActivityController</b><b class="function">::edit</b></p>
+									<p><b>ActivityController</b><b class="function">::update</b></p>
+								</pre>
+
+								<pre class="label">
+									<span>Query (Eloquent):</span>
+									<p><b>$activity</b> = <b>ElinkActivities</b>::<b>find</b>(<b class="function">$id</b>)</p>
+								</pre>
+
+								<div class="comments">
+									<h5>Comments</h5>
+									<ul>
+										<li>Get the specific <b>Activity</b> using the <b class="function">ID</b></li>
+									</ul>
+								</div>
+
+								<pre class="label">
+									<span>Update Query (Eloquent):</span>
+									<p><b>$activity</b> = <b>ElinkActivities</b>::<b>find</b>(<b class="function">$id</b>)</p>
+									<p><b>$activity</b>-><b class="function">title</b> = <b>$request</b>-><b class="function">title</b></p>
+									<p><b>$activity</b>-><b class="function">subtitle</b> = <b>$request</b>-><b class="function">subtitle</b></p>
+									<p><b>$activity</b>-><b class="function">message</b> = <b>$request</b>-><b class="function">message</b></p>
+									<p></p>
+									<p><b>$datetime</b> = <b class="function">new</b> <b>DateTime</b>()</p>
+									<p><b class="function">if</b>(<b>$request</b>-><b>has</b>(<b class="function">'activity_date'</b>) && <b>$request</b>-><b class="function">activity_date</b>) {</p>
+									<p>&nbsp;&nbsp;&nbsp;&nbsp;<b>$activity_date</b> = <b>$datetime</b>-><b>createFromFormat</b>(<b class="function">'m/d/Y'</b>, <b>$request</b>-><b class="function">activity_date</b>)-><b>format</b>(<b class="function">"Y-m-d H:i:s"</b>)</p>
+									<p>&nbsp;&nbsp;&nbsp;&nbsp;<b>$activity</b>-><b class="function">activity_date</b> = <b>$activity_date</b></p>
+									<p>}</p>
+									<p></p>
+									<p><b>$activity</b>-><b>save</b>()</p>
+									<p></p>
+									<p><b class="function">if</b>(<b>$request</b>-><b>hasFile</b>(<b class="function">"image_url"</b>)) {</p>
+									<p>&nbsp;&nbsp;&nbsp;&nbsp;<b>$path</b> = <b>$request</b>-><b class="function">image_url</b>-><b>store</b>(<b class="function">'images/'</b>.<b>$activity</b>-><b class="function">id</b>)</p>
+									<p>&nbsp;&nbsp;&nbsp;&nbsp;<b>$activity</b>-><b class="function">image_url</b> = <b>asset</b>(<b class="function">'storage/app/'</b>.<b>$path</b>)</p>
+									<p>&nbsp;&nbsp;&nbsp;&nbsp;<b>$activity</b>-><b>save</b>()</p>
+									<p>}</p>
+								</pre>
+
+								<div class="comments">
+									<h5>Comments</h5>
+									<ul>
+										<li>Update the data in <i>elink_activities</i> other than the <b class="function">Image URL</b></li>
+										<li>If a new <b class="function">Image URL</b> data is added then update that specific Activity's <b class="function">Image URL</b></li>
+										<li>It will also add a <b>Log</b> that indicates that this specific <b>Activity</b> is updated</li>
+									</ul>
+								</div>
+
+								<pre class="label">
+									<span>Actions (Button Triggers):</span>
+									<p><b>Back</b></p>
+								</pre>
+
+								<pre class="label">
+									<span>Back Action:</span>
+									<a href="http://dir.elink.corp/activities" target="_blank">http://dir.elink.corp/activities</a>
+								</pre>
+
+								<div class="comments">
+									<h5>Comments</h5>
+									<ul>
+										<li>Clicking the <b>Back</b> Button, it will redirect you back to the <i>Activities</i> Page</li>
+									</ul>
+								</div>
+							</div>
+						</div>
+					</main>
+				</div>
+
+				<div class="clearfix"></div>
+			</div>
+		</div>
+		<!-- End Main -->
+	</div> <!-- End Clearfix -->
+</div> <!-- End Protect Me -->
+<a href="#" class="back_top"></a>
+<footer>
+	<div class="wrapper">
+		<div class="footer_con">
+			<div class="pagination">
+				<a href="separated_employees.html">Prev</a>
+				<a href="javascript:;" class="disabled">Next</a>
+			</div>
+		</div>
+	</div>
+</footer>
+</body>
+</html>
