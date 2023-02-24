@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html class="no-js" lang="en-US">
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>Human Resources Gateway - Developer Guide</title>
+	<link rel="icon" type="image/png" href="images/favicon.png">
+	<link rel="stylesheet" href="styles/style.css">
+
+	<script src="https://use.fontawesome.com/a63cbdeb8f.js"></script>
+</head>
+<body>
+<div class="protect-me">
+	<div class="clearfix">
+		<!-- Header -->
+		<header>
+			<div class="wrapper">
+				<div class="header_con">
+					<a href="index.html" class="main_logo">
+						<figure><img src="images/main-logo.png" alt=""/></figure>
+					</a>
+				</div>
+			</div>
+		</header>
+		<!-- End Header -->
+
+		<!-- Main -->
+		<div id="main_area">
+			<div class="wrapper">
+				<div class="main_con">
+					<main>
+						<h1>Blog Posts - HR Progress</h1>
+						<ul class="bullet">
+							<li><a href="hr_progress.html#list_page">List of Post Images Page</a></li>
+							<li><a href="hr_progress.html#add_page">Create New Post Page</a></li>
+						</ul>
+
+						<div class="divider"></div>
+
+						<div class="main_content">
+							<h2>Overview</h2>
+							<p>Images use for the slideshow in <i>Dashboard</i> Page</p>
+
+							<pre class="label">
+								<span>Tables Affected:</span>
+								<a href="javascript:;" class="disabled">posts</a>
+								<a href="javascript:;" class="disabled">log</a>
+							</pre>
+
+							<pre class="label">
+								<span>Controllers Used:</span>
+								<a href="javascript:;" class="disabled">root/app/Http/Controllers/PostController.php</a>
+							</pre>
+
+							<pre class="label">
+								<span>Models Used:</span>
+								<a href="javascript:;" class="disabled">root/app/Posts.php</a>
+							</pre>
+
+							<pre class="label">
+								<span>Views Used:</span>
+								<a href="javascript:;" class="disabled">root/resources/views/post/style.css</a>
+								<a href="javascript:;" class="disabled">root/resources/views/post/js-script.php</a>
+							</pre>
+
+							<div class="divider"></div>
+
+							<div class="content content_child" id="list_page">
+								<h3>List of Post Images Page</h3>
+								<p>List of the Company's previous, ongoing and upcoming <i>Activities</i>.</p>
+
+								<pre class="label">
+									<span>Location:</span>
+									<a href="http://dir.elink.corp/posts" target="_blank">http://dir.elink.corp/posts</a>
+								</pre>
+
+								<pre class="label">
+									<span>Views Used:</span>
+									<a href="javascript:;" class="disabled">root/resources/views/post/index.blade.php</a>
+								</pre>
+
+								<pre class="label">
+									<span>Query (Eloquent):</span>
+									<p><b>Posts</b>::<b>all</b>()</p>
+								</pre>
+
+								<div class="comments">
+									<h5>Comments</h5>
+									<ul>
+										<li>Get all <i>Post Images</i> from <b class="function">oldest</b> to <b class="function">newest</b></li>
+									</ul>
+								</div>
+
+								<pre class="label">
+									<span>Actions (Button Triggers):</span>
+									<p><b>History</b></p>
+									<p><b>Create New Post</b></p>
+									<p><b>Post Slider</b></p>
+									<p><b>Delete Post</b></p>
+								</pre>
+
+								<pre class="label">
+									<span>History Action:</span>
+									<p><b>Log</b>::<b>getLog</b>(<b class="function">'Post'</b>)</p>
+								</pre>
+
+								<div class="comments">
+									<h5>Comments</h5>
+									<ul>
+										<li>Click the <b>History</b> Button, will show a <b class="function">Pop-Up</b> that is gonna show all the Updates that happened in <i>HR Progress</i> Module</li>
+									</ul>
+								</div>
+
+								<pre class="label">
+									<span>Create New Post Action:</span>
+									<a href="http://dir.elink.corp/posts/create" target="_blank">http://dir.elink.corp/posts/create</a>
+								</pre>
+
+								<div class="comments">
+									<h5>Comments</h5>
+									<ul>
+										<li>Clicking the <b>Create New Post</b> Button, it will redirect you to the <i>Create New Post</i> Page</li>
+									</ul>
+								</div>
+
+								<pre class="label">
+									<span>Post Slider Action:</span>
+									<p><b>PostController</b>::<b class="function">enabled</b></p>
+								</pre>
+
+								<pre class="label">
+									<span>Post Slider Query (Eloquent):</span>
+									<p><b>$post</b> = <b>Posts</b>::<b>find</b>(<b class="function">$id</b>)</p>
+									<p><b>$post</b>-><b class="function">enabled</b> = <b>$request</b>-><b class="function">enabled</b></p>
+									<p><b>$post</b>-><b>save</b>()</p>
+								</pre>
+
+								<div class="comments">
+									<h5>Comments</h5>
+									<ul>
+										<li>Clicking the <b>Slider</b> Button, it will update the <i>Post Image</i> to either be <b class="function">Enabled</b> or <b class="function">Disabled</b> from the <i>Dashboard</i> Slider</li>
+										<li>It will also add a <b>Log</b> that indicates that someone emabled/disabled this specific <b>Post Image</b></li>
+									</ul>
+								</div>
+
+								<pre class="label">
+									<span>Delete Post Action:</span>
+									<p><b>PostController</b>::<b class="function">destroy</b></p>
+								</pre>
+
+								<pre class="label">
+									<span>Delete Post Query (Eloquent):</span>
+									<p><b>$post</b> = <b>Posts</b>::<b>find</b>(<b class="function">$id</b>)</p>
+									<p><b>$post</b>-><b>delete</b>()</p>
+								</pre>
+
+								<div class="comments">
+									<h5>Comments</h5>
+									<ul>
+										<li>Clicking the <b>Trashcan Icon <span class="fa fa-trash"></span></b> Button, it will show a <b class="function">Pop-Up</b> that is gonna ask if you want to delete a specific <b>Post Image</b></li>
+										<li>It will also add a <b>Log</b> that indicates that someone deleted a specific <b>Post Image</b></li>
+									</ul>
+								</div>
+							</div>
+
+							<div class="divider"></div>
+
+							<div class="content content_child" id="add_page">
+								<h3>Create New Post Page</h3>
+								<p>Page that lets you add a new <b>Post Image</b></p>
+
+								<pre class="label">
+									<span>Location:</span>
+									<a href="http://dir.elink.corp/posts/create" target="_blank">http://dir.elink.corp/posts/create</a>
+								</pre>
+
+								<pre class="label">
+									<span>Views Used:</span>
+									<a href="javascript:;" class="disabled">root/resources/views/post/create.blade.php</a>
+								</pre>
+
+								<pre class="label">
+									<span>Inputs Needed:</span>
+									<p><b>Images</b> (Required)</p>
+								</pre>
+
+								<pre class="label">
+									<span>Functions Used:</span>
+									<p><b>PostController</b>::<b class="function">store</b></p>
+								</pre>
+
+								<pre class="label">
+									<span>Query (Eloquent):</span>
+									<p><b>$post</b> = <b class="function">new</b> <b>Posts</b>()</p>
+									<p><b>$post</b>-><b class="function">posted_by_id</b> = <b>Auth</b>::<b>user</b>()-><b class="function">id</b></p>
+									<p><b>$post</b>-><b class="function">enabled</b> = <b class="function">0</b></p>
+									<p><b>$post</b>-><b>save</b>()</p>
+								</pre>
+
+								<div class="comments">
+									<h5>Comments</h5>
+									<ul>
+										<li>Insert the data in <i>posts</i>, disable the Image first on insert</li>
+										<li>It will also add a <b>Log</b> that indicates that a new <b>Post Image</b> is added</li>
+									</ul>
+								</div>
+
+								<pre class="label">
+									<span>Actions (Button Triggers):</span>
+									<p><b>Back</b></p>
+								</pre>
+
+								<pre class="label">
+									<span>Back Action:</span>
+									<a href="http://dir.elink.corp/posts" target="_blank">http://dir.elink.corp/posts</a>
+								</pre>
+
+								<div class="comments">
+									<h5>Comments</h5>
+									<ul>
+										<li>Clicking the <b>Back</b> Button, it will redirect you back to the <i>Post Images</i> Page</li>
+									</ul>
+								</div>
+							</div>
+						</div>
+					</main>
+				</div>
+
+				<div class="clearfix"></div>
+			</div>
+		</div>
+		<!-- End Main -->
+	</div> <!-- End Clearfix -->
+</div> <!-- End Protect Me -->
+<a href="#" class="back_top"></a>
+<footer>
+	<div class="wrapper">
+		<div class="footer_con">
+			<div class="pagination">
+				<a href="events.html">Prev</a>
+				<a href="javascript:;" class="disabled">Next</a>
+			</div>
+		</div>
+	</div>
+</footer>
+</body>
+</html>
