@@ -1,0 +1,298 @@
+<!DOCTYPE html>
+<html class="no-js" lang="en-US">
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>Human Resources Gateway - Developer Guide</title>
+	<link rel="icon" type="image/png" href="images/favicon.png">
+	<link rel="stylesheet" href="styles/style.css">
+
+	<script src="https://use.fontawesome.com/a63cbdeb8f.js"></script>
+</head>
+<body>
+<div class="protect-me">
+	<div class="clearfix">
+		<!-- Header -->
+		<header>
+			<div class="wrapper">
+				<div class="header_con">
+					<a href="index.html" class="main_logo">
+						<figure><img src="images/main-logo.png" alt=""/></figure>
+					</a>
+				</div>
+			</div>
+		</header>
+		<!-- End Header -->
+
+		<!-- Main -->
+		<div id="main_area">
+			<div class="wrapper">
+				<div class="main_con">
+					<main>
+						<h1>Separated Employees</h1>
+						<ul class="bullet">
+							<li><a href="separated_employees.html#list_page">Employee List Page</a></li>
+							<li><a href="separated_employees.html#view_page">View Employee Detail Page</a></li>
+						</ul>
+
+						<div class="divider"></div>
+
+						<div class="main_content">
+							<h2>Overview</h2>
+							<p>List of the Company's <i>Separated Employees</i>.</p>
+
+							<pre class="label">
+								<span>Tables Affected:</span>
+								<a href="javascript:;" class="disabled">employee_info</a>
+								<a href="javascript:;" class="disabled">employee_info_details</a>
+								<a href="javascript:;" class="disabled">log</a>
+							</pre>
+
+							<pre class="label">
+								<span>Controllers Used:</span>
+								<a href="javascript:;" class="disabled">root/app/Http/Controllers/EmployeeInfoController.php</a>
+							</pre>
+
+							<pre class="label">
+								<span>Models Used:</span>
+								<a href="javascript:;" class="disabled">root/app/User.php</a>
+								<a href="javascript:;" class="disabled">root/app/EmployeeInfoDetails.php</a>
+								<a href="javascript:;" class="disabled">root/app/Log.php</a>
+							</pre>
+
+							<pre class="label">
+								<span>Views Used:</span>
+								<a href="javascript:;" class="disabled">root/resources/views/employee/style.css</a>
+							</pre>
+
+							<div class="divider"></div>
+
+							<div class="content content_child" id="list_page">
+								<h3>Employee List Page</h3>
+								<p>Get the list of <i>Separated Employees</i>.</p>
+
+								<pre class="label">
+									<span>Location:</span>
+									<a href="http://dir.elink.corp/employees/separated" target="_blank">http://dir.elink.corp/employees/separated</a>
+								</pre>
+
+								<pre class="label">
+									<span>Views Used:</span>
+									<a href="javascript:;" class="disabled">root/resources/views/employee/separated.blade.php</a>
+								</pre>
+
+								<pre class="label">
+									<span>Other Directory Used:</span>
+									<a href="javascript:;" class="disabled">root/app/Repositories/EmployeeRepository.php</a>
+								</pre>
+
+								<pre class="label">
+									<span>Functions Used:</span>
+									<p><b>EmployeeInfoController</b><b class="function">::separatedEmployees</b></p>
+								</pre>
+
+								<pre class="label">
+									<span>Query (Eloquent):</span>
+									<p><b>$employees</b> = <b>User</b>::<b>separatedEmployees</b>()</p>
+									<p><b>$employees</b>-><b>where</b>(<b class="function">'id'</b>, <b class="function">'&lt;&gt;'</b>, <b class="function">1</b>)-><b>orderBy</b>(<b class="function">'last_name'</b>, <b class="function">'ASC'</b>)-><b>paginate</b>(<b class="function">10</b>)</p>
+								</pre>
+
+								<div class="comments">
+									<h5>Comments</h5>
+									<ul>
+										<li>Get the first <b class="function">10</b> record using <b class="function">Pagination</b> to get the <i>Separated Employees</i> except the Super Admin, in alphabetical order by <i>Last Name</i></li>
+									</ul>
+								</div>
+
+								<pre class="label">
+									<span>Inputs Needed (Search):</span>
+									<p><b>Search by name</b> (Keyword Search)</p>
+								</pre>
+
+								<pre class="label">
+									<span>Search Keyword Query (Eloquent):</span>
+									<p><b>$employees</b> = <b>User</b>::<b>separatedEmployees</b>()</p>
+									<p><b class="function">if</b> (<b>$request</b>-><b>has</b>(<b class="function">'keyword'</b>) && <b>$request</b>-><b>get</b>(<b class="function">'keyword'</b>) != <b class="function">""</b>) {</p>
+									<p>&nbsp;&nbsp;&nbsp;&nbsp;<b>$employees</b> = <b>$employees</b>-><b>where</b>(<b>function</b>(<b class="function">$query</b>) <b>use</b>(<b class="function">$request</b>) {</p>
+									<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<b>$query</b>-><b>where</b>(<b class="function">'first_name'</b>, <b class="function">'LIKE'</b>, <b class="function">'%'</b>.<b>$request</b>-><b>get</b>(<b class="function">'keyword'</b>).<b class="function">'%'</b>)</p>
+									<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-><b>orWhere</b>(<b class="function">'last_name'</b>, <b class="function">'LIKE'</b>, <b class="function">'%'</b>.<b>$request</b>-><b>get</b>(<b class="function">'keyword'</b>).<b class="function">'%'</b>)</p>
+									<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-><b>orWhere</b>(<b class="function">'middle_name'</b>, <b class="function">'LIKE'</b>, <b class="function">'%'</b>.<b>$request</b>-><b>get</b>(<b class="function">'keyword'</b>).<b class="function">'%'</b>)</p>
+									<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-><b>orWhere</b>(<b>DB</b>::<b>raw</b>(<b class="function">'CONCAT(first_name, " ", last_name)'</b>), <b class="function">'LIKE'</b>, <b class="function">'%'</b>.<b>$request</b>-><b>get</b>(<b class="function">'keyword'</b>).<b class="function">'%'</b>)</p>
+									<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-><b>orWhere</b>(<b class="function">'email'</b>, <b class="function">'LIKE'</b>, <b class="function">'%'</b>.<b>$request</b>-><b>get</b>(<b class="function">'keyword'</b>).<b class="function">'%'</b>)</p>
+									<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-><b>orWhere</b>(<b class="function">'email2'</b>, <b class="function">'LIKE'</b>, <b class="function">'%'</b>.<b>$request</b>-><b>get</b>(<b class="function">'keyword'</b>).<b class="function">'%'</b>)</p>
+									<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-><b>orWhere</b>(<b class="function">'email3'</b>, <b class="function">'LIKE'</b>, <b class="function">'%'</b>.<b>$request</b>-><b>get</b>(<b class="function">'keyword'</b>).<b class="function">'%'</b>)</p>
+									<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-><b>orWhere</b>(<b class="function">'alias'</b>, <b class="function">'LIKE'</b>, <b class="function">'%'</b>.<b>$request</b>-><b>get</b>(<b class="function">'keyword'</b>).<b class="function">'%'</b>)</p>
+									<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-><b>orWhere</b>(<b class="function">'team_name'</b>, <b class="function">'LIKE'</b>, <b class="function">'%'</b>.<b>$request</b>-><b>get</b>(<b class="function">'keyword'</b>).<b class="function">'%'</b>)</p>
+									<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-><b>orWhere</b>(<b class="function">'dept_code'</b>, <b class="function">'LIKE'</b>, <b class="function">'%'</b>.<b>$request</b>-><b>get</b>(<b class="function">'keyword'</b>).<b class="function">'%'</b>)</p>
+									<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-><b>orWhere</b>(<b class="function">'position_name'</b>, <b class="function">'LIKE'</b>, <b class="function">'%'</b>.<b>$request</b>-><b>get</b>(<b class="function">'keyword'</b>).<b class="function">'%'</b>)</p>
+									<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-><b>orWhere</b>(<b class="function">'ext'</b>, <b class="function">'LIKE'</b>, <b class="function">'%'</b>.<b>$request</b>-><b>get</b>(<b class="function">'keyword'</b>).<b class="function">'%'</b>)</p>
+									<p>&nbsp;&nbsp;&nbsp;&nbsp;})</p>
+									<p>}</p>
+									<p></p>
+									<p><b>$employees</b>-><b>where</b>(<b class="function">'id'</b>, <b class="function">'&lt;&gt;'</b>, <b class="function">1</b>)-><b>orderBy</b>(<b class="function">'last_name'</b>, <b class="function">'ASC'</b>)-><b>paginate</b>(<b class="function">10</b>)</p>
+								</pre>
+
+								<div class="comments">
+									<h5>Comments</h5>
+									<ul>
+										<li>When Searching for a <i>Separated Employee</i> using the <b>Search by name</b>, compare it to some of the columns from <b>employee_info</b>, the following columns are used: <b class="function">first_name</b>, <b class="function">last_name</b>, <b class="function">middle_name</b>, <b class="function">email</b>, <b class="function">email2</b>, <b class="function">email3</b>, <b class="function">alias</b>, <b class="function">team_name</b>, <b class="function">dept_code</b>, <b class="function">position_name</b>, <b class="function">ext</b></li>
+										<li>After that, select the first <b class="function">10</b> records except for super admin using <b class="function">Pagination</b>, and order it alphabetically by <i>Last Name</i></li>
+									</ul>
+								</div>
+
+								<pre class="label">
+									<span>Actions (Button Triggers):</span>
+									<p><b>Download Separated Employees</b></p>
+									<p><b>View Employee Information</b></p>
+									<p><b>Reactivate Employee</b></p>
+								</pre>
+
+								<pre class="label">
+									<span>Download Separated Employees Action:</span>
+									<p><b>EmployeeInfoController</b>::<b class="function">downloadInactive</b></p>
+								</pre>
+
+								<div class="comments">
+									<h5>Comments</h5>
+									<ul>
+										<li>Clicking the <b>Download Separated Employees</b> Button, it will generate an <b class="function">Excel File</b> where you can view <i>All Employees</i> specified by its <b>Filters</b> if it is being Filtered.</li>
+									</ul>
+								</div>
+
+								<pre class="label">
+									<span>View Employee Information Action:</span>
+									<a href="http://dir.elink.corp/profile/xxx" target="_blank">http://dir.elink.corp/profile/xxx</a>
+								</pre>
+
+								<div class="comments">
+									<h5>Comments</h5>
+									<ul>
+										<li>Clicking the Employees <b>Name</b> or the <b>Eye <span class="fa fa-eye"></span></b> Button, it will redirect you to that Separated <i>Employees Detail</i> Page</li>
+									</ul>
+								</div>
+
+								<pre class="label">
+									<span>Reactivate Employee Action:</span>
+									<p><b>EmployeeInfoController</b>::<b class="function">reactivate</b></p>
+									<p><b>EmployeeRepository</b>::<b class="function">reactivateEmployee</b></p>
+								</pre>
+
+								<div class="comments">
+									<h5>Comments</h5>
+									<ul>
+										<li>Clicking the <b>Person Icon with the Plus Mark <span class="fa fa-user-plus"></span></b> Button, it will show a <b class="function">Pop-Up</b> that is gonna ask if you want to put this specific Employee to the <i>Active Employees</i></li>
+										<li>It will also add a <b>Log</b> that indicates that someone transfers this user to the <i>Active Employees</i> Lists</li>
+									</ul>
+								</div>
+							</div>
+
+							<div class="divider"></div>
+
+							<div class="content content_child" id="view_page">
+								<h3>View Employee Detail Page</h3>
+								<p>Show a specific <i>Employees</i> details.</p>
+
+								<pre class="label">
+									<span>Location:</span>
+									<a href="http://dir.elink.corp/profile/xxx" target="_blank">http://dir.elink.corp/profile/xxx</a>
+								</pre>
+
+								<pre class="label">
+									<span>Other Tables Affected:</span>
+									<a href="javascript:;" class="disabled">leave_request</a>
+									<a href="javascript:;" class="disabled">leave_request_details</a>
+								</pre>
+
+								<pre class="label">
+									<span>Models Used:</span>
+									<a href="javascript:;" class="disabled">root/app/LeaveRequest.php</a>
+									<a href="javascript:;" class="disabled">root/app/LeaveRequestDetails.php</a>
+								</pre>
+
+								<pre class="label">
+									<span>Views Used:</span>
+									<a href="javascript:;" class="disabled">root/resources/views/auth/profile/view.blade.php</a>
+								</pre>
+
+								<pre class="label">
+									<span>Functions Used:</span>
+									<p><b>EmployeeInfoController</b><b class="function">::profile</b></p>
+								</pre>
+
+								<pre class="label">
+									<span>Query (Eloquent):</span>
+									<p><b>$employees</b> = <b>User</b>::<b>withTrashed</b>()-><b>find</b>(<b class="function">$id</b>)</p>
+								</pre>
+
+								<div class="comments">
+									<h5>Comments</h5>
+									<ul>
+										<li>Using the Employees <b class="function">ID</b>, get that specific employee <b>withTrashed</b> is a function use to allow <b class="function">deleted</b> data or <i>Separated Employees</i> to be viewed</li>
+										<li>If that certain employee is not found on the Gateway, it will redirect to a <b>404 Error</b> Page</li>
+									</ul>
+								</div>
+
+								<pre class="label">
+									<span>Get Specific Employee's Details Query (Eloquent):</span>
+									<p><b>EmployeeInfoDetails</b>::<b>where</b>(<b class="function">'employee_id'</b>, <b>$id</b>)-><b>first</b>()</p>
+								</pre>
+
+								<div class="comments">
+									<h5>Comments</h5>
+									<ul>
+										<li>Using the Employees <b class="function">ID</b>, get that specific employee's <i>Information Details</i></li>
+									</ul>
+								</div>
+
+								<pre class="label">
+									<span>Get Specific Employee's Leave Details Query (Eloquent):</span>
+									<p><b>LeaveRequest</b>::<b>getLeave</b>(<b class="function">'separated'</b>, <b>$employee</b>-><b class="function">id</b>, <b class="function">'list'</b>, <b class="function">1</b>)</p>
+								</pre>
+
+								<div class="comments">
+									<h5>Comments</h5>
+									<ul>
+										<li>Using the Employees <b class="function">ID</b>, get that specific employee's <i>Leave Requests Details</i></li>
+									</ul>
+								</div>
+
+								<pre class="label">
+									<span>Actions (Button Triggers):</span>
+									<p><b>Back</b></p>
+								</pre>
+
+								<pre class="label">
+									<span>Back Action:</span>
+									<a href="http://dir.elink.corp/employees/separated" target="_blank">http://dir.elink.corp/employees/separated</a>
+								</pre>
+
+								<div class="comments">
+									<h5>Comments</h5>
+									<ul>
+										<li>Clicking the <b>Back</b> Button, it will redirect you back to the <i>Separated Employees</i> Page</li>
+									</ul>
+								</div>
+							</div>
+						</div>
+					</main>
+				</div>
+
+				<div class="clearfix"></div>
+			</div>
+		</div>
+		<!-- End Main -->
+	</div> <!-- End Clearfix -->
+</div> <!-- End Protect Me -->
+<a href="#" class="back_top"></a>
+<footer>
+	<div class="wrapper">
+		<div class="footer_con">
+			<div class="pagination">
+				<a href="active_employees.html">Prev</a>
+				<a href="activities.html">Next</a>
+			</div>
+		</div>
+	</div>
+</footer>
+</body>
+</html>
