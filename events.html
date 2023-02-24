@@ -1,0 +1,496 @@
+<!DOCTYPE html>
+<html class="no-js" lang="en-US">
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>Human Resources Gateway - Developer Guide</title>
+	<link rel="icon" type="image/png" href="images/favicon.png">
+	<link rel="stylesheet" href="styles/style.css">
+
+	<script src="https://use.fontawesome.com/a63cbdeb8f.js"></script>
+</head>
+<body>
+<div class="protect-me">
+	<div class="clearfix">
+		<!-- Header -->
+		<header>
+			<div class="wrapper">
+				<div class="header_con">
+					<a href="index.html" class="main_logo">
+						<figure><img src="images/main-logo.png" alt=""/></figure>
+					</a>
+				</div>
+			</div>
+		</header>
+		<!-- End Header -->
+
+		<!-- Main -->
+		<div id="main_area">
+			<div class="wrapper">
+				<div class="main_con">
+					<main>
+						<h1>Blog Posts - Events</h1>
+						<ul class="bullet">
+							<li><a href="events.html#list_page">List of Events Page</a></li>
+							<li><a href="events.html#add_page">Add New Event Page</a></li>
+							<li><a href="events.html#view_page">View Event Page</a></li>
+							<li><a href="events.html#edit_page">Edit Event Page</a></li>
+							<li><a href="events.html#calendar_page">Calendar Page</a></li>
+						</ul>
+
+						<div class="divider"></div>
+
+						<div class="main_content">
+							<h2>Overview</h2>
+							<p>Company's <i>Calendar of Events</i>. Also for adding, updating or deleting an <b class="function">Event</b></p>
+
+							<pre class="label">
+								<span>Tables Affected:</span>
+								<a href="javascript:;" class="disabled">events</a>
+								<a href="javascript:;" class="disabled">log</a>
+							</pre>
+
+							<pre class="label">
+								<span>Controllers Used:</span>
+								<a href="javascript:;" class="disabled">root/app/Http/Controllers/EventsController.php</a>
+							</pre>
+
+							<pre class="label">
+								<span>Models Used:</span>
+								<a href="javascript:;" class="disabled">root/app/Events.php</a>
+							</pre>
+
+							<pre class="label">
+								<span>Views Used:</span>
+								<a href="javascript:;" class="disabled">root/resources/views/events/style.php</a>
+								<a href="javascript:;" class="disabled">root/resources/views/events/js-script.php</a>
+							</pre>
+
+							<div class="divider"></div>
+
+							<div class="content content_child" id="list_page">
+								<h3>List of Events Page</h3>
+								<p>List of <i>Calendar of Events</i>.</p>
+
+								<pre class="label">
+									<span>Location:</span>
+									<a href="http://dir.elink.corp/events" target="_blank">http://dir.elink.corp/events</a>
+								</pre>
+
+								<pre class="label">
+									<span>Views Used:</span>
+									<a href="javascript:;" class="disabled">root/resources/views/events/index.blade.php</a>
+								</pre>
+
+								<pre class="label">
+									<span>Query (Eloquent):</span>
+									<p><b>Events</b>::<b>orderByDesc</b>(<b class="function">'id'</b>)-><b>get</b>()</p>
+								</pre>
+
+								<div class="comments">
+									<h5>Comments</h5>
+									<ul>
+										<li>Get all <i>Events</i> from <b class="function">newest</b> to <b class="function">oldest</b></li>
+									</ul>
+								</div>
+
+								<pre class="label">
+									<span>Actions (Button Triggers):</span>
+									<p><b>History</b></p>
+									<p><b>Calendar</b></p>
+									<p><b>Add Event</b></p>
+									<p><b>Edit Event</b></p>
+									<p><b>Delete Event</b></p>
+								</pre>
+
+								<pre class="label">
+									<span>History Action:</span>
+									<p><b>Log</b>::<b>getLog</b>(<b class="function">'Events'</b>)</p>
+								</pre>
+
+								<div class="comments">
+									<h5>Comments</h5>
+									<ul>
+										<li>Click the <b>History</b> Button, will show a <b class="function">Pop-Up</b> that is gonna show all the Updates that happened in <i>Events</i> Module</li>
+									</ul>
+								</div>
+
+								<pre class="label">
+									<span>Calendar View Action:</span>
+									<a href="http://dir.elink.corp/events/calendar" target="_blank">http://dir.elink.corp/events/calendar</a>
+								</pre>
+
+								<div class="comments">
+									<h5>Comments</h5>
+									<ul>
+										<li>Clicking the <b>Calendar View</b> Button, it will redirect you to the <i>Calendar</i> Page</li>
+									</ul>
+								</div>
+
+								<pre class="label">
+									<span>Add Event Action:</span>
+									<a href="http://dir.elink.corp/events/create" target="_blank">http://dir.elink.corp/events/create</a>
+								</pre>
+
+								<div class="comments">
+									<h5>Comments</h5>
+									<ul>
+										<li>Clicking the <b>Add Event</b> Button, it will redirect you to the <i>Add Event</i> Page</li>
+									</ul>
+								</div>
+
+								<pre class="label">
+									<span>View Event Action:</span>
+									<a href="http://dir.elink.corp/events/xxx" target="_blank">http://dir.elink.corp/events/xxx</a>
+								</pre>
+
+								<div class="comments">
+									<h5>Comments</h5>
+									<ul>
+										<li>Clicking the <b>Eye Icon <span class="fa fa-eye"></span></b> Button, it will redirect you to the <i>View Event</i> Page</li>
+									</ul>
+								</div>
+
+								<pre class="label">
+									<span>Edit Event Action:</span>
+									<a href="http://dir.elink.corp/events/xxx/edit" target="_blank">http://dir.elink.corp/events/xxx/edit</a>
+								</pre>
+
+								<div class="comments">
+									<h5>Comments</h5>
+									<ul>
+										<li>Clicking the <b>Pencil <span class="fa fa-pencil"></span></b> Button, it will redirect you to the <i>Edit Event</i> Page</li>
+									</ul>
+								</div>
+
+								<pre class="label">
+									<span>Delete Event Action:</span>
+									<p><b>EventsController</b>::<b class="function">destroy</b></p>
+								</pre>
+
+								<pre class="label">
+									<span>Delete Event Query (Eloquent):</span>
+									<p><b>$event</b> = <b>Events</b>::<b>find</b>(<b class="function">$id</b>)</p>
+									<p><b>$event</b>-><b>delete</b>()</p>
+								</pre>
+
+								<div class="comments">
+									<h5>Comments</h5>
+									<ul>
+										<li>Clicking the <b>Trashcan Icon <span class="fa fa-trash"></span></b> Button, it will show a <b class="function">Pop-Up</b> that is gonna ask if you want to delete a specific <b>Event</b></li>
+										<li>It will also add a <b>Log</b> that indicates that someone deleted this specific <b>Event</b></li>
+									</ul>
+								</div>
+							</div>
+
+							<div class="divider"></div>
+
+							<div class="content content_child" id="add_page">
+								<h3>Add New Event Page</h3>
+								<p>Page that lets you add a new <b>Event</b></p>
+
+								<pre class="label">
+									<span>Location:</span>
+									<a href="http://dir.elink.corp/events/create" target="_blank">http://dir.elink.corp/events/create</a>
+								</pre>
+
+								<pre class="label">
+									<span>Views Used:</span>
+									<a href="javascript:;" class="disabled">root/resources/views/events/create.blade.php</a>
+								</pre>
+
+								<pre class="label">
+									<span>Inputs Needed:</span>
+									<p><b>Event Name</b> (Required)</p>
+									<p><b>Start Date</b> (Required)</p>
+									<p><b>End Date</b> (Required)</p>
+									<p><b>Event Color</b> (Required)</p>
+									<p><b>Event Description</b> (Required)</p>
+								</pre>
+
+								<pre class="label">
+									<span>Functions Used:</span>
+									<p><b>EventsController</b>::<b class="function">store</b></p>
+								</pre>
+
+								<pre class="label">
+									<span>Query (Eloquent):</span>
+									<p><b>$events</b> = <b class="function">new</b> <b>Events</b>()</p>
+									<p><b>$events</b>-><b class="function">event_name</b> = <b>$request</b>-><b class="function">event_name</b></p>
+									<p><b>$events</b>-><b class="function">event_description</b> = <b>$request</b>-><b class="function">event_description</b></p>
+									<p><b>$events</b>-><b class="function">event_color</b> = <b>$request</b>-><b class="function">event_color</b></p>
+									<p><b class="function">if</b>(<b>$request</b>-><b>has</b>(<b class="function">'start_date'</b>)) {</p>
+									<p>&nbsp;&nbsp;&nbsp;&nbsp;<b>$events</b>-><b class="function">start_date</b> = <b>date</b>(<b class="function">"Y-m-d H:i:s"</b>, <b>strtotime</b>(<b>$request</b>-><b class="function">start_date</b>))</p>
+									<p>}</p>
+									<p></p>
+									<p><b class="function">if</b>(<b>$request</b>-><b>has</b>(<b class="function">'end_date'</b>)) {</p>
+									<p>&nbsp;&nbsp;&nbsp;&nbsp;<b>$events</b>-><b class="function">end_date</b> = <b>date</b>(<b class="function">"Y-m-d H:i:s"</b>, <b>strtotime</b>(<b>$request</b>-><b class="function">end_date</b>))</p>
+									<p>}</p>
+									<p></p>
+									<p><b>$events</b>-><b>save</b>()</p>
+								</pre>
+
+								<div class="comments">
+									<h5>Comments</h5>
+									<ul>
+										<li>Insert the data in <i>events</i></li>
+										<li>It will also add a <b>Log</b> that indicates that a new <b>Event</b> is added</li>
+									</ul>
+								</div>
+
+								<pre class="label">
+									<span>Actions (Button Triggers):</span>
+									<p><b>Back</b></p>
+								</pre>
+
+								<pre class="label">
+									<span>Back Action:</span>
+									<p><a href="http://dir.elink.corp/events" target="_blank">http://dir.elink.corp/events</a></p>
+									<p><a href="http://dir.elink.corp/events/calendar" target="_blank">http://dir.elink.corp/events/calendar</a></p>
+								</pre>
+
+								<div class="comments">
+									<h5>Comments</h5>
+									<ul>
+										<li>Clicking the <b>Back</b> Button, it will redirect you back to the <b class="function">Previous</b> Page you opened, either <i>Events</i> Page or <i>Calendar</i> Page</li>
+									</ul>
+								</div>
+							</div>
+
+							<div class="divider"></div>
+
+							<div class="content content_child" id="view_page">
+								<h3>View Event Page</h3>
+								<p>Page that lets you view a specific <b>Event</b></p>
+
+								<pre class="label">
+									<span>Location:</span>
+									<a href="http://dir.elink.corp/events/xxx" target="_blank">http://dir.elink.corp/events/xxx</a>
+								</pre>
+
+								<pre class="label">
+									<span>Views Used:</span>
+									<a href="javascript:;" class="disabled">root/resources/views/activity/view.blade.php</a>
+								</pre>
+
+								<pre class="label">
+									<span>Functions Used:</span>
+									<p><b>EventsController</b>::<b class="function">show</b></p>
+								</pre>
+
+								<pre class="label">
+									<span>Query (Eloquent):</span>
+									<p><b>$event</b> = <b>Events</b>::<b>find</b>(<b class="function">$id</b>)</p>
+								</pre>
+
+								<div class="comments">
+									<h5>Comments</h5>
+									<ul>
+										<li>Get the specific <b>Event</b> using the <b class="function">ID</b></li>
+									</ul>
+								</div>
+
+								<pre class="label">
+									<span>Actions (Button Triggers):</span>
+									<p><b>Back</b></p>
+									<p><b>Edit</b></p>
+								</pre>
+
+								<pre class="label">
+									<span>Back Action:</span>
+									<a href="http://dir.elink.corp/events" target="_blank">http://dir.elink.corp/events</a>
+								</pre>
+
+								<div class="comments">
+									<h5>Comments</h5>
+									<ul>
+										<li>Clicking the <b>Back</b> Button, it will redirect you back to the <i>Events</i> Page</li>
+									</ul>
+								</div>
+
+								<pre class="label">
+									<span>Edit Action:</span>
+									<a href="http://dir.elink.corp/events/xxx/edit" target="_blank">http://dir.elink.corp/events/xxx/edit</a>
+								</pre>
+
+								<div class="comments">
+									<h5>Comments</h5>
+									<ul>
+										<li>Clicking the <b>Edit</b> Button, it will redirect you back to the <i>Edit</i> Page</li>
+									</ul>
+								</div>
+							</div>
+
+							<div class="divider"></div>
+
+							<div class="content content_child" id="edit_page">
+								<h3>Edit Event Page</h3>
+								<p>Page that lets you edit a specific <b>Event</b></p>
+
+								<pre class="label">
+									<span>Location:</span>
+									<a href="http://dir.elink.corp/events/xxx/edit" target="_blank">http://dir.elink.corp/events/xxx/edit</a>
+								</pre>
+
+								<pre class="label">
+									<span>Views Used:</span>
+									<a href="javascript:;" class="disabled">root/resources/views/events/edit.blade.php</a>
+								</pre>
+
+								<pre class="label">
+									<span>Inputs Needed:</span>
+									<p><b>Event Name</b> (Required)</p>
+									<p><b>Start Date</b> (Required)</p>
+									<p><b>End Date</b> (Required)</p>
+									<p><b>Event Color</b> (Required)</p>
+									<p><b>Event Description</b> (Required)</p>
+								</pre>
+
+								<pre class="label">
+									<span>Functions Used:</span>
+									<p><b>EventsController</b>::<b class="function">edit</b></p>
+									<p><b>EventsController</b>::<b class="function">update</b></p>
+								</pre>
+
+								<pre class="label">
+									<span>Query (Eloquent):</span>
+									<p><b>$event</b> = <b>Events</b>::<b>find</b>(<b class="function">$id</b>)</p>
+								</pre>
+
+								<div class="comments">
+									<h5>Comments</h5>
+									<ul>
+										<li>Get the specific <b>Event</b> using the <b class="function">ID</b></li>
+									</ul>
+								</div>
+
+								<pre class="label">
+									<span>Update Query (Eloquent):</span>
+									<p><b>$event</b> = <b>Events</b>::<b>find</b>(<b class="function">$id</b>)</p>
+									<p><b>$event</b>-><b class="function">event_name</b> = <b>$request</b>-><b class="function">event_name</b></p>
+									<p><b>$event</b>-><b class="function">event_description</b> = <b>$request</b>-><b class="function">event_description</b></p>
+									<p><b>$event</b>-><b class="function">event_color</b> = <b>$request</b>-><b class="function">event_color</b></p>
+									<p><b class="function">if</b>(<b>$request</b>-><b>has</b>(<b class="function">'start_date'</b>)) {</p>
+									<p>&nbsp;&nbsp;&nbsp;&nbsp;<b>$event</b>-><b class="function">start_date</b> = <b>date</b>(<b class="function">"Y-m-d H:i:s"</b>, <b>strtotime</b>(<b>$request</b>-><b class="function">start_date</b>))</p>
+									<p>}</p>
+									<p></p>
+									<p><b class="function">if</b>(<b>$request</b>-><b>has</b>(<b class="function">'end_date'</b>)) {</p>
+									<p>&nbsp;&nbsp;&nbsp;&nbsp;<b>$event</b>-><b class="function">end_date</b> = <b>date</b>(<b class="function">"Y-m-d H:i:s"</b>, <b>strtotime</b>(<b>$request</b>-><b class="function">end_date</b>))</p>
+									<p>}</p>
+									<p></p>
+									<p><b>$event</b>-><b>save</b>()</p>
+								</pre>
+
+								<div class="comments">
+									<h5>Comments</h5>
+									<ul>
+										<li>Update the data in <i>events</i></li>
+										<li>It will also add a <b>Log</b> that indicates that this specific <b>Event</b> is updated</li>
+									</ul>
+								</div>
+
+								<pre class="label">
+									<span>Actions (Button Triggers):</span>
+									<p><b>Back</b></p>
+								</pre>
+
+								<pre class="label">
+									<span>Back Action:</span>
+									<p><a href="http://dir.elink.corp/events" target="_blank">http://dir.elink.corp/events</a></p>
+									<p><a href="http://dir.elink.corp/events/xxx" target="_blank">http://dir.elink.corp/events/xxx</a></p>
+								</pre>
+
+								<div class="comments">
+									<h5>Comments</h5>
+									<ul>
+										<li>Clicking the <b>Back</b> Button, it will redirect you back to the <b class="function">Previous</b> Page you opened, either <i>Events</i> Page or <i>Event View</i> Page</li>
+									</ul>
+								</div>
+							</div>
+
+							<div class="divider"></div>
+
+							<div class="content content_child" id="calendar_page">
+								<h3>Calendar Page</h3>
+								<p>Page that lets you see all events in a <i>Calendar</i> style.</p>
+
+								<pre class="label">
+									<span>Location:</span>
+									<a href="http://dir.elink.corp/events/calendar" target="_blank">http://dir.elink.corp/events/calendar</a>
+								</pre>
+
+								<pre class="label">
+									<span>Views Used:</span>
+									<a href="javascript:;" class="disabled">root/resources/views/events/calendar.blade.php</a>
+								</pre>
+
+								<pre class="label">
+									<span>Functions Used:</span>
+									<p><b>EventsController</b>::<b class="function">lists</b></p>
+								</pre>
+
+								<pre class="label">
+									<span>Query (Eloquent):</span>
+									<p><b>Events</b>::<b>all</b>()</p>
+								</pre>
+
+								<div class="comments">
+									<h5>Comments</h5>
+									<ul>
+										<li>Get all the <b>Events</b>, to be used in <i>Calendar</i></li>
+									</ul>
+								</div>
+
+								<pre class="label">
+									<span>Actions (Button Triggers):</span>
+									<p><b>Add Event</b></p>
+									<p><b>Back</b></p>
+								</pre>
+
+								<pre class="label">
+									<span>Add Event Action:</span>
+									<a href="http://dir.elink.corp/events/create" target="_blank">http://dir.elink.corp/events/create</a>
+								</pre>
+
+								<div class="comments">
+									<h5>Comments</h5>
+									<ul>
+										<li>Clicking the <b>Back</b> Button, it will redirect you back to the <i>Add Event</i> Page</li>
+									</ul>
+								</div>
+
+								<pre class="label">
+									<span>Back Action:</span>
+									<a href="http://dir.elink.corp/events" target="_blank">http://dir.elink.corp/events</a>
+								</pre>
+
+								<div class="comments">
+									<h5>Comments</h5>
+									<ul>
+										<li>Clicking the <b>Back</b> Button, it will redirect you back to the <i>Events</i> Page</li>
+									</ul>
+								</div>
+							</div>
+						</div>
+					</main>
+				</div>
+
+				<div class="clearfix"></div>
+			</div>
+		</div>
+		<!-- End Main -->
+	</div> <!-- End Clearfix -->
+</div> <!-- End Protect Me -->
+<a href="#" class="back_top"></a>
+<footer>
+	<div class="wrapper">
+		<div class="footer_con">
+			<div class="pagination">
+				<a href="activities.html">Prev</a>
+				<a href="javascript:;" class="disabled">Next</a>
+			</div>
+		</div>
+	</div>
+</footer>
+</body>
+</html>
