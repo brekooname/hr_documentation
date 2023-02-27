@@ -1,0 +1,1111 @@
+<!DOCTYPE html>
+<html class="no-js" lang="en-US">
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>Human Resources Gateway - Developer Guide</title>
+	<link rel="icon" type="image/png" href="images/favicon.png">
+	<link rel="stylesheet" href="styles/style.css">
+
+	<script src="https://use.fontawesome.com/a63cbdeb8f.js"></script>
+</head>
+<body>
+<div class="protect-me">
+	<div class="clearfix">
+		<!-- Header -->
+		<header>
+			<div class="wrapper">
+				<div class="header_con">
+					<a href="index.html" class="main_logo">
+						<figure><img src="images/main-logo.png" alt=""/></figure>
+					</a>
+				</div>
+			</div>
+		</header>
+		<!-- End Header -->
+
+		<!-- Main -->
+		<div id="main_area">
+			<div class="wrapper">
+				<div class="main_con">
+					<main>
+						<h1>Timekeeping - Overtime</h1>
+						<ul class="bullet">
+							<li><a href="overtime.html#list_page">Overtime Lists Page</a></li>
+							<li><a href="overtime.html#add_page">File Overtime Page</a></li>
+							<li><a href="overtime.html#view_page">View Overtime Page</a></li>
+							<li><a href="overtime.html#edit_page">Edit Overtime Page</a></li>
+							<li><a href="overtime.html#timekeeping_page">Timekeeping Overtime Page</a></li>
+							<li><a href="overtime.html#team_page">Team Overtime Lists Page</a></li>
+						</ul>
+
+						<div class="divider"></div>
+
+						<div class="main_content">
+							<h2>Overview</h2>
+							<p>The page where Employees file their <i>Overtime Request</i></p>
+
+							<pre class="label">
+								<span>Tables Affected:</span>
+								<a href="javascript:;" class="disabled">overtime_request</a>
+								<a href="javascript:;" class="disabled">overtime_request_details</a>
+							</pre>
+
+							<pre class="label">
+								<span>Controllers Used:</span>
+								<a href="javascript:;" class="disabled">root/app/Http/Controllers/OvertimeController.php</a>
+							</pre>
+
+							<pre class="label">
+								<span>Models Used:</span>
+								<a href="javascript:;" class="disabled">root/app/OvertimeRequest.php</a>
+								<a href="javascript:;" class="disabled">root/app/OvertimeRequestDetails.php</a>
+							</pre>
+
+							<pre class="label">
+								<span>Views Used:</span>
+								<a href="javascript:;" class="disabled">root/resources/views/request/style.css</a>
+								<a href="javascript:;" class="disabled">root/resources/views/request/js-script.php</a>
+							</pre>
+
+							<div class="divider"></div>
+
+							<div class="content content_child" id="list_page">
+								<h3>Overtime Lists Page</h3>
+								<p>List of Employees <i>Overtime Request</i>.</p>
+								<p>If the Employee is a <b>Regular</b> user, it will only shows his/her personal Requests.</p>
+								<p>Meanwhile <b>Administrator</b> can see everyone's <i>Overtime Request</i>.</p>
+								<p>The default list are the <b class="function">Pending</b> Requests.</p>
+
+								<pre class="label">
+									<span>Location:</span>
+									<a href="http://dir.elink.corp/overtime" target="_blank">http://dir.elink.corp/overtime</a>
+								</pre>
+
+								<pre class="label">
+									<span>Views Used:</span>
+									<a href="javascript:;" class="disabled">root/resources/views/request/overtime_request.blade.php</a>
+								</pre>
+
+								<pre class="label">
+									<span>Query (Eloquent):</span>
+									<p><b>$status</b> = ((<b>$request</b>-><b>has</b>(<b class="function">'status'</b>) && <b>$request</b>-><b>get</b>(<b class="function">'status'</b>) != <b class="function">""</b>) ? <b>$request</b>-><b>get</b>(<b class="function">'status'</b>) : <b class="function">'pending'</b>)</p>
+									<p><b>$id</b> = <b>Auth</b>::<b>user</b>()-><b class="function">id</b></p>
+									<p></p>
+									<p><b>OvertimeRequest</b>::<b>getOvertime</b>(<b>$status</b>, <b class="function">'user'</b>, <b>$id</b>)</p>
+									<p><b class="function">if</b>(<b>Auth</b>::<b>user</b>()-><b>isAdmin</b>()){</p>
+									<p>&nbsp;&nbsp;&nbsp;&nbsp;<b>OvertimeRequest</b>::<b>getOvertime</b>(<b>$status</b>)</p>
+									<p>}</p>
+								</pre>
+
+								<div class="comments">
+									<h5>Comments</h5>
+									<ul>
+										<li>Get all <i>Overtime Request</i> base on the <b class="function">Status</b>, by default it is <b class="function">Pending</b></li>
+										<li>If an Employee is just a <b>Regular</b> user get only his/her own Request</li>
+										<li>If an Employee is an <b>Administrator</b> get all employees Request</li>
+									</ul>
+								</div>
+
+								<pre class="label">
+									<span>Actions (Button Triggers):</span>
+									<p><b>Pending</b></p>
+									<p><b>Approved</b></p>
+									<p><b>Verifying</b></p>
+									<p><b>Verified</b></p>
+									<p><b>Completed</b></p>
+									<p><b>Declined</b></p>
+									<p><b>Team Overtime</b></p>
+									<p><b>File Overtime</b></p>
+									<p><b>View Overtime Page</b></p>
+								</pre>
+
+								<pre class="label">
+									<span>Pending Action:</span>
+									<a href="http://dir.elink.corp/overtime" target="_blank">http://dir.elink.corp/overtime</a>
+								</pre>
+
+								<div class="comments">
+									<h5>Comments</h5>
+									<ul>
+										<li>Get all <b class="function">Pending</b> <i>Overtime Request</i></li>
+									</ul>
+								</div>
+
+								<pre class="label">
+									<span>Approved Action:</span>
+									<a href="http://dir.elink.corp/overtime?status=approved" target="_blank">http://dir.elink.corp/overtime?status=approved</a>
+								</pre>
+
+								<div class="comments">
+									<h5>Comments</h5>
+									<ul>
+										<li>Get all <b class="function">Approved</b> <i>Overtime Request</i></li>
+									</ul>
+								</div>
+
+								<pre class="label">
+									<span>Verifying Action:</span>
+									<a href="http://dir.elink.corp/overtime?status=verifying" target="_blank">http://dir.elink.corp/overtime?status=verifying</a>
+								</pre>
+
+								<div class="comments">
+									<h5>Comments</h5>
+									<ul>
+										<li>Get all <b class="function">Verifying</b> <i>Overtime Request</i></li>
+									</ul>
+								</div>
+
+								<pre class="label">
+									<span>Verified Action:</span>
+									<a href="http://dir.elink.corp/overtime?status=verified" target="_blank">http://dir.elink.corp/overtime?status=verified</a>
+								</pre>
+
+								<div class="comments">
+									<h5>Comments</h5>
+									<ul>
+										<li>Get all <b class="function">Verified</b> <i>Overtime Request</i></li>
+									</ul>
+								</div>
+
+								<pre class="label">
+									<span>Completed Action:</span>
+									<a href="http://dir.elink.corp/overtime?status=completed" target="_blank">http://dir.elink.corp/overtime?status=completed</a>
+								</pre>
+
+								<div class="comments">
+									<h5>Comments</h5>
+									<ul>
+										<li>Get all <b class="function">Completed</b> <i>Overtime Request</i></li>
+									</ul>
+								</div>
+
+								<pre class="label">
+									<span>Declined Action:</span>
+									<a href="http://dir.elink.corp/overtime?status=declined" target="_blank">http://dir.elink.corp/overtime?status=declined</a>
+								</pre>
+
+								<div class="comments">
+									<h5>Comments</h5>
+									<ul>
+										<li>Get all <b class="function">Declined</b> <i>Overtime Request</i></li>
+									</ul>
+								</div>
+
+								<pre class="label">
+									<span>Team Overtime Action:</span>
+									<a href="http://dir.elink.corp/overtime/team-overtime" target="_blank">http://dir.elink.corp/overtime/team-overtime</a>
+								</pre>
+
+								<div class="comments">
+									<h5>Comments</h5>
+									<ul>
+										<li>Redirect to <b>Team Overtime List</b> Page</li>
+									</ul>
+								</div>
+
+								<pre class="label">
+									<span>File Overtime Action:</span>
+									<a href="http://dir.elink.corp/overtime/create" target="_blank">http://dir.elink.corp/overtime/create</a>
+								</pre>
+
+								<div class="comments">
+									<h5>Comments</h5>
+									<ul>
+										<li>Redirect to <b>File Overtime</b> Page</li>
+									</ul>
+								</div>
+
+								<pre class="label">
+									<span>View Overtime Action:</span>
+									<a href="http://dir.elink.corp/overtime/xxx" target="_blank">http://dir.elink.corp/overtime/xxx</a>
+								</pre>
+
+								<div class="comments">
+									<h5>Comments</h5>
+									<ul>
+										<li>Clicking the <b>Eye <span class="fa fa-eye"></span></b> Button, it will redirect you to that <i>View Overtime</i> Page</li>
+									</ul>
+								</div>
+							</div>
+
+							<div class="divider"></div>
+
+							<div class="content content_child" id="add_page">
+								<h3>File Overtime Page</h3>
+								<p>Page that lets you add a new <i>Overtime Request</i></p>
+
+								<pre class="label">
+									<span>Location:</span>
+									<a href="http://dir.elink.corp/overtime/create" target="_blank">http://dir.elink.corp/overtime/create</a>
+								</pre>
+
+								<pre class="label">
+									<span>Other Tables Affected:</span>
+									<a href="javascript:;" class="disabled">log</a>
+								</pre>
+
+								<pre class="label">
+									<span>Views Used:</span>
+									<a href="javascript:;" class="disabled">root/resources/views/request/overtime_create.blade.php</a>
+								</pre>
+
+								<pre class="label">
+									<span>Other Directory Used:</span>
+									<a href="javascript:;" class="disabled">root/app/Mail/OvertimeNotification.php</a>
+									<a href="javascript:;" class="disabled">root/app/Mail/OvertimeSelfNotification.php</a>
+								</pre>
+
+								<pre class="label">
+									<span>Inputs Needed:</span>
+									<p><b>Overtime Date</b> (Required, Multiple)</p>
+									<p><b>Estimated No. of Hours</b> (Required, Multiple)</p>
+									<p><b>Overtime Reason</b> (Required)</p>
+								</pre>
+
+								<pre class="label">
+									<span>Functions Used:</span>
+									<p><b>OvertimeController</b>::<b class="function">store</b></p>
+								</pre>
+
+								<pre class="label">
+									<span>Query (Eloquent):</span>
+									<p><b>$overtime</b> = <b class="function">new</b> <b>OvertimeRequest</b>()</p>
+									<p><b>$overtime</b>-><b class="function">employee_id</b> = <b>Auth</b>::<b>user</b>()-><b class="function">id</b></p>
+									<p><b>$overtime</b>-><b class="function">reason</b> = <b>$request</b>-><b class="function">reason</b></p>
+									<p><b>$overtime</b>-><b>save</b>()</p>
+									<p></p>
+									<p><b>$obj</b> = []</p>
+									<p><b class="function">foreach</b>(<b>$request</b>-><b class="function">date</b> <b class="function">as</b> <b>$key</b>=><b>$date</b>) {</p>
+									<p>&nbsp;&nbsp;&nbsp;&nbsp;<b>$detail</b> = <b class="function">new</b> <b>OvertimeRequestDetails</b>()</p>
+									<p>&nbsp;&nbsp;&nbsp;&nbsp;<b>$detail</b>-><b class="function">overtime_id</b> = <b>$overtime</b>-><b class="function">id</b></p>
+									<p>&nbsp;&nbsp;&nbsp;&nbsp;<b>$detail</b>-><b class="function">date</b> = <b>date</b>(<b class="function">'Y-m-d'</b>, <b>strtotime</b>(<b>$date</b>))</p>
+									<p>&nbsp;&nbsp;&nbsp;&nbsp;<b>$detail</b>-><b class="function">no_of_hours</b> = <b>$request</b>-><b class="function">no_of_hours</b>[<b>$key</b>]</p>
+									<p>&nbsp;&nbsp;&nbsp;&nbsp;<b>$detail</b>-><b>save</b>()</p>
+									<p></p>
+									<p>&nbsp;&nbsp;&nbsp;&nbsp;<b>$obj</b>[<b>$key</b>][<b class="function">'date'</b>] = <b>date</b>(<b class="function">'Y-m-d'</b>, <b>strtotime</b>(<b>$date</b>))</p>
+									<p>&nbsp;&nbsp;&nbsp;&nbsp;<b>$obj</b>[<b>$key</b>][<b class="function">'no_of_hours'</b>] = <b>$request</b>-><b class="function">no_of_hours</b>[<b>$key</b>]</p>
+									<p>}</p>
+									<p></p>
+									<p><b>$supervisor</b> = <b>User</b>::<b>find</b>(<b>Auth</b>::<b>user</b>()-><b class="function">supervisor_id</b>)</p>
+									<p><b>$manager</b> = <b>User</b>::<b>find</b>(<b>Auth</b>::<b>user</b>()-><b class="function">manager_id</b>)</p>
+									<p></p>
+									<p><b>$data</b>[<b class="function">'id'</b>] = <b>$overtime</b>-><b class="function">id</b></p>
+									<p><b>$data</b>[<b class="function">'requester_name'</b>] = <b>strtoupper</b>(<b>Auth</b>::<b>user</b>()-><b>fullname</b>())</p>
+									<p><b>$data</b>[<b class="function">'details'</b>] = <b>$obj</b></p>
+									<p><b>$data</b>[<b class="function">'url'</b>] = <b>url</b>(<b class="function">"overtime/{<b>$overtime->id</b>}"</b>)</p>
+									<p><b>$data</b>[<b class="function">'emp_name'</b>] = <b class="function">'CC MAIL'</b></p>
+									<p><b>$data</b>[<b class="function">'reason'</b>] = <b>$request</b>-><b class="function">reason</b></p>
+									<p></p>
+									<p><b class="function">if</b>(!<b>empty</b>(<b>$supervisor</b>-><b class="function">id</b>)) {</p>
+									<p>&nbsp;&nbsp;&nbsp;&nbsp;<b>$data</b>[<b class="function">'emp_name'</b>] = <b>strtoupper</b>(<b>$supervisor</b>-><b class="function">first_name</b>)</p>
+									<p>&nbsp;&nbsp;&nbsp;&nbsp;<b>Mail</b>::<b>to</b>(<b>$supervisor</b>-><b class="function">email</b>)-><b>send</b>(<b class="function">new</b> <b>OvertimeNotification</b>(<b>$data</b>))</p>
+									<p>}</p>
+									<p></p>
+									<p><b class="function">if</b>(!<b>empty</b>(<b>$manager</b>-><b class="function">id</b>)) {</p>
+									<p>&nbsp;&nbsp;&nbsp;&nbsp;<b>$data</b>[<b class="function">'emp_name'</b>] = <b>strtoupper</b>(<b>$manager</b>-><b class="function">first_name</b>)</p>
+									<p>&nbsp;&nbsp;&nbsp;&nbsp;<b>Mail</b>::<b>to</b>(<b>$manager</b>-><b class="function">email</b>)-><b>send</b>(<b class="function">new</b> <b>OvertimeNotification</b>(<b>$data</b>))</p>
+									<p>}</p>
+									<p></p>
+									<p><b>Mail</b>::<b>to</b>(<b>Auth</b>::<b>user</b>()-><b class="function">email</b>)-><b>send</b>(<b class="function">new</b> <b>OvertimeSelfNotification</b>([<b class="function">'emp_name'</b> => <b>strtoupper</b>(<b>Auth</b>::<b>user</b>()-><b class="function">first_name</b>)]))</p>
+								</pre>
+
+								<div class="comments">
+									<h5>Comments</h5>
+									<ul>
+										<li>Insert data on <i>overtime_request</i>.</li>
+										<li>After saving, get the generated <b class="function">ID</b> and insert it together with the details which is looped as to how many days the Request is on <i>overtime_request_details</i>.</li>
+										<li>After saving both <i>overtime_request</i> and <i>overtime_request_details</i>, Get that employee's <b>Supervisor</b> and <b>Manager</b>, and send an <b class="function">Email</b> to them, to notify that someone under supervision from them has made a Request.</li>
+										<li>An <b class="function">Email</b> will also be sent to the employee who made the Request, that his/her Request is successfully created.</li>
+										<li>It will also add a <b>Log</b> that indicates that an Employee Requested an Overtime.</li>
+									</ul>
+								</div>
+
+								<pre class="label">
+									<span>Actions (Button Triggers):</span>
+									<p><b>Back</b></p>
+									<p><b>Plus</b></p>
+									<p><b>Minus</b></p>
+								</pre>
+
+								<pre class="label">
+									<span>Back Action:</span>
+									<a href="http://dir.elink.corp/overtime" target="_blank">http://dir.elink.corp/overtime</a>
+								</pre>
+
+								<div class="comments">
+									<h5>Comments</h5>
+									<ul>
+										<li>Clicking the <b>Back</b> Button, it will redirect you back to the <i>Overtime Lists</i> Page</li>
+									</ul>
+								</div>
+
+								<pre class="label">
+									<span>Plus Action:</span>
+									<a href="javascript:;" class="disabled">Additional Row</a>
+								</pre>
+
+								<div class="comments">
+									<h5>Comments</h5>
+									<ul>
+										<li>Clicking the <b>Plus <span class="fa fa-plus"></span></b> Button, It will add an additional row for multiple days request.</li>
+									</ul>
+								</div>
+
+								<pre class="label">
+									<span>Minus Action:</span>
+									<a href="javascript:;" class="disabled">Remove Row</a>
+								</pre>
+
+								<div class="comments">
+									<h5>Comments</h5>
+									<ul>
+										<li>Clicking the <b>Minus <span class="fa fa-minus"></span></b> Button, It will remove that specific row.</li>
+									</ul>
+								</div>
+							</div>
+
+							<div class="divider"></div>
+
+							<div class="content content_child" id="view_page">
+								<h3>View Overtime Page</h3>
+								<p>Page that lets you view a specific <i>Overtime Request</i></p>
+
+								<pre class="label">
+									<span>Location:</span>
+									<a href="http://dir.elink.corp/overtime/xxx" target="_blank">http://dir.elink.corp/overtime/xxx</a>
+								</pre>
+
+								<pre class="label">
+									<span>Other Tables Affected:</span>
+									<a href="javascript:;" class="disabled">log</a>
+								</pre>
+
+								<pre class="label">
+									<span>Views Used:</span>
+									<a href="javascript:;" class="disabled">root/resources/views/request/overtime_show.blade.php</a>
+								</pre>
+
+								<pre class="label">
+									<span>Other Directory Used:</span>
+									<a href="javascript:;" class="disabled">root/app/Mail/OvertimeReminder.php</a>
+									<a href="javascript:;" class="disabled">root/app/Mail/OvertimeApproved.php</a>
+									<a href="javascript:;" class="disabled">root/app/Mail/OvertimeDeclined.php</a>
+									<a href="javascript:;" class="disabled">root/app/Mail/OvertimeVerified.php</a>
+									<a href="javascript:;" class="disabled">root/app/Mail/OvertimeCompleted.php</a>
+									<a href="javascript:;" class="disabled">root/app/Mail/OvertimeRevert.php</a>
+								</pre>
+
+								<pre class="label">
+									<span>Functions Used:</span>
+									<p><b>OvertimeController</b>::<b class="function">show</b></p>
+								</pre>
+
+								<pre class="label">
+									<span>Query (Eloquent):</span>
+									<p><b>$overtime</b> = <b>OvertimeRequest</b>::<b>getOvertime</b>(<b class="function">""</b>, <b class="function">'show'</b>, <b>$id</b>)</p>
+								</pre>
+
+								<div class="comments">
+									<h5>Comments</h5>
+									<ul>
+										<li>Using the <b class="function">ID</b>, get that specific <i>Overtime Request</i></li>
+									</ul>
+								</div>
+
+								<pre class="label">
+									<span>Actions (Button Triggers):</span>
+									<p><b>History</b></p>
+									<p><b>Back</b></p>
+									<p><b>Recommend</b></p>
+									<p><b>Approve</b></p>
+									<p><b>Update</b></p>
+									<p><b>Timekeeping</b></p>
+									<p><b>Verified</b></p>
+									<p><b>Complete</b></p>
+									<p><b>Decline/Cancel</b></p>
+									<p><b>Revert</b></p>
+								</pre>
+
+								<pre class="label">
+									<span>History Action:</span>
+									<p><b>Log</b>::<b>getLog</b>(<b class="function">'Overtime'</b>, <b>$id</b>)</p>
+								</pre>
+
+								<div class="comments">
+									<h5>Comments</h5>
+									<ul>
+										<li>Clicking the <b>History</b> Button, will show a <b class="function">Pop-Up</b> that is gonna show all the Updates that happened to that specific <i>Overtime Request</i></li>
+									</ul>
+								</div>
+
+								<pre class="label">
+									<span>Back Action:</span>
+									<a href="http://dir.elink.corp/overtime" target="_blank">http://dir.elink.corp/overtime</a>
+								</pre>
+
+								<div class="comments">
+									<h5>Comments</h5>
+									<ul>
+										<li>Clicking the <b>Back</b> Button, it will redirect you back to the <i>Overtime Lists</i> Page</li>
+									</ul>
+								</div>
+
+								<pre class="label">
+									<span>Recommend Action:</span>
+									<p><b>OvertimeController</b>::<b class="function">recommend</b></p>
+								</pre>
+
+								<pre class="label">
+									<span>Recommend Query (Eloquent):</span>
+									<p><b>$overtime</b> = <b>OvertimeRequest</b>::<b>withTrashed</b>()-><b>find</b>(<b>$request</b>-><b class="function">id</b>)</p>
+									<p><b>$overtime</b>-><b class="function">recommend_id</b> = <b>Auth</b>::<b>user</b>()-><b class="function">id</b></p>
+									<p><b>$overtime</b>-><b class="function">recommend_date</b> = <b>date</b>(<b class="function">'Y-m-d H:i:s'</b>)</p>
+									<p></p>
+									<p><b>$employee</b> = <b>User</b>::<b>withTrashed</b>()-><b>find</b>(<b>$overtime</b>-><b class="function">employee_id</b>)</p>
+									<p><b>$manager</b> = <b>User</b>::<b>find</b>(<b>$employee</b>-><b class="function">manager_id</b>)</p>
+									<p></p>
+									<p><b>$data</b> = [</p>
+									<p>&nbsp;&nbsp;&nbsp;&nbsp;<b class="function">'emp_name'</b> => <b>strtoupper</b>(<b>$employee</b>-><b>fullname</b>()),</p>
+									<p>&nbsp;&nbsp;&nbsp;&nbsp;<b class="function">'id'</b> => <b>$request</b>-><b class="function">id</b>,</p>
+									<p>&nbsp;&nbsp;&nbsp;&nbsp;<b class="function">'url'</b> => <b>url</b>(<b class="function">"overtime/{<b>$overtime->id</b>}"</b>)</p>
+									<p>]</p>
+									<p></p>
+									<p><b>$overtime</b>-><b>save</b>()</p>
+									<p></p>
+									<p><b class="function">if</b>(<b>empty</b>(<b>$manager</b>)) {</p>
+									<p>&nbsp;&nbsp;&nbsp;&nbsp;<b>$data</b>[<b class="function">'leader_name'</b>] = <b class="function">'HR DEPARTMENT'</b></p>
+									<p></p>
+									<p>&nbsp;&nbsp;&nbsp;&nbsp;<b>Mail</b>::<b>to</b>(<b class="function">'hrd@elink.com.ph'</b>)-><b>send</b>(<b class="function">new</b> <b>OvertimeReminder</b>(<b>$data</b>))</p>
+									<p>} <b class="function">else</b> {</p>
+									<p>&nbsp;&nbsp;&nbsp;&nbsp;<b>$data</b>[<b class="function">'leader_name'</b>] = <b>strtoupper</b>(<b>$manager</b>-><b class="function">first_name</b>)</p>
+									<p></p>
+									<p>&nbsp;&nbsp;&nbsp;&nbsp;<b>Mail</b>::<b>to</b>(<b>$manager</b>-><b class="function">email</b>)-><b>send</b>(<b class="function">new</b> <b>OvertimeReminder</b>(<b>$data</b>))</p>
+									<p>}</p>
+								</pre>
+
+								<div class="comments">
+									<h5>Comments</h5>
+									<ul>
+										<li>Clicking the <b>Recommend</b> Button, It will update the <i>Overtime Request</i>, adding <b class="function">recommend_id</b> from the <b>Supervisor</b>'s <b class="function">ID</b>, and <b class="function">recommend_date</b> using the current time the <b>Supervisor</b> recommended the Request.</li>
+										<li>After updating the <i>Overtime Request</i>, send an email to the employees <b>Manager</b>, if a manager is not found then send it directly to the <b>HR</b>'s <b class="function">Email</b></li>
+										<li>It will also add a <b>Log</b> that indicates that an Overtime is successfully recommended.</li>
+									</ul>
+								</div>
+
+								<pre class="label">
+									<span>Approve Action:</span>
+									<p><b>OvertimeController</b>::<b class="function">approve</b></p>
+								</pre>
+
+								<pre class="label">
+									<span>Approve Query (Eloquent):</span>
+									<p><b>$overtime</b> = <b>OvertimeRequest</b>::<b>withTrashed</b>()-><b>find</b>(<b>$request</b>-><b class="function">id</b>)</p>
+									<p><b>$overtime</b>-><b class="function">approved_id</b> = <b>Auth</b>::<b>user</b>()-><b class="function">id</b></p>
+									<p><b>$overtime</b>-><b class="function">approved_date</b> = <b>date</b>(<b class="function">'Y-m-d H:i:s'</b>)</p>
+									<p><b>$overtime</b>-><b class="function">approved_reason</b> = <b class="function">null</b></p>
+									<p><b>$overtime</b>-><b class="function">status</b> = <b class="function">'APPROVED'</b></p>
+									<p></p>
+									<p><b>$employee</b> = <b>User</b>::<b>withTrashed</b>()-><b>find</b>(<b>$overtime</b>-><b class="function">employee_id</b>)</p>
+									<p><b>$details</b> = <b>DB</b>::<b>select</b>(<b class="function">"SELECT * FROM `overtime_request_details` WHERE `overtime_request_details`.`overtime_id` = {<b>$overtime->id</b>} ORDER BY `overtime_request_details`.`date`"</b>)</p>
+									<p></p>
+									<p><b>$obj</b> = []</p>
+									<p><b class="function">foreach</b>(<b>$details</b> <b class="function">as</b> <b>$key</b>=><b>$detail</b>) {</p>
+									<p>&nbsp;&nbsp;&nbsp;&nbsp;<b>$obj</b>[<b>$key</b>][<b class="function">'date'</b>] = <b>date</b>(<b class="function">'Y-m-d'</b>, <b>strtotime</b>(<b>$detail</b>-><b class="function">date</b>))</p>
+									<p>&nbsp;&nbsp;&nbsp;&nbsp;<b>$obj</b>[<b>$key</b>][<b class="function">'no_of_hours'</b>] = <b>$detail</b>-><b class="function">no_of_hours</b></p>
+									<p>}</p>
+									<p></p>
+									<p><b>$data</b> = [</p>
+									<p>&nbsp;&nbsp;&nbsp;&nbsp;<b class="function">'emp_name'</b> => <b>strtoupper</b>(<b>$employee</b>-><b class="function">first_name</b>),</p>
+									<p>&nbsp;&nbsp;&nbsp;&nbsp;<b class="function">'date'</b> => <b>$details</b>[<b class="function">0</b>]-><b class="function">date</b>,</p>
+									<p>&nbsp;&nbsp;&nbsp;&nbsp;<b class="function">'details'</b> => <b>$obj</b></p>
+									<p>&nbsp;&nbsp;&nbsp;&nbsp;<b class="function">'reason'</b> => <b>$overtime</b>-><b class="function">reason</b></p>
+									<p>]</p>
+									<p></p>
+									<p><b>$overtime</b>-><b>save</b>()</p>
+									<p></p>
+									<p><b>Mail</b>::<b>to</b>(<b>$employee</b>-><b class="function">email</b>)-><b>send</b>(<b class="function">new</b> <b>OvertimeApproved</b>(<b>$data</b>))</p>
+								</pre>
+
+								<div class="comments">
+									<h5>Comments</h5>
+									<ul>
+										<li>Clicking the <b>Approve</b> Button, It will update the <i>Overtime Request</i>, adding <b class="function">approved_id</b> from the <b>Manager</b>'s <b class="function">ID</b> or someone from <b>HR</b> who will approve the Request, <b class="function">approved_date</b> using the current time the <b>Manager</b> or <b>HR</b> approved the Request, <b class="function">status</b> is then changed to <b class="function">APPROVED</b> from <b class="function">PENDING</b></li>
+										<li>After updating the <i>Overtime Request</i>, send an email to the employee to notify him/her that his/her <i>Overtime Request</i> is successfully approved.</li>
+										<li>It will also add a <b>Log</b> that indicates that an Overtime is successfully approved.</li>
+									</ul>
+								</div>
+
+								<pre class="label">
+									<span>Update Action:</span>
+									<a href="http://dir.elink.corp/overtime/xxx/edit" target="_blank">http://dir.elink.corp/overtime/xxx/edit</a>
+								</pre>
+
+								<div class="comments">
+									<h5>Comments</h5>
+									<ul>
+										<li>Clicking the <b>Update</b> Button, it will redirect you back to the <i>Edit Overtime</i> Page</li>
+									</ul>
+								</div>
+
+								<pre class="label">
+									<span>Timekeeping Action:</span>
+									<a href="http://dir.elink.corp/overtime/timekeeping/xxx" target="_blank">http://dir.elink.corp/overtime/timekeeping/xxx</a>
+								</pre>
+
+								<div class="comments">
+									<h5>Comments</h5>
+									<ul>
+										<li>Clicking the <b>Timekeeping</b> Button, it will redirect you back to the <i>Timekeeping Overtime</i> Page</li>
+									</ul>
+								</div>
+
+								<pre class="label">
+									<span>Verified Action:</span>
+									<p><b>OvertimeController</b>::<b class="function">verified</b></p>
+								</pre>
+
+								<pre class="label">
+									<span>Verified Query (Eloquent):</span>
+									<p><b>$overtime</b> = <b>OvertimeRequest</b>::<b>withTrashed</b>()-><b>find</b>(<b>$request</b>-><b class="function">id</b>)</p>
+									<p><b>$overtime</b>-><b class="function">status</b> = <b class="function">'VERIFIED'</b></p>
+									<p></p>
+									<p><b>$employee</b> = <b>User</b>::<b>withTrashed</b>()-><b>find</b>(<b>$overtime</b>-><b class="function">employee_id</b>)</p>
+									<p><b>$manager</b> = <b>User</b>::<b>find</b>(<b>$employee</b>-><b class="function">manager_id</b>)</p>
+									<p></p>
+									<p><b>$data</b> = [</p>
+									<p>&nbsp;&nbsp;&nbsp;&nbsp;<b class="function">'emp_name'</b> => <b>strtoupper</b>(<b>$employee</b>-><b class="function">first_name</b>),</p>
+									<p>&nbsp;&nbsp;&nbsp;&nbsp;<b class="function">'url'</b> => <b>url</b>(<b class="function">"overtime/{<b>$overtime->id</b>}"</b>)</p>
+									<p>]</p>
+									<p></p>
+									<p><b class="function">if</b>(<b>empty</b>(<b>$manager</b>)) {</p>
+									<p>&nbsp;&nbsp;&nbsp;&nbsp;<b>$data</b>[<b class="function">'manager_name'</b>] = <b class="function">'HR DEPARTMENT'</b></p>
+									<p></p>
+									<p>&nbsp;&nbsp;&nbsp;&nbsp;<b>Mail</b>::<b>to</b>(<b class="function">'hrd@elink.com.ph'</b>)-><b>send</b>(<b class="function">new</b> <b>OvertimeVerified</b>(<b>$data</b>))</p>
+									<p>} <b class="function">else</b> {</p>
+									<p>&nbsp;&nbsp;&nbsp;&nbsp;<b>$data</b>[<b class="function">'manager_name'</b>] = <b>strtoupper</b>(<b>$manager</b>-><b class="function">first_name</b>)</p>
+									<p></p>
+									<p>&nbsp;&nbsp;&nbsp;&nbsp;<b>Mail</b>::<b>to</b>(<b>$manager</b>-><b class="function">email</b>)-><b>send</b>(<b class="function">new</b> <b>OvertimeVerified</b>(<b>$data</b>))</p>
+									<p>}</p>
+									<p></p>
+									<p><b>$overtime</b>-><b>save</b>()</p>
+								</pre>
+
+								<div class="comments">
+									<h5>Comments</h5>
+									<ul>
+										<li>Clicking the <b>Verified</b> Button, It will update the <i>Overtime Request</i>, changing the <b class="function">status</b> from <b class="function">VERIFYING</b> to <b class="function">VERIFIED</b>.</li>
+										<li>After updating the <i>Overtime Request</i>, send an email to the employee's <b>Manager</b> or to <b>HR</b> that the Request is already verified.</li>
+										<li>It will also add a <b>Log</b> that indicates that an Overtime is successfully verified.</li>
+									</ul>
+								</div>
+
+								<pre class="label">
+									<span>Complete Action:</span>
+									<p><b>OvertimeController</b>::<b class="function">complete</b></p>
+								</pre>
+
+								<pre class="label">
+									<span>Complete Query (Eloquent):</span>
+									<p><b>$overtime</b> = <b>OvertimeRequest</b>::<b>withTrashed</b>()-><b>find</b>(<b>$request</b>-><b class="function">id</b>)</p>
+									<p><b>$overtime</b>-><b class="function">completed_id</b> = <b>Auth</b>::<b>user</b>()-><b class="function">id</b></p>
+									<p><b>$overtime</b>-><b class="function">completed_date</b> = <b>date</b>(<b class="function">'Y-m-d H:i:s'</b>)</p>
+									<p><b>$overtime</b>-><b class="function">status</b> = <b class="function">'COMPLETED'</b></p>
+									<p></p>
+									<p><b>$employee</b> = <b>User</b>::<b>withTrashed</b>()-><b>find</b>(<b>$overtime</b>-><b class="function">employee_id</b>)</p>
+									<p><b>$details</b> = <b>DB</b>::<b>select</b>(<b class="function">"SELECT * FROM `overtime_request_details` WHERE `overtime_request_details`.`overtime_id` = {<b>$overtime->id</b>} ORDER BY `overtime_request_details`.`date`"</b>)</p>
+									<p></p>
+									<p><b>$data</b> = [</p>
+									<p>&nbsp;&nbsp;&nbsp;&nbsp;<b class="function">'emp_name'</b> => <b>strtoupper</b>(<b>$employee</b>-><b class="function">first_name</b>),</p>
+									<p>&nbsp;&nbsp;&nbsp;&nbsp;<b class="function">'url'</b> => <b>url</b>(<b class="function">"overtime/{<b>$overtime->id</b>}"</b>),</p>
+									<p>&nbsp;&nbsp;&nbsp;&nbsp;<b class="function">'date'</b> => <b>$details</b>[<b class="function">0</b>]-><b class="function">date</b></p>
+									<p>]</p>
+									<p></p>
+									<p><b>$overtime</b>-><b>save</b>()</p>
+									<p></p>
+									<p><b>Mail</b>::<b>to</b>(<b>$employee</b>-><b class="function">email</b>)-><b>send</b>(<b class="function">new</b> <b>OvertimeCompleted</b>(<b>$data</b>))</p>
+								</pre>
+
+								<div class="comments">
+									<h5>Comments</h5>
+									<ul>
+										<li>Clicking the <b>Approve</b> Button, It will update the <i>Overtime Request</i>, adding <b class="function">completed_id</b> from the <b>Manager</b>'s <b class="function">ID</b> or someone from <b>HR</b> who will complete the Request, <b class="function">completed_date</b> using the current time the <b>Manager</b> or <b>HR</b> completed the Request, <b class="function">status</b> is then changed to <b class="function">COMPLETED</b> from <b class="function">VERIFIED</b></li>
+										<li>After updating the <i>Overtime Request</i>, send an email to the employee to notify him/her that his/her <i>Overtime Request</i> is successfully completed.</li>
+										<li>It will also add a <b>Log</b> that indicates that an Overtime is successfully completed.</li>
+									</ul>
+								</div>
+
+								<pre class="label">
+									<span>Decline/Cancel Action:</span>
+									<p><b>OvertimeController</b>::<b class="function">decline</b></p>
+								</pre>
+
+								<pre class="label">
+									<span>Decline/Cancel Inputs Needed:</span>
+									<p><b>Reason for declining</b> (Required)</p>
+								</pre>
+
+								<pre class="label">
+									<span>Decline/Cancel Query (Eloquent):</span>
+									<p><b>$overtime</b> = <b>OvertimeRequest</b>::<b>withTrashed</b>()-><b>find</b>(<b>$request</b>-><b class="function">id</b>)</p>
+									<p><b>$overtime</b>-><b class="function">declined_id</b> = <b>Auth</b>::<b>user</b>()-><b class="function">id</b></p>
+									<p><b>$overtime</b>-><b class="function">declined_date</b> = <b>date</b>(<b class="function">'Y-m-d H:i:s'</b>)</p>
+									<p><b>$overtime</b>-><b class="function">declined_reason</b> = <b>$request</b>-><b class="function">reason_for_disapproval</b></p>
+									<p><b>$overtime</b>-><b class="function">status</b> = <b class="function">'DECLINED'</b></p>
+									<p><b>$overtime</b>-><b class="function">declined_by_superior</b> = <b class="function">'NO'</b></p>
+									<p></p>
+									<p><b>$employee</b> = <b>User</b>::<b>withTrashed</b>()-><b>find</b>(<b>$overtime</b>-><b class="function">employee_id</b>)</p>
+									<p><b>$details</b> = <b>DB</b>::<b>select</b>(<b class="function">"SELECT * FROM `overtime_request_details` WHERE `overtime_request_details`.`overtime_id` = {<b>$overtime->id</b>} ORDER BY `overtime_request_details`.`date`"</b>)</p>
+									<p><b class="function">if</b>(<b>$employee</b>-><b class="function">supervisor_id</b> == <b>Auth</b>::<b>user</b>()-><b class="function">id</b> && <b>$employee</b>-><b class="function">supervisor_id</b> != <b>$employee</b>-><b class="function">manager_id</b>) {</p>
+									<p>&nbsp;&nbsp;&nbsp;&nbsp;<b>$overtime</b>-><b class="function">declined_by_superior</b> = <b class="function">'YES'</b></p>
+									<p>}</p>
+									<p></p>
+									<p><b>$data</b> = [</p>
+									<p>&nbsp;&nbsp;&nbsp;&nbsp;<b class="function">'emp_name'</b> => <b>strtoupper</b>(<b>$employee</b>-><b class="function">first_name</b>),</p>
+									<p>&nbsp;&nbsp;&nbsp;&nbsp;<b class="function">'date'</b> => <b>$details</b>[<b class="function">0</b>]-><b class="function">date</b></p>
+									<p>]</p>
+									<p></p>
+									<p><b>$overtime</b>-><b>save</b>()</p>
+									<p></p>
+									<p><b>Mail</b>::<b>to</b>(<b>$employee</b>-><b class="function">email</b>)-><b>send</b>(<b class="function">new</b> <b>OvertimeDeclined</b>(<b>$data</b>))</p>
+								</pre>
+
+								<div class="comments">
+									<h5>Comments</h5>
+									<ul>
+										<li>Clicking the <b>Decline/Cancel</b> Button, Will show a <b class="function">Pop-up</b> that let's you add a reason as to why this particular Request is about to be declined.</li>
+										<li>It will update the <i>Overtime Request</i>, adding <b class="function">declined_id</b> from the <b>Manager</b>'s or <b>Supervisor</b>'s <b class="function">ID</b> or someone from <b>HR</b> who will decline the Request, <b class="function">declined_date</b> using the current time the <b>Manager</b>, <b>Supervisor</b> or <b>HR</b> declined the Request, <b class="function">declined_reason</b> is updated to the reason inserted, <b class="function">declined_by_superior</b>'s default value is <b class="function">NO</b> but if the <b>Supervisor</b> is the one who declined the request it will be <b class="function">YES</b>, <b class="function">status</b> is then changed to <b class="function">DECLINED</b>.</li>
+										<li>After updating the <i>Overtime Request</i>, send an email to the employee to notify him/her that his/her <i>Overtime Request</i> is declined.</li>
+										<li>It will also add a <b>Log</b> that indicates that an Overtime is declined.</li>
+									</ul>
+								</div>
+
+								<pre class="label">
+									<span>Revert Action:</span>
+									<p><b>OvertimeController</b>::<b class="function">revert</b></p>
+								</pre>
+
+								<pre class="label">
+									<span>Revert Inputs Needed:</span>
+									<p><b>Reason for reverting</b> (Required)</p>
+								</pre>
+
+								<pre class="label">
+									<span>Revert Query (Eloquent):</span>
+									<p><b>$overtime</b> = <b>OvertimeRequest</b>::<b>withTrashed</b>()-><b>find</b>(<b>$request</b>-><b class="function">id</b>)</p>
+									<p><b>$overtime</b>-><b class="function">approved_reason</b> = <b>$request</b>-><b class="function">reason_for_reverting</b></p>
+									<p><b>$overtime</b>-><b class="function">status</b> = <b class="function">'APPROVED'</b></p>
+									<p></p>
+									<p><b>$employee</b> = <b>User</b>::<b>withTrashed</b>()-><b>find</b>(<b>$overtime</b>-><b class="function">employee_id</b>)</p>
+									<p></p>
+									<p><b>$data</b> = [</p>
+									<p>&nbsp;&nbsp;&nbsp;&nbsp;<b class="function">'emp_name'</b> => <b>strtoupper</b>(<b>$employee</b>-><b class="function">first_name</b>),</p>
+									<p>&nbsp;&nbsp;&nbsp;&nbsp;<b class="function">'url'</b> => <b>url</b>(<b class="function">"overtime/{<b>$overtime->id</b>}"</b>)</p>
+									<p>]</p>
+									<p></p>
+									<p><b>$overtime</b>-><b>save</b>()</p>
+									<p></p>
+									<p><b>Mail</b>::<b>to</b>(<b>$employee</b>-><b class="function">email</b>)-><b>send</b>(<b class="function">new</b> <b>OvertimeRevert</b>(<b>$data</b>))</p>
+								</pre>
+
+								<div class="comments">
+									<h5>Comments</h5>
+									<ul>
+										<li>Clicking the <b>Revert</b> Button, Will show a <b class="function">Pop-up</b> that let's you add a reason as to why this particular Request is being reverted.</li>
+										<li>It will update the <i>Overtime Request</i>, changing <b class="function">approved_reason</b> to the reason of reverting the Request, <b class="function">status</b> then changed to <b class="function">APPROVED</b>. <b class="function">APPROVED</b> is used, so that it will show on the <b class="function">APPROVED</b> list, but using the <b class="function">approved_reason</b> it will check that the status is actually <b class="function">REVERTED</b></li>
+										<li>After updating the <i>Overtime Request</i>, send an email to the employee to notify him/her that his/her <i>Overtime Request</i> is reverted.</li>
+										<li>It will also add a <b>Log</b> that indicates that an Overtime is reverted.</li>
+									</ul>
+								</div>
+							</div>
+
+							<div class="divider"></div>
+
+							<div class="content content_child" id="edit_page">
+								<h3>Edit Overtime Page</h3>
+								<p>Page that lets you edit the specific <i>Overtime Request</i></p>
+
+								<pre class="label">
+									<span>Location:</span>
+									<a href="http://dir.elink.corp/overtime/xxx/edit" target="_blank">http://dir.elink.corp/overtime/xxx/edit</a>
+								</pre>
+
+								<pre class="label">
+									<span>Other Tables Affected:</span>
+									<a href="javascript:;" class="disabled">log</a>
+								</pre>
+
+								<pre class="label">
+									<span>Views Used:</span>
+									<a href="javascript:;" class="disabled">root/resources/views/request/overtime_edit.blade.php</a>
+								</pre>
+
+								<pre class="label">
+									<span>Inputs Needed:</span>
+									<p><b>Overtime Date</b> (Required, Multiple)</p>
+									<p><b>Estimated No. of Hours</b> (Required, Multiple)</p>
+									<p><b>Overtime Reason</b> (Required)</p>
+								</pre>
+
+								<pre class="label">
+									<span>Functions Used:</span>
+									<p><b>OvertimeController</b>::<b class="function">update</b></p>
+								</pre>
+
+								<pre class="label">
+									<span>Query (Eloquent):</span>
+									<p><b>$overtime</b> = <b>OvertimeRequest</b>::<b>withTrashed</b>()-><b>find</b>(<b>$request</b>-><b class="function">id</b>)</p>
+									<p><b>$overtime</b>-><b class="function">reason</b> = <b>$request</b>-><b class="function">reason</b></p>
+									<p></p>
+									<p><b>OvertimeRequestDetails</b>::<b>where</b>(<b class="function">'overtime_id'</b>, <b>$overtime</b>-><b class="function">id</b>)-><b>forceDelete</b>()</p>
+									<p></p>
+									<p><b class="function">foreach</b>(<b>$request</b>-><b class="function">date</b> <b class="function">as</b> <b>$key</b>=><b>$date</b>) {</p>
+									<p>&nbsp;&nbsp;&nbsp;&nbsp;<b>$detail</b> = <b class="function">new</b> <b>OvertimeRequestDetails</b>()</p>
+									<p>&nbsp;&nbsp;&nbsp;&nbsp;<b>$detail</b>-><b class="function">overtime_id</b> = <b>$overtime</b>-><b class="function">id</b></p>
+									<p>&nbsp;&nbsp;&nbsp;&nbsp;<b>$detail</b>-><b class="function">date</b> = <b>date</b>(<b class="function">'Y-m-d'</b>, <b>strtotime</b>(<b>$date</b>))</p>
+									<p>&nbsp;&nbsp;&nbsp;&nbsp;<b>$detail</b>-><b class="function">no_of_hours</b> = <b>$request</b>-><b class="function">no_of_hours</b>[<b>$key</b>]</p>
+									<p>&nbsp;&nbsp;&nbsp;&nbsp;<b class="function">if</b>(!<b>empty</b>(<b>$request</b>-><b class="function">time_in</b>[<b>$key</b>])) {</p>
+									<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<b>$detail</b>-><b class="function">time_in</b> = <b>date</b>(<b class="function">'Y-m-d H:i:s'</b>, <b>strtotime</b>(<b>$request</b>-><b class="function">time_in</b>[<b>$key</b>]))</p>
+									<p>&nbsp;&nbsp;&nbsp;&nbsp;}</p>
+									<p>&nbsp;&nbsp;&nbsp;&nbsp;<b class="function">if</b>(!<b>empty</b>(<b>$request</b>-><b class="function">time_out</b>[<b>$key</b>])) {</p>
+									<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<b>$detail</b>-><b class="function">time_out</b> = <b>date</b>(<b class="function">'Y-m-d H:i:s'</b>, <b>strtotime</b>(<b>$request</b>-><b class="function">time_out</b>[<b>$key</b>]))</p>
+									<p>&nbsp;&nbsp;&nbsp;&nbsp;}</p>
+									<p>&nbsp;&nbsp;&nbsp;&nbsp;<b>$detail</b>-><b>save</b>()</p>
+									<p>}</p>
+									<p></p>
+									<p><b>$overtime</b>-><b>save</b>()</p>
+								</pre>
+
+								<div class="comments">
+									<h5>Comments</h5>
+									<ul>
+										<li>Update data on <i>overtime_request</i>.</li>
+										<li>Delete the previously inserted data in <i>overtime_request_details</i>, and re-insert it with new one.</li>
+										<li>It will also add a <b>Log</b> that indicates that the <i>Overtime Request</i> is successfully updated.</li>
+									</ul>
+								</div>
+
+								<pre class="label">
+									<span>Actions (Button Triggers):</span>
+									<p><b>Back</b></p>
+									<p><b>Plus</b></p>
+									<p><b>Minus</b></p>
+								</pre>
+
+								<pre class="label">
+									<span>Back Action:</span>
+									<a href="http://dir.elink.corp/overtime/xxx" target="_blank">http://dir.elink.corp/overtime/xxx</a>
+								</pre>
+
+								<div class="comments">
+									<h5>Comments</h5>
+									<ul>
+										<li>Clicking the <b>Back</b> Button, it will redirect you back to the <i>View Overtime</i> Page</li>
+									</ul>
+								</div>
+
+								<pre class="label">
+									<span>Plus Action:</span>
+									<a href="javascript:;" class="disabled">Additional Row</a>
+								</pre>
+
+								<div class="comments">
+									<h5>Comments</h5>
+									<ul>
+										<li>Clicking the <b>Plus <span class="fa fa-plus"></span></b> Button, It will add an additional row for multiple days request.</li>
+									</ul>
+								</div>
+
+								<pre class="label">
+									<span>Minus Action:</span>
+									<a href="javascript:;" class="disabled">Remove Row</a>
+								</pre>
+
+								<div class="comments">
+									<h5>Comments</h5>
+									<ul>
+										<li>Clicking the <b>Minus <span class="fa fa-minus"></span></b> Button, It will remove that specific row.</li>
+									</ul>
+								</div>
+							</div>
+
+							<div class="divider"></div>
+
+							<div class="content content_child" id="timekeeping_page">
+								<h3>Timekeeping Overtime Page</h3>
+								<p>Page that lets you edit the <b>Time In</b> and <b>Time Out</b> of each detail for a specific <i>Overtime Request</i></p>
+
+								<pre class="label">
+									<span>Location:</span>
+									<a href="http://dir.elink.corp/overtime/timekeeping/xxx" target="_blank">http://dir.elink.corp/overtime/timekeeping/xxx</a>
+								</pre>
+
+								<pre class="label">
+									<span>Other Tables Affected:</span>
+									<a href="javascript:;" class="disabled">log</a>
+								</pre>
+
+								<pre class="label">
+									<span>Views Used:</span>
+									<a href="javascript:;" class="disabled">root/resources/views/request/overtime_timekeeping.blade.php</a>
+								</pre>
+
+								<pre class="label">
+									<span>Inputs Needed:</span>
+									<p><b>Time In</b></p>
+									<p><b>Time Out</b></p>
+								</pre>
+
+								<pre class="label">
+									<span>Functions Used:</span>
+									<p><b>OvertimeController</b>::<b class="function">verification</b></p>
+								</pre>
+
+								<pre class="label">
+									<span>Query (Eloquent):</span>
+									<p><b>$overtime</b> = <b>OvertimeRequest</b>::<b>withTrashed</b>()-><b>find</b>(<b>$request</b>-><b class="function">id</b>)</p>
+									<p></p>
+									<p><b>$i</b> = <b class="function">0</b></p>
+									<p><b>$obj</b> = []</p>
+									<p><b class="function">foreach</b>(<b>$request</b>-><b class="function">ids</b> <b class="function">as</b> <b>$key</b>=><b>$id</b>) {</p>
+									<p>&nbsp;&nbsp;&nbsp;&nbsp;<b class="function">if</b>(!<b>empty</b>(<b>$request</b>-><b class="function">time_in</b>[<b>$key</b>])) {</p>
+									<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<b>$detail</b>-><b class="function">time_in</b> = <b>date</b>(<b class="function">'Y-m-d H:i:s'</b>, <b>strtotime</b>(<b>$request</b>-><b class="function">time_in</b>[<b>$key</b>]))</p>
+									<p>&nbsp;&nbsp;&nbsp;&nbsp;}</p>
+									<p>&nbsp;&nbsp;&nbsp;&nbsp;<b class="function">if</b>(!<b>empty</b>(<b>$request</b>-><b class="function">time_out</b>[<b>$key</b>])) {</p>
+									<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<b>$detail</b>-><b class="function">time_out</b> = <b>date</b>(<b class="function">'Y-m-d H:i:s'</b>, <b>strtotime</b>(<b>$request</b>-><b class="function">time_out</b>[<b>$key</b>]))</p>
+									<p>&nbsp;&nbsp;&nbsp;&nbsp;}</p>
+									<p>&nbsp;&nbsp;&nbsp;&nbsp;<b>$detail</b>-><b>save</b>()</p>
+									<p></p>
+									<p>&nbsp;&nbsp;&nbsp;&nbsp;<b class="function">if</b>(<b>empty</b>(<b>$request</b>-><b class="function">time_in</b>[<b>$key</b>]) || <b>empty</b>(<b>$request</b>-><b class="function">time_out</b>[<b>$key</b>])) { <b>$i</b>++; }</p>
+									<p></p>
+									<p>&nbsp;&nbsp;&nbsp;&nbsp;<b>$obj</b>[<b>$key</b>][<b class="function">'date'</b>] = <b>date</b>(<b class="function">'Y-m-d'</b>, <b>strtotime</b>(<b>$detail</b>-><b class="function">date</b>))</p>
+									<p>&nbsp;&nbsp;&nbsp;&nbsp;<b>$obj</b>[<b>$key</b>][<b class="function">'time_in'</b>] = <b>date</b>(<b class="function">'Y-m-d H:i:s'</b>, <b>strtotime</b>(<b>$request</b>-><b class="function">time_in</b>[<b>$key</b>]))</p>
+									<p>&nbsp;&nbsp;&nbsp;&nbsp;<b>$obj</b>[<b>$key</b>][<b class="function">'time_out'</b>] = <b>date</b>(<b class="function">'Y-m-d H:i:s'</b>, <b>strtotime</b>(<b>$request</b>-><b class="function">time_out</b>[<b>$key</b>]))</p>
+									<p>}</p>
+									<p></p>
+									<p><b>$employee</b> = <b>User</b>::<b>withTrashed</b>()-><b>find</b>(<b>$overtime</b>-><b class="function">employee_id</b>)</p>
+									<p><b>$manager</b> = <b>User</b>::<b>find</b>(<b>$employee</b>-><b class="function">manager_id</b>)</p>
+									<p></p>
+									<p><b>$data</b> = [</p>
+									<p>&nbsp;&nbsp;&nbsp;&nbsp;<b class="function">'emp_name'</b> => <b>strtoupper</b>(<b>$employee</b>-><b class="function">firstname</b>),</p>
+									<p>&nbsp;&nbsp;&nbsp;&nbsp;<b class="function">'reason'</b> => <b>$overtime</b>-><b class="function">reason</b>,</p>
+									<p>&nbsp;&nbsp;&nbsp;&nbsp;<b class="function">'url'</b> => <b>url</b>(<b class="function">"overtime/{<b>$overtime->id</b>}"</b>),</p>
+									<p>&nbsp;&nbsp;&nbsp;&nbsp;<b class="function">'details'</b> => <b>$obj</b></p>
+									<p>]</p>
+									<p></p>
+									<p><b class="function">if</b>(<b>$i</b> == <b class="function">0</b>) {</p>
+									<p>&nbsp;&nbsp;&nbsp;&nbsp;<b>$overtime</b>-><b class="function">status</b> = <b class="function">'VERIFYING'</b></p>
+									<p>&nbsp;&nbsp;&nbsp;&nbsp;<b class="function">if</b>(!<b>empty</b>(<b>$request</b>-><b class="function">remarks</b>)) {</p>
+									<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<b>$overtime</b>-><b class="function">reverted_reason</b> = <b>$request</b>-><b class="function">remarks</b></p>
+									<p>&nbsp;&nbsp;&nbsp;&nbsp;}</p>
+									<p></p>
+									<p>&nbsp;&nbsp;&nbsp;&nbsp;<b>$overtime</b>-><b>save</b>()</p>
+									<p>}</p>
+									<p></p>
+									<p><b class="function">if</b>(<b>empty</b>(<b>$manager</b>)) {</p>
+									<p>&nbsp;&nbsp;&nbsp;&nbsp;<b>$data</b>[<b class="function">'leader_name'</b>] = <b class="function">'HR DEPARTMENT'</b></p>
+									<p></p>
+									<p>&nbsp;&nbsp;&nbsp;&nbsp;<b>Mail</b>::<b>to</b>(<b class="function">'hrd@elink.com.ph'</b>)-><b>send</b>(<b class="function">new</b> <b>OvertimeVerification</b>(<b>$data</b>))</p>
+									<p>} <b class="function">else</b> {</p>
+									<p>&nbsp;&nbsp;&nbsp;&nbsp;<b>$data</b>[<b class="function">'leader_name'</b>] = <b>strtoupper</b>(<b>$manager</b>-><b class="function">first_name</b>)</p>
+									<p></p>
+									<p>&nbsp;&nbsp;&nbsp;&nbsp;<b>Mail</b>::<b>to</b>(<b>$manager</b>-><b class="function">email</b>)-><b>send</b>(<b class="function">new</b> <b>OvertimeVerification</b>(<b>$data</b>))</p>
+									<p>}</p>
+								</pre>
+
+								<div class="comments">
+									<h5>Comments</h5>
+									<ul>
+										<li>Update data <i>overtime_request_details</i>.</li>
+										<li>If all the details has been filled-out then update <i>overtime_request</i>, change <b class="function">status</b> to <b class="function">VERIFYING</b></li>
+										<li>After updating the <i>Overtime Request</i> timekeeping, send an email to the employees <b>Manager</b>, if a manager is not found then send it directly to the <b>HR</b>'s Email</li>
+										<li>It will also add a <b>Log</b> that indicates that the <i>Overtime Request</i> timekeeping is successfully updated.</li>
+									</ul>
+								</div>
+
+								<pre class="label">
+									<span>Actions (Button Triggers):</span>
+									<p><b>Back</b></p>
+								</pre>
+
+								<pre class="label">
+									<span>Back Action:</span>
+									<a href="http://dir.elink.corp/overtime/xxx" target="_blank">http://dir.elink.corp/overtime/xxx</a>
+								</pre>
+
+								<div class="comments">
+									<h5>Comments</h5>
+									<ul>
+										<li>Clicking the <b>Back</b> Button, it will redirect you back to the <i>View Overtime</i> Page</li>
+									</ul>
+								</div>
+							</div>
+
+							<div class="divider"></div>
+
+							<div class="content content_child" id="team_page">
+								<h3>Overtime Lists Page</h3>
+								<p>List of specific Employees under a <b>Supervisor</b> or <b>Manager</b>'s <i>Overtime Request</i>.</p>
+								<p>Only a <b>Supervisor</b> and a <b>Manager</b> can view this page.</p>
+
+								<pre class="label">
+									<span>Location:</span>
+									<a href="http://dir.elink.corp/team-overtime" target="_blank">http://dir.elink.corp/team-overtime</a>
+								</pre>
+
+								<pre class="label">
+									<span>Views Used:</span>
+									<a href="javascript:;" class="disabled">root/resources/views/request/overtime_team.blade.php</a>
+								</pre>
+
+								<pre class="label">
+									<span>Functions Used:</span>
+									<p><b>OvertimeController</b>::<b class="function">team</b></p>
+								</pre>
+
+								<pre class="label">
+									<span>Query (Eloquent):</span>
+									<p><b>$status</b> = ((<b>$request</b>-><b>has</b>(<b class="function">'status'</b>) && <b>$request</b>-><b>get</b>(<b class="function">'status'</b>) != <b class="function">""</b>) ? <b>$request</b>-><b>get</b>(<b class="function">'status'</b>) : <b class="function">'pending'</b>)</p>
+									<p><b>$id</b> = <b>Auth</b>::<b>user</b>()-><b class="function">id</b></p>
+									<p></p>
+									<p><b>OvertimeRequest</b>::<b>getOvertime</b>(<b>$status</b>, <b class="function">'team'</b>, <b>$id</b>)</p>
+								</pre>
+
+								<div class="comments">
+									<h5>Comments</h5>
+									<ul>
+										<li>Get all Employees under the specific <b>Supervisor</b> or <b>Manager</b>'s <i>Overtime Request</i> base on the <b class="function">Status</b>, by default it is <b class="function">Pending</b></li>
+									</ul>
+								</div>
+
+								<pre class="label">
+									<span>Actions (Button Triggers):</span>
+									<p><b>Pending</b></p>
+									<p><b>Approved</b></p>
+									<p><b>Verifying</b></p>
+									<p><b>Verified</b></p>
+									<p><b>Completed</b></p>
+									<p><b>Declined</b></p>
+									<p><b>Back</b></p>
+									<p><b>View Overtime Page</b></p>
+								</pre>
+
+								<pre class="label">
+									<span>Pending Action:</span>
+									<a href="http://dir.elink.corp/team-overtime" target="_blank">http://dir.elink.corp/team-overtime</a>
+								</pre>
+
+								<div class="comments">
+									<h5>Comments</h5>
+									<ul>
+										<li>Get all <b class="function">Pending</b> <i>Overtime Request</i> under a specific <b>Supervisor</b> or <b>Manager</b></li>
+									</ul>
+								</div>
+
+								<pre class="label">
+									<span>Approved Action:</span>
+									<a href="http://dir.elink.corp/team-overtime?status=approved" target="_blank">http://dir.elink.corp/team-overtime?status=approved</a>
+								</pre>
+
+								<div class="comments">
+									<h5>Comments</h5>
+									<ul>
+										<li>Get all <b class="function">Approved</b> <i>Overtime Request</i> under a specific <b>Supervisor</b> or <b>Manager</b></li>
+									</ul>
+								</div>
+
+								<pre class="label">
+									<span>Verifying Action:</span>
+									<a href="http://dir.elink.corp/team-overtime?status=verifying" target="_blank">http://dir.elink.corp/team-overtime?status=verifying</a>
+								</pre>
+
+								<div class="comments">
+									<h5>Comments</h5>
+									<ul>
+										<li>Get all <b class="function">Verifying</b> <i>Overtime Request</i> under a specific <b>Supervisor</b> or <b>Manager</b></li>
+									</ul>
+								</div>
+
+								<pre class="label">
+									<span>Verified Action:</span>
+									<a href="http://dir.elink.corp/team-overtime?status=verified" target="_blank">http://dir.elink.corp/team-overtime?status=verified</a>
+								</pre>
+
+								<div class="comments">
+									<h5>Comments</h5>
+									<ul>
+										<li>Get all <b class="function">Verified</b> <i>Overtime Request</i> under a specific <b>Supervisor</b> or <b>Manager</b></li>
+									</ul>
+								</div>
+
+								<pre class="label">
+									<span>Completed Action:</span>
+									<a href="http://dir.elink.corp/team-overtime?status=completed" target="_blank">http://dir.elink.corp/team-overtime?status=completed</a>
+								</pre>
+
+								<div class="comments">
+									<h5>Comments</h5>
+									<ul>
+										<li>Get all <b class="function">Completed</b> <i>Overtime Request</i> under a specific <b>Supervisor</b> or <b>Manager</b></li>
+									</ul>
+								</div>
+
+								<pre class="label">
+									<span>Declined Action:</span>
+									<a href="http://dir.elink.corp/team-overtime?status=declined" target="_blank">http://dir.elink.corp/team-overtime?status=declined</a>
+								</pre>
+
+								<div class="comments">
+									<h5>Comments</h5>
+									<ul>
+										<li>Get all <b class="function">Declined</b> <i>Overtime Request</i> under a specific <b>Supervisor</b> or <b>Manager</b></li>
+									</ul>
+								</div>
+
+								<pre class="label">
+									<span>Back Action:</span>
+									<a href="http://dir.elink.corp/overtime" target="_blank">http://dir.elink.corp/overtime</a>
+								</pre>
+
+								<div class="comments">
+									<h5>Comments</h5>
+									<ul>
+										<li>Clicking the <b>Back</b> Button, it will redirect you back to the <i>Overtime Lists</i> Page</li>
+									</ul>
+								</div>
+
+								<pre class="label">
+									<span>View Overtime Action:</span>
+									<a href="http://dir.elink.corp/overtime/xxx" target="_blank">http://dir.elink.corp/overtime/xxx</a>
+								</pre>
+
+								<div class="comments">
+									<h5>Comments</h5>
+									<ul>
+										<li>Clicking the <b>Eye <span class="fa fa-eye"></span></b> Button, it will redirect you to that <i>View Overtime</i> Page</li>
+									</ul>
+								</div>
+							</div>
+						</div>
+					</main>
+				</div>
+
+				<div class="clearfix"></div>
+			</div>
+		</div>
+		<!-- End Main -->
+	</div> <!-- End Clearfix -->
+</div> <!-- End Protect Me -->
+<a href="#" class="back_top"></a>
+<footer>
+	<div class="wrapper">
+		<div class="footer_con">
+			<div class="pagination">
+				<a href="hr_progress.html">Prev</a>
+				<a href="javascript:;" class="disabled">Next</a>
+			</div>
+		</div>
+	</div>
+</footer>
+</body>
+</html>
